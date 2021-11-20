@@ -1,7 +1,6 @@
 Table users as U {
   id int [pk, increment] // auto-increment
-  first_name varchar
-  last_name varchar
+  username varchar
   email varchar
   password varchar
 }
