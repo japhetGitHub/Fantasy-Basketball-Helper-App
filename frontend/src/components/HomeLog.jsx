@@ -4,6 +4,7 @@ import { virtualize } from 'react-swipeable-views-utils';
 import { mod } from 'react-swipeable-views-core';
 import { Pagination } from '@mui/material';
 import TeamOverview from './TeamOverview.jsx';
+import AddNewTeam from './AddNewTeam.jsx';
 
 import '../style/pagination.css'
 
@@ -39,16 +40,18 @@ export default function HomeLog (props) {
     }
   ] 
 
+  data.push({last: true})
   function slideRenderer(params) {
     const { index, key } = params;
     const nbOfSlides = data.length;
     const slide = mod(index, nbOfSlides)
     return (
         <div key={key} style={Object.assign({})}>
+          {data[slide].last ?  <AddNewTeam onClick={() => {console.log("call the add new team")}}/> :
             <TeamOverview teamName={ data[slide].teamName } topPerformer={ data[slide].topPerformer } 
             worstPerformer={ data[slide].worstPerformer } totalFanPoints={data[slide].totalFanPoints} 
             onClick={() => console.log(`call the info for the teamid ${data[slide].teamId}`)}
-          />
+          />}
             <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size="small" classes={".MuiPagination-root"} variant="outlined" />
         </div>
     );
