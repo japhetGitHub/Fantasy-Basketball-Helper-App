@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from './utilities/Button.jsx'
+import Button from './utilities/Button.jsx';
 
-export default function TeamOverview (props) {
+export default function TeamOverview(props) {
   const { teamName, topPerformer, worstPerformer, totalFanPoints, onClick } = props;
   return (
     <div className="TeamOverview">

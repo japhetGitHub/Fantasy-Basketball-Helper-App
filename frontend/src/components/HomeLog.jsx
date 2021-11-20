@@ -6,11 +6,12 @@ import { Pagination } from '@mui/material';
 import TeamOverview from './TeamOverview.jsx';
 import AddNewTeam from './AddNewTeam.jsx';
 
-import '../style/pagination.css'
+import '../style/pagination.css';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-export default function HomeLog (props) {
+// we will need to add the props in the function
+export default function HomeLog() {
   const data = [
     {
       teamId: 1,
@@ -38,27 +39,29 @@ export default function HomeLog (props) {
       },
       totalFanPoints: 934
     }
-  ] 
+  ];
 
-  data.push({last: true})
+  data.push({last: true});
 
-  function slideRenderer(params) {
+  const slideRenderer = (params) => {
     const { index, key } = params;
     const nbOfSlides = data.length;
-    const slide = mod(index, nbOfSlides)
+    const slide = mod(index, nbOfSlides);
     return (
-        <div key={key} style={Object.assign({})}>
-          {
-            data[slide].last ?  <AddNewTeam onClick={() => {console.log("call the add new team")}}/> :
-            <TeamOverview teamName={ data[slide].teamName } topPerformer={ data[slide].topPerformer } 
-            worstPerformer={ data[slide].worstPerformer } totalFanPoints={data[slide].totalFanPoints} 
-            onClick={() => console.log(`call the info for the teamid ${data[slide].teamId}`)}
-            />
-          }
-            <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size={"small"} variant={"outlined"} />
-        </div>
+      <div key={key} style={Object.assign({})}>
+
+        {data[slide].last &&
+          <AddNewTeam onClick={() => console.log("call the add new team")}/>
+        }
+
+        {!data[slide].last &&
+          <TeamOverview teamName={data[slide].teamName} topPerformer={data[slide].topPerformer} worstPerformer={ data[slide].worstPerformer } totalFanPoints={data[slide].totalFanPoints} onClick={() => console.log(`call the info for the teamid ${data[slide].teamId}`)} />
+        }
+
+        <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size={"small"} variant={"outlined"} />
+      </div>
     );
-  }
+  };
 
   // <Carousel slides={<TeamOverview ... />} lastSlide={<AddNewTeam ... />} />
   return (

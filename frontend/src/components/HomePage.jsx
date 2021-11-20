@@ -1,9 +1,9 @@
 import React from "react";
-import Button from './utilities/Button.jsx'
+import Button from './utilities/Button.jsx';
 
-export default function  HomePage (props) {  
-  const {onClick} = props
-  return(
+export default function  HomePage(props) {
+  const {onClick} = props;
+  return (
     <div className="HomePage">
       <p className="welcome-text">Congratulations, you’re about to be a walking W.</p>
       <Button onClick={() => onClick("Login")} text={"Login"} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AddNewTeam (props) {
+export default function AddNewTeam(props) {
   const { onClick } = props;
   return (
     <div className="AddNewTeam" >
