@@ -66,7 +66,7 @@ Table player_info {
   average_fantasypointsfanduel int 
   average_fantasypointsdraftkings int 
   average_fantasypoints int
-  average_fantasypointsfantasy int 
+  average_fantasypointsFantasyDraft int 
 }
 
 Table player_stats {
@@ -112,8 +112,9 @@ Table player_stats {
   plusminus int 
   doubledoubles int 
   tripledoubles int 
-  fantasypointsfanduel int 
-  fantasypointsdraftkings int 
-  fantasypoints int 
-  fantasypointsfantasy int 
+  fantasyPointsFanduel int 
+  fantasyPointsDraftKings int 
+  fantasyPointsYahoo int 
+  fantasyPointsFantasyDraft int 
+  fantasyPoints int
 }

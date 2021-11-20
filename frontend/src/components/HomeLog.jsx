@@ -41,6 +41,7 @@ export default function HomeLog (props) {
   ] 
 
   data.push({last: true})
+
   function slideRenderer(params) {
     const { index, key } = params;
     const nbOfSlides = data.length;
@@ -52,13 +53,14 @@ export default function HomeLog (props) {
             <TeamOverview teamName={ data[slide].teamName } topPerformer={ data[slide].topPerformer } 
             worstPerformer={ data[slide].worstPerformer } totalFanPoints={data[slide].totalFanPoints} 
             onClick={() => console.log(`call the info for the teamid ${data[slide].teamId}`)}
-          />
+            />
           }
             <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size={"small"} variant={"outlined"} />
         </div>
     );
   }
 
+  // <Carousel slides={<TeamOverview ... />} lastSlide={<AddNewTeam ... />} />
   return (
     <div className="HomeLog">
       <VirtualizeSwipeableViews slideRenderer={slideRenderer} />
