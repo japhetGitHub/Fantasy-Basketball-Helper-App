@@ -47,12 +47,14 @@ export default function HomeLog (props) {
     const slide = mod(index, nbOfSlides)
     return (
         <div key={key} style={Object.assign({})}>
-          {data[slide].last ?  <AddNewTeam onClick={() => {console.log("call the add new team")}}/> :
+          {
+            data[slide].last ?  <AddNewTeam onClick={() => {console.log("call the add new team")}}/> :
             <TeamOverview teamName={ data[slide].teamName } topPerformer={ data[slide].topPerformer } 
             worstPerformer={ data[slide].worstPerformer } totalFanPoints={data[slide].totalFanPoints} 
             onClick={() => console.log(`call the info for the teamid ${data[slide].teamId}`)}
-          />}
-            <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size="small" classes={".MuiPagination-root"} variant="outlined" />
+          />
+          }
+            <Pagination count={nbOfSlides} page={slide + 1} hidePrevButton hideNextButton size={"small"} variant={"outlined"} />
         </div>
     );
   }
