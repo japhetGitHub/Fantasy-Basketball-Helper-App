@@ -2,6 +2,7 @@ import React from 'react';
 import Button from './Button.jsx'
 
 export default function Register (props) {
+  const {onClick} = props
   return (
     <div className="Register">
       <h3>Register</h3>
@@ -12,6 +13,7 @@ export default function Register (props) {
       <input className="input-box" name="repeate_password" type="text" placeholder="Repeat Password" />
     </form>
       <Button onClick={() => console.log("we should register the user based on this info")} text={"Register"}  />
+      <Button onClick={() => onClick("HomePage")} text={"Back"}  />
     </div>
   );
 }
