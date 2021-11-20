@@ -12,7 +12,7 @@ export default function Register (props) {
       <input className="input-box" name="password" type="text" placeholder="Password" />
       <input className="input-box" name="repeate_password" type="text" placeholder="Repeat Password" />
     </form>
-      <Button onClick={() => console.log("we should register the user based on this info")} text={"Register"}  />
+      <Button onClick={() => onClick("HomeLog")} text={"Register"}  />
       <Button onClick={() => onClick("HomePage")} text={"Back"}  />
     </div>
   );

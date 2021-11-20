@@ -10,7 +10,7 @@ export default function Login (props) {
       <input className="input-box" name="email" type="text" placeholder="Email" />
       <input className="input-box" name="password" type="text" placeholder="Password" />
     </form>
-      <Button onClick={() => console.log("we should login the user based on this info")} text={"Login"}  />
+      <Button onClick={() => onClick("HomeLog")} text={"Login"}  />
       <Button onClick={() => onClick("HomePage")} text={"Back"}  />
     </div>
   );
