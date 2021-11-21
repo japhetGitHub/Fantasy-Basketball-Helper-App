@@ -10,7 +10,7 @@ export default function  HomePage(props) {
       <Button onClick={() => onClick("Register")} text={"Register"} />
       <div className="about-us">
         <h3>About us</h3>
-        <p>Aren’t you tired of wasting time switching between so many apps to ...</p>
+        <p>Aren’t you tired of wasting time by switching between so many apps to ...</p>
       </div>
     </div>
   );
