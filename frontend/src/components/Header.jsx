@@ -12,7 +12,7 @@ export default function Header(props) {
   return (
     <div className="header">
       <h1>Our website name</h1>
-      <div className="liveGameBanner">{live && String(liveGames)}: if it's true, there is live game but i cant manage to show the score, else no games are on(its a if)</div>
+      <div className="liveGameBanner">{live && String(liveGames)}: if it's rue, there is live game but i cant manage to show the score, else no games are on(its a if)</div>
     </div>
   );
 }

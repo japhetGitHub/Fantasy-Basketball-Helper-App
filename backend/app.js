@@ -2,27 +2,28 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const db = require('./db');
-const dbHelpers = require('./helpers/dbHelpers')(db);
+const cors =require("cors");
 
 const app = express();
 
+app.use(cors({origin: "*", credential: true}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// a quick start of the routing, might not be the good routes.
+// create this for every routes group
 const teamRouter = require('./routes/team');
 
+// do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
 app.use('/api/team', teamRouter);
 
-app.get('/api/authenticate');
 
-// depend on the JWT
-app.post('/api/login');
-app.post('/api/register');
+// // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
+// app.get('/api/authenticate');
+// app.post('/api/login');
+// app.post('/api/register');
 
 console.log("Listening on port 3001...");
 
