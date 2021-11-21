@@ -3,7 +3,7 @@ A helper app that allows users to at-a-glance see rich basketball data/statistic
 
 # instruction
 
-run npm install
-run 'createdb fantasy_basket -O labber' the first time
-create a .env based on the .env.exemple
-run 'npm run db:reset'
+run npm install in frontend and backend.  
+run 'createdb fantasy_basket -O labber' the first time.  
+create a .env based on the .env.exemple on both forntend and backend.  
+run 'npm run db:reset'.  
