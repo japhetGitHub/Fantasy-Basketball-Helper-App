@@ -7,9 +7,12 @@ import Login from './Login.jsx';
 import HomeLog from './HomeLog.jsx';
 
 
-const App = () => {
+
+
+export default function App() {
   const [view, setView] = useState("HomePage");
   const [showLiveGame, setShowLiveGame] = useState(true);
+
   return (
     <div className="Application">
       <Header live={showLiveGame} />
@@ -19,6 +22,4 @@ const App = () => {
       {view === "HomeLog" && <HomeLog onClick={setShowLiveGame} />}
     </div>
   );
-};
-
-export default App;
+}

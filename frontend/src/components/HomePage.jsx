@@ -1,17 +1,35 @@
 import React from "react";
 import Button from './utilities/Button.jsx';
+import Footer from './utilities/Footer.jsx';
+import AboutUs from "./AboutUs.jsx";
+
+import {
+  StyledWelcomeText,
+  StyledButtonHomePage,
+  StyledHomePage
+} from '../style/HomePage.styles';
 
 export default function  HomePage(props) {
-  const {onClick} = props;
+  const { onClick } = props;
   return (
     <div className="HomePage">
-      <p className="welcome-text">Congratulations, you’re about to be a walking W.</p>
-      <Button onClick={() => onClick("Login")} text={"Login"} />
-      <Button onClick={() => onClick("Register")} text={"Register"} />
-      <div className="about-us">
-        <h3>About us</h3>
-        <p>Aren’t you tired of wasting time by switching between so many apps to ...</p>
-      </div>
+      <StyledHomePage>
+        <StyledWelcomeText>Congratulations,<br/>you’re about to be<br/>a walking W.</StyledWelcomeText>
+        <StyledButtonHomePage>
+          <Button
+            onClick={() => onClick("Login")}
+            text={"Login"}
+            variant={"contained"}
+          />
+          <Button
+            onClick={() => onClick("Register")}
+            text={"Register"}
+            variant={"outlined"}
+          />
+        </StyledButtonHomePage>
+      </StyledHomePage>
+      <AboutUs />
+      <Footer />
     </div>
   );
 }

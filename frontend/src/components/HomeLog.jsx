@@ -33,12 +33,24 @@ export default function HomeLog() {
       totalFanPoints: 934
     }
   ];
+
   const viewArray = data.map((singleTeam) => {
-    return (<TeamOverview teamName={singleTeam.teamName} topPerformer={singleTeam.topPerformer}
-      worstPerformer={singleTeam.worstPerformer} totalFanPoints={singleTeam.totalFanPoints}
-      onClick={() => console.log(`call the info for the teamid ${singleTeam.teamId}`)} />);
+    return (
+      <TeamOverview
+        teamName={singleTeam.teamName}
+        topPerformer={singleTeam.topPerformer}
+        worstPerformer={singleTeam.worstPerformer}
+        totalFanPoints={singleTeam.totalFanPoints}
+        onClick={() => console.log(`call the info for the teamid ${singleTeam.teamId}`)}
+      />);
   });
-  viewArray.push(<AddNewTeam onClick={() => console.log("call the add new team")}/>);
+
+  viewArray.push(
+    <AddNewTeam
+      onClick={() => console.log("call the add new team")}
+    />
+  );
+  
   return (
     <div className="HomeLog">
       <Carousel slides={viewArray} />

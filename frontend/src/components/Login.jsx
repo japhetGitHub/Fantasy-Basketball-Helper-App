@@ -7,11 +7,27 @@ export default function Login(props) {
     <div className="Login">
       <h3>Login</h3>
       <form>
-        <input className="input-box" name="email" type="text" placeholder="Email" />
-        <input className="input-box" name="password" type="text" placeholder="Password" />
+        <input
+          className="input-box"
+          name="email"
+          type="text"
+          placeholder="Email"
+        />
+        <input
+          className="input-box"
+          name="password"
+          type="text"
+          placeholder="Password"
+        />
       </form>
-      <Button onClick={() => onClick("HomeLog")} text={"Login"}  />
-      <Button onClick={() => onClick("HomePage")} text={"Back"}  />
+      <Button
+        onClick={() => onClick("HomeLog")}
+        text={"Login"}
+      />
+      <Button
+        onClick={() => onClick("HomePage")}
+        text={"Back"}
+      />
     </div>
   );
 }

@@ -2,11 +2,22 @@ import React from 'react';
 import Button from './utilities/Button.jsx';
 
 export default function TeamOverview(props) {
-  const { teamName, topPerformer, worstPerformer, totalFanPoints, onClick } = props;
+  
+  const {
+    teamName,
+    topPerformer,
+    worstPerformer,
+    totalFanPoints,
+    onClick
+  } = props;
+
   return (
     <div className="TeamOverview">
       <h3>{teamName}</h3>
-      <Button text={"More..."} onClick={onClick} />
+      <Button
+        text={"More..."}
+        onClick={onClick}
+      />
       <h4>Top performer</h4>
       <p>image of the top performer {topPerformer.image}</p>
       <p>{topPerformer.name}</p>
