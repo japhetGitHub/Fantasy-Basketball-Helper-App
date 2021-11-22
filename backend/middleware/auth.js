@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 
 const users = [
@@ -17,8 +16,6 @@ const users = [
 ];
 
 dotenv.config();
-
-router.use(bodyParser.json());
 
 const accessTokenSecret = process.env.TOKEN_SECRET;
 
