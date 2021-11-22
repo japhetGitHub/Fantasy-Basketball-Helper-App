@@ -4,7 +4,8 @@ import AddNewTeam from './AddNewTeam.jsx';
 import Carousel from './utilities/Carousel.jsx';
 
 // we will need to add the props in the function
-export default function HomeLog() {
+export default function HomeLog(props) {
+  const { onClick } = props;
   const data = [
     {
       teamId: 1,
@@ -47,7 +48,7 @@ export default function HomeLog() {
 
   viewArray.push(
     <AddNewTeam
-      onClick={() => console.log("call the add new team")}
+      onClick={onClick}
     />
   );
   

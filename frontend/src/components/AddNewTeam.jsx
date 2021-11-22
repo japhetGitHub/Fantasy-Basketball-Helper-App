@@ -7,7 +7,7 @@ export default function AddNewTeam(props) {
     <div className="AddNewTeam" >
       <h3>Add a new team</h3>
       <img
-        onClick={onClick}
+        onClick={() => onClick("CreateNewTeam")}
         src={addImage}
         alt="Add sign"
         height="200px"
