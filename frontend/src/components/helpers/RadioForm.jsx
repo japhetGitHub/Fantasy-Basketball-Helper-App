@@ -21,7 +21,6 @@ export default function RadioForm(props) {
         <FormControlLabel value="Draft King" control={<Radio />} label="Draft King" />
         <FormControlLabel value="Fan Duel" control={<Radio />} label="Fan Duel" />
         <FormControlLabel value="Fantasy Draft" control={<Radio />} label="Fantasy Draft" />
-        <FormControlLabel value="Other" control={<Radio />} label="Other" />
       </RadioGroup>
     </FormControl>
   );

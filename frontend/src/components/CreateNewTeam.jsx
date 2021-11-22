@@ -14,9 +14,6 @@ export default function CreateNewTeam(props) {
       <h3>Create a new team</h3>
       <TextLabel name={"Name of the team"} />
       <RadioForm onChange={setFantasyChoice} />
-      {fantasyChoice === "Other" &&
-        <p>We will calculate your team and players fantasy points by averaging the fantasy points of multiple well known fantasy leagues.</p>
-      }
       <Button
         onClick={() => onClick("HomeLog")}
         text={"Create!"}
