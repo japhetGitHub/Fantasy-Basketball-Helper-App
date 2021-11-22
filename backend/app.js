@@ -5,6 +5,8 @@ const logger = require('morgan');
 const cors =require("cors");
 const db = require('./db');
 const app = express();
+const axios = require('axios');
+var CronJob = require('cron').CronJob;
 
 app.use(cors({origin: "*", credential: true}));
 app.use(logger('dev'));
@@ -186,6 +188,35 @@ app.get('/:userID/:teamID/:playerID/playerstats', function (req, res) {
   .catch((err) => err); 
 });
 
+const getPlayerStatsForDB = async function() {
+  
+  const headers = {
+    "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
+  }
+  const today = new Date()
+  console.log("++++++++++++++++++++++++++++++++++++", today);
+  return
+  const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/2021-NOV-20`
+  console.log("URL ===", url)
+
+  try {
+    const {data} = await axios.get(url, {headers: headers})
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+const today = new Date();
+
+
+
+var job = new CronJob('* * * * * *', function() {
+  console.log('You will see this message every second');
+  // getPlayerStatsForDB();
+}, null, true, 'America/Los_Angeles');
+job.start();
+
+getPlayerStatsForDB();
 
 // // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
 // app.get('/api/authenticate');
