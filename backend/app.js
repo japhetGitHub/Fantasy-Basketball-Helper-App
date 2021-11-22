@@ -13,12 +13,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// MIDDLEWARE
+const authentication = require('./middleware/auth');
+app.use('/api/authenticate', authentication); // must be above all routes
+
 // create this for every routes group
 const teamRouter = require('./routes/team');
+const exampleRouter = require('./routes/exampleRoute');
 
 // do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
 app.use('/api/team', teamRouter);
-
+app.use('/api/example', exampleRouter);
 
 // // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
 // app.get('/api/authenticate');
