@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../style/Application.css';
 import Header from './Header.jsx';
 import HomePage from './HomePage.jsx';
 import Register from './Register.jsx';
