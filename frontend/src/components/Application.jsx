@@ -5,12 +5,14 @@ import Register from './Register.jsx';
 import Login from './Login.jsx';
 import HomeLog from './HomeLog.jsx';
 import CreateNewTeam from './CreateNewTeam.jsx';
+import SpecificTeamOverview from './SpecificTeamOverview.jsx';
 
 
 
 
 export default function App() {
   const [view, setView] = useState("HomePage");
+  const [selectedTeam, setSelectedTeam] = useState(null);
   const [showLiveGame, setShowLiveGame] = useState(true);
 
   return (
@@ -19,8 +21,9 @@ export default function App() {
       {view === "HomePage" && <HomePage onClick={setView} />}
       {view === "Register" && <Register onClick={setView} />}
       {view === "Login" && <Login onClick={setView} />}
-      {view === "HomeLog" && <HomeLog onClick={setView} />}
+      {view === "HomeLog" && <HomeLog onClick={setView} onSelectedTeam={setSelectedTeam} />}
       {view === "CreateNewTeam" && <CreateNewTeam onClick={setView} />}
+      {view === "SpecificTeamOverview" && <SpecificTeamOverview onClick={setView}  selectedTeam={selectedTeam} onSelectedTeam={setSelectedTeam} />}
     </div>
   );
 }

@@ -12,7 +12,7 @@ import stephImage from './../image/steph.png';
 
 // we will need to add the props in the function
 export default function HomeLog(props) {
-  const { onClick } = props;
+  const { onClick, onSelectedTeam } = props;
   const data = [
     {
       teamId: 1,
@@ -49,7 +49,10 @@ export default function HomeLog(props) {
         topPerformer={singleTeam.topPerformer}
         worstPerformer={singleTeam.worstPerformer}
         totalFanPoints={singleTeam.totalFanPoints}
-        onClick={() => console.log(`call the info for the teamid ${singleTeam.teamId}`)}
+        onClick={() => {
+          onClick("SpecificTeamOverview");
+          onSelectedTeam(singleTeam.teamId);
+        }}
       />);
   });
 
