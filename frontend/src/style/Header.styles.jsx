@@ -12,5 +12,6 @@ export const StyledHeader = styled.h1`
   padding-top: 25px;
   padding-bottom: 25px;
   background-color: #B4DFE5;
+  padding-left: 10px;
 `;
 
