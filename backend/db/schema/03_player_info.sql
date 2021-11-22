@@ -45,8 +45,9 @@ CREATE TABLE player_info (
   average_plusMinus INT  NOT NULL,
   average_doubleDoubles INT  NOT NULL,
   average_tripleDoubles INT  NOT NULL,
-  average_fantasyPointsfanduel INT  NOT NULL,
-  average_fantasyPointsdraftkings INT  NOT NULL,
+  average_fantasyPointsFanDuel INT  NOT NULL,
+  average_fantasyPointsDraftKings INT  NOT NULL,
   average_fantasyPoints INT NOT NULL,
-  average_fantasyPointsFantasyDraft INT NOT NULL 
+  average_fantasyPointsFantasyDraft INT NOT NULL,
+  average_fantasyYahoo INT NOT NULL
 );

@@ -7,3 +7,4 @@ run npm install in frontend and backend.
 run 'createdb fantasy_basket -O labber' the first time.  
 create a .env based on the .env.exemple on both forntend and backend.  
 run 'npm run db:reset'.  
+run 'npm start' in the frontend and 'npm run dev' in the backend.  

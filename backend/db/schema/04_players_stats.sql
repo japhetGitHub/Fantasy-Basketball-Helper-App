@@ -45,8 +45,9 @@ CREATE TABLE player_stats (
   plusMinus INT  NOT NULL,
   doubleDoubles INT  NOT NULL,
   tripleDoubles INT  NOT NULL,
-  fantasyPointsfanduel INT  NOT NULL,
-  fantasyPointsdraftkings INT  NOT NULL,
+  fantasyPointsFanDuel INT  NOT NULL,
+  fantasyPointsDraftKings INT  NOT NULL,
   fantasyPoints INT NOT NULL,
-  fantasyPointsFantasyDraft INT NOT NULL 
+  fantasyPointsFantasyDraft INT NOT NULL,
+  fantasyYahoo INT NOT NULL
 );
