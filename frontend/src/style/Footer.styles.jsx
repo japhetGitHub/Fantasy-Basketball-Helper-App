@@ -5,7 +5,7 @@ export const StyledFooter = styled.div`
   justify-content: flex-end;
   border-top: 2px solid grey;
   padding-right: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   img {
      padding-top: 20px;
      margin-left: 2px;

@@ -1,11 +1,13 @@
 import React from 'react';
 import addImage from '../image/add.png';
 
+import { StyledAddNewTeam } from '../style/AddNewTeam.styles';
+
 export default function AddNewTeam(props) {
   const { onClick } = props;
   return (
-    <div className="AddNewTeam" >
-      <h3>Add a new team</h3>
+    <StyledAddNewTeam>
+      <h2>Add a new team</h2>
       <img
         onClick={() => onClick("CreateNewTeam")}
         src={addImage}
@@ -13,6 +15,6 @@ export default function AddNewTeam(props) {
         height="200px"
         weight="200px"
       />
-    </div>
+    </StyledAddNewTeam>
   );
 }
