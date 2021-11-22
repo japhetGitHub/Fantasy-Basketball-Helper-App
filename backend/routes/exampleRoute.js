@@ -1,13 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-
-dotenv.config();
-const accessTokenSecret = process.env.TOKEN_SECRET;
-
-router.use(bodyParser.json());
+const authenticateJWT = require('../middleware/authenticateJWT');
 
 const books = [
   {
@@ -35,25 +28,6 @@ const books = [
       "year": 1315
   },
 ];
-
-const authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-
-  if (authHeader) {
-      const token = authHeader.split(' ')[1];
-
-      jwt.verify(token, accessTokenSecret, (err, user) => {
-          if (err) {
-              return res.sendStatus(403);
-          }
-
-          req.user = user;
-          next();
-      });
-  } else {
-      res.sendStatus(401);
-  }
-};
 
 router.get('/books', authenticateJWT, (req, res) => {
   res.json(books);
