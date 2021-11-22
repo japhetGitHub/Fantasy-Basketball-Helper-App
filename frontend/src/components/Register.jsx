@@ -1,45 +1,32 @@
 import React from 'react';
 import Button from './utilities/Button.jsx';
+import TextLabel from './utilities/TextLabel.jsx';
+import Footer from './utilities/Footer.jsx';
+
+import { StyledRegister } from '../style/Register.styles';
 
 export default function Register(props) {
   const { onClick } = props;
   return (
-    <div className="Register">
+    <StyledRegister>
       <h3>Register</h3>
       <form>
-        <input
-          className="input-box"
-          name="username"
-          type="text"
-          placeholder="Username"
-        />
-        <input
-          className="input-box"
-          name="email"
-          type="text"
-          placeholder="Email"
-        />
-        <input
-          className="input-box"
-          name="password"
-          type="text"
-          placeholder="Password"
-        />
-        <input
-          className="input-box"
-          name="repeate_password"
-          type="text"
-          placeholder="Repeat Password"
-        />
+        <TextLabel name={"Username"} />
+        <TextLabel name={"Email"} />
+        <TextLabel name={"Password"} />
+        <TextLabel name={"Repeat Password"} />
       </form>
       <Button
         onClick={() => onClick("HomeLog")}
         text={"Register"}
+        variant={"contained"}
       />
       <Button
         onClick={() => onClick("HomePage")}
         text={"Back"}
+        variant={"outlined"}
       />
-    </div>
+      <Footer />
+    </StyledRegister>
   );
 }
