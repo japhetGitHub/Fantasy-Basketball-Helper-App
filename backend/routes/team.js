@@ -21,16 +21,28 @@ OR if its a PUT or a POST:
       .then(() => console.log("post is completed"));
   }, []);
 */
-team.get('/all', function(req, res, next) {
-  const user_id = req.headers["user_id"];
-  const query = {
-    text: `SELECT * FROM teams WHERE user_id=${user_id}`,
-};
-
-return db
-    .query(query)
-    .then((result) => res.json({data: result.rows}))
+team.get('/all', function(req, res) {
+  // const user_id = req.headers["user_id"];
+  // const query = {
+  //   text: `SELECT * FROM teams WHERE user_id=${user_id}`
+  // }
+  // console.log('HELLO');
+  // res.send('HELLO')
+  return db 
+    // .query(query)
+    // console.log('HELLO')
+    .query(`SELECT * FROM teams`)
+    // res.json({data: result.rows}
+    // .then (res.send())
+    .then((result) => {
+      console.log('RESULT', result)
+      res.json({data: result.rows})
+    })
     .catch((err) => err);
 });
+
+
+
+
 
 module.exports = team;
