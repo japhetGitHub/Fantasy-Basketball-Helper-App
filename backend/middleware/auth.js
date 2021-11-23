@@ -6,12 +6,16 @@ const dotenv = require('dotenv');
 const users = [
   {
       username: 'john',
-      password: 'password123admin',
+      password: 'admin123',
       role: 'admin'
   }, {
       username: 'anna',
-      password: 'password123member',
-      role: 'member'
+      password: 'user123',
+      role: 'user'
+  }, {
+      username: 'test',
+      password: 'pass',
+      role: 'user'
   }
 ];
 
@@ -26,51 +30,52 @@ router.post('/login', (req, res) => {
   const { username, password } = req.body;
   // console.log(req.body)
 
-  // Filter user from the users array by username and password
+  // Filter user from the users array by username and password (later should be changed to a db lookup w/ password digest)
   const user = users.find(u => { return u.username === username && u.password === password });
 
   if (user) {
       // Generate an access token and a refresh token
-      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '20m' });
+      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '5m' });
       const refreshToken = jwt.sign({ username: user.username, role: user.role }, refreshTokenSecret);
       
-      refreshTokens.push(refreshToken);
+      refreshTokens.push(refreshToken); // add refresh token to array (later should be changed to a db insert)
 
       res.json({
           accessToken,
           refreshToken
       });
   } else {
-      res.send('Username or password incorrect');
+      res.status(401).send('Username or password incorrect');
   }
 });
 
-router.post('/token', (req, res) => {
-  const { token } = req.body;
+router.post('/token', (req, res) => { // receives requests for new access token  
+  const { token } = req.body; // body contains refresh token
 
   if (!token) {
       return res.sendStatus(401);
   }
 
-  if (!refreshTokens.includes(token)) {
+  if (!refreshTokens.includes(token)) { // must be valid refresh token
       return res.sendStatus(403);
   }
 
-  jwt.verify(token, refreshTokenSecret, (err, user) => {
+  jwt.verify(token, refreshTokenSecret, (err, user) => { // generates new access token based on verified refresh token
       if (err) {
           return res.sendStatus(403);
       }
 
-      const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: '20m' });
+      const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: '5m' });
 
-      res.json({
-          accessToken
+      res.status(201).json({
+          accessToken // returns new access token
       });
   });
 });
 
 router.post('/logout', (req, res) => {
   const { token } = req.body;
+  // removes refresh token when user logs out so that a new access token cannot be maliciously recreated
   refreshTokens = refreshTokens.filter(t => t !== token);
 
   res.send("Logout successful");
