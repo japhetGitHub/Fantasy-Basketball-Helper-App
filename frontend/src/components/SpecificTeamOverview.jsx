@@ -2,6 +2,8 @@ import React from 'react';
 import Button from './utilities/Button.jsx';
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
+import PieChartGraph from './utilities/PieChartGraph.jsx';
+import TwitterZone from './utilities/TwitterZone.jsx';
 
 import { StyledSpecificTeamOverview } from '../style/SpecificTeamOverview.styles';
 
@@ -53,24 +55,35 @@ export default function SpecificTeamOverview(props) {
   };
 
   const rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
-  let totalFanPoints = 0;
-  let carouselArray = rankedPlayer.map((player) => {
-    totalFanPoints += player.lastWeekFan;
-    return (<PlayerCards
-      playerFirstName={player.playerFirstName}
-      playerLastName={player.playerLastName}
-      playerImage={player.playerImage}
-      position={player.position}
-      lastWeekPoints={player.lastWeekPoints}
-      lastWeekFan={player.lastWeekFan}
-      lastWeekBlocks={player.lastWeekBlocks}
-      lastWeekSteals={player.lastWeekSteals}
-    />);
-  });
+
+  const carouselArray = [];
+  carouselArray.push(<PlayerCards
+    playerFirstName={rankedPlayer[0].playerFirstName}
+    playerLastName={rankedPlayer[0].playerLastName}
+    playerImage={rankedPlayer[0].playerImage}
+    position={rankedPlayer[0].position}
+    lastWeekPoints={rankedPlayer[0].lastWeekPoints}
+    lastWeekFan={rankedPlayer[0].lastWeekFan}
+    lastWeekBlocks={rankedPlayer[0].lastWeekBlocks}
+    lastWeekSteals={rankedPlayer[0].lastWeekSteals}
+  />);
+
+  carouselArray.push(<PlayerCards
+    playerFirstName={rankedPlayer[rankedPlayer.length - 1].playerFirstName}
+    playerLastName={rankedPlayer[rankedPlayer.length - 1].playerLastName}
+    playerImage={rankedPlayer[rankedPlayer.length - 1].playerImage}
+    position={rankedPlayer[rankedPlayer.length - 1].position}
+    lastWeekPoints={rankedPlayer[rankedPlayer.length - 1].lastWeekPoints}
+    lastWeekFan={rankedPlayer[rankedPlayer.length - 1].lastWeekFan}
+    lastWeekBlocks={rankedPlayer[rankedPlayer.length - 1].lastWeekBlocks}
+    lastWeekSteals={rankedPlayer[rankedPlayer.length - 1].lastWeekSteals}
+  />);
+
+  carouselArray.push(<PieChartGraph foward={200} center={600} guard={100} />);
 
   return (
     <StyledSpecificTeamOverview>
-      <span>{data.teamName} - {totalFanPoints} fpts</span>
+      <span>{data.teamName} - 857 fpts</span>
       <div className={"top-button"} >
         <Button
           onClick={() => console.log("go to manage player")}
@@ -86,9 +99,8 @@ export default function SpecificTeamOverview(props) {
       
       <Carousel slides={carouselArray} />
 
-      <div className={"tweets"} >
-        there will be tweets here
-      </div>
+      <TwitterZone />
+
       <div className={"bottom-button"}>
         <Button
           onClick={() => {

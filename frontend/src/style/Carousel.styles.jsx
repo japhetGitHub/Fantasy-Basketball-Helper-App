@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const StyledCarousel = styled.div`
   & .carousel-view {
-    overflow:hidden;
+    overflow: hidden;
   }
-  
+
   & nav {
     display: flex;
     justify-content: center;
