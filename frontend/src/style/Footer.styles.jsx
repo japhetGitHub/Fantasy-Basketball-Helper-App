@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled.div`
+  margin-top: auto;
   display: flex;
   justify-content: flex-end;
   border-top: 2px solid grey;

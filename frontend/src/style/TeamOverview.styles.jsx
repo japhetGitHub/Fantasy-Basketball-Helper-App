@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 
 export const StyledTeamOverview = styled.div`
-  text-align: center;
-  padding-top: 10px;
+  margin-top: 1em;
+`;
 
-  & .headerOfATeam {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    
-
+export const StyledHeader = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+  align-items: center;
+  
+  & button {
+    padding: 0.3em 0.4em;
   }
+`;
 
+export const StyledCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
 `;

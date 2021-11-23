@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Footer from './utilities/Footer.jsx';
 import Button from './utilities/Button.jsx';
 import TextLabel from './utilities/TextLabel.jsx';
 import RadioForm from './helpers/RadioForm.jsx';
@@ -19,7 +18,11 @@ export default function CreateNewTeam(props) {
         text={"Create!"}
         variant={"contained"}
       />
-      <Footer />
+      <Button
+        onClick={() => onClick("HomeLog")}
+        text={"Back"}
+        variant={"outlined"}
+      />
     </StyledCreateNewTeam>
   );
 }

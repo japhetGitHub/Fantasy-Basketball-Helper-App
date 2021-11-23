@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from './utilities/Button.jsx';
 import TextLabel from './utilities/TextLabel.jsx';
-import Footer from './utilities/Footer.jsx';
 
 import { StyledRegister } from '../style/Register.styles';
 
@@ -15,18 +14,17 @@ export default function Register(props) {
         <TextLabel name={"Email"} />
         <TextLabel name={"Password"} />
         <TextLabel name={"Repeat Password"} />
+        <Button
+          onClick={() => onClick("HomeLog")}
+          text={"Register"}
+          variant={"contained"}
+        />
+        <Button
+          onClick={() => onClick("HomePage")}
+          text={"Back"}
+          variant={"outlined"}
+        />
       </form>
-      <Button
-        onClick={() => onClick("HomeLog")}
-        text={"Register"}
-        variant={"contained"}
-      />
-      <Button
-        onClick={() => onClick("HomePage")}
-        text={"Back"}
-        variant={"outlined"}
-      />
-      <Footer />
     </StyledRegister>
   );
 }

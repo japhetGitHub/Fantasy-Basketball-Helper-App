@@ -12,8 +12,6 @@ export default function AddNewTeam(props) {
         onClick={() => onClick("CreateNewTeam")}
         src={addImage}
         alt="Add sign"
-        height="200px"
-        weight="200px"
       />
     </StyledAddNewTeam>
   );

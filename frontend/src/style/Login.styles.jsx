@@ -3,22 +3,11 @@ import styled from 'styled-components';
 export const StyledLogin = styled.div`
   text-align: center;
 
-  & h3 {
-    padding-top: 35px;
-    padding-bottom: 40px;
+  & form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 110%;
   }
-
-  & div {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  & button {
-    margin-top: 25px;
-    margin-bottom: 220px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
 `;
 

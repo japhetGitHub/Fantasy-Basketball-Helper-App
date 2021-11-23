@@ -4,7 +4,7 @@ import { virtualize } from 'react-swipeable-views-utils';
 import { mod } from 'react-swipeable-views-core';
 import { Pagination } from '@mui/material';
 
-import '../../style/pagination.css';
+import { StyledCarousel } from '../../style/Carousel.styles.jsx';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -24,8 +24,10 @@ export default function Carousel(props) {
     const slide = mod(index, nbOfSlides);
     return (
       <div
+        className={"test"}
         key={key}
         style={Object.assign({})}
+        
       >
         {slides[slide]}
         <Pagination
@@ -41,9 +43,9 @@ export default function Carousel(props) {
   };
 
   return (
-    <div className="Carousel">
+    <StyledCarousel>
       <VirtualizeSwipeableViews slideRenderer={slideRenderer} />
-    </div>
+    </StyledCarousel>
   );
 }
 

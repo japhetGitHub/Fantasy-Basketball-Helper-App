@@ -2,7 +2,7 @@ import React from 'react';
 import TeamOverview from './TeamOverview.jsx';
 import AddNewTeam from './AddNewTeam.jsx';
 import Carousel from './utilities/Carousel.jsx';
-import Footer from './utilities/Footer.jsx';
+
 
 import { StyledHomeLog } from '../style/HomeLog.styles';
 
@@ -12,7 +12,7 @@ import stephImage from './../image/steph.png';
 
 // we will need to add the props in the function
 export default function HomeLog(props) {
-  const { onClick } = props;
+  const { onClick, onSelectedTeam } = props;
   const data = [
     {
       teamId: 1,
@@ -49,7 +49,10 @@ export default function HomeLog(props) {
         topPerformer={singleTeam.topPerformer}
         worstPerformer={singleTeam.worstPerformer}
         totalFanPoints={singleTeam.totalFanPoints}
-        onClick={() => console.log(`call the info for the teamid ${singleTeam.teamId}`)}
+        onClick={() => {
+          onClick("SpecificTeamOverview");
+          onSelectedTeam(singleTeam.teamId);
+        }}
       />);
   });
 
@@ -62,7 +65,6 @@ export default function HomeLog(props) {
   return (
     <StyledHomeLog>
       <Carousel slides={viewArray} />
-      <Footer />
     </StyledHomeLog>
   );
 }
