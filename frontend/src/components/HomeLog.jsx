@@ -2,7 +2,7 @@ import React from 'react';
 import TeamOverview from './TeamOverview.jsx';
 import AddNewTeam from './AddNewTeam.jsx';
 import Carousel from './utilities/Carousel.jsx';
-import Footer from './utilities/Footer.jsx';
+
 
 import { StyledHomeLog } from '../style/HomeLog.styles';
 
@@ -65,7 +65,6 @@ export default function HomeLog(props) {
   return (
     <StyledHomeLog>
       <Carousel slides={viewArray} />
-      <Footer />
     </StyledHomeLog>
   );
 }

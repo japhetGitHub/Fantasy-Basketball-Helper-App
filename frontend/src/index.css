@@ -1,7 +1,15 @@
 body {
   margin: 0;
+  height: 100vh;
   font-family: 'Merriweather', serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   background-color: #FBE8A6;
+  box-sizing: border-box;
+  padding: 0 0.5em;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+#root {
+  height: 100vh;
 }

@@ -22,6 +22,7 @@ export default function Button(props) {
       onClick={onClick}
       variant={variant}
       color={color}
+      size="small"
     >
       {text}
     </ButtonMui>

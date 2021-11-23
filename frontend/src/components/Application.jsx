@@ -6,8 +6,9 @@ import Login from './Login.jsx';
 import HomeLog from './HomeLog.jsx';
 import CreateNewTeam from './CreateNewTeam.jsx';
 import SpecificTeamOverview from './SpecificTeamOverview.jsx';
+import Footer from './utilities/Footer.jsx';
 
-
+import { StyledApplication } from '../style/Application.styles';
 
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
   const [showLiveGame, setShowLiveGame] = useState(true);
 
   return (
-    <div className="Application">
+    <StyledApplication>
       <Header live={showLiveGame} />
       {view === "HomePage" && <HomePage onClick={setView} />}
       {view === "Register" && <Register onClick={setView} />}
@@ -24,6 +25,7 @@ export default function App() {
       {view === "HomeLog" && <HomeLog onClick={setView} onSelectedTeam={setSelectedTeam} />}
       {view === "CreateNewTeam" && <CreateNewTeam onClick={setView} />}
       {view === "SpecificTeamOverview" && <SpecificTeamOverview onClick={setView}  selectedTeam={selectedTeam} onSelectedTeam={setSelectedTeam} />}
-    </div>
+      <Footer/>
+    </StyledApplication>
   );
 }

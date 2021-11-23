@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './utilities/Footer.jsx';
 import Button from './utilities/Button.jsx';
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
@@ -12,7 +11,7 @@ import stephImage from './../image/steph.png';
 
 export default function SpecificTeamOverview(props) {
   const { onClick, selectedTeam, onSelectedTeam } = props;
-  
+
   // do an axios request based on the selectedTeam for the teamId and return only fantasy points set
   // as the fantasy choice the user picked for that specific team
   // all these data are average of the last week played
@@ -54,8 +53,9 @@ export default function SpecificTeamOverview(props) {
   };
 
   const rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
-
+  let totalFanPoints = 0;
   let carouselArray = rankedPlayer.map((player) => {
+    totalFanPoints += player.lastWeekFan;
     return (<PlayerCards
       playerFirstName={player.playerFirstName}
       playerLastName={player.playerLastName}
@@ -70,38 +70,41 @@ export default function SpecificTeamOverview(props) {
 
   return (
     <StyledSpecificTeamOverview>
-      <p>{data.teamName}</p>
-      <Button
-        onClick={() => console.log("go to manage player")}
-        text={"Manage players"}
-        variant={"outlined"}
-      />
-      <Button
-        onClick={() => console.log("go to Starting Lineups")}
-        text={"Starting Lineups"}
-        variant={"outlined"}
-      />
-
+      <span>{data.teamName} - {totalFanPoints} fpts</span>
+      <div className={"top-button"} >
+        <Button
+          onClick={() => console.log("go to manage player")}
+          text={"Manage players"}
+          variant={"outlined"}
+        />
+        <Button
+          onClick={() => console.log("go to Starting Lineups")}
+          text={"Starting Lineups"}
+          variant={"outlined"}
+        />
+      </div>
+      
       <Carousel slides={carouselArray} />
 
       <div className={"tweets"} >
         there will be tweets here
       </div>
-      <Button
-        onClick={() => {
-          onClick("HomeLog");
-          onSelectedTeam(null);
-        }}
-        text={"Back"}
-        variant={"outlined"}
-      />
-      <Button
-        onClick={() => console.log("go to delete team")}
-        text={"Delete team"}
-        variant={"contained"}
-        color={"error"}
-      />
-      <Footer />
+      <div className={"bottom-button"}>
+        <Button
+          onClick={() => {
+            onClick("HomeLog");
+            onSelectedTeam(null);
+          }}
+          text={"Back"}
+          variant={"outlined"}
+        />
+        <Button
+          onClick={() => console.log("go to delete team")}
+          text={"Delete team"}
+          variant={"contained"}
+          color={"error"}
+        />
+      </div>
     </StyledSpecificTeamOverview>
   );
 }

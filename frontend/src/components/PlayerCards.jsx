@@ -16,29 +16,30 @@ export default function PlayerCards(props) {
     lastWeekBlocks,
     lastWeekSteals
   } = props;
+
   return (
     <StyledPlayerCards>
-      <h3>{playerFirstName} {playerLastName}, {position}</h3>
-      <img src={playerImage} height="100px" width="100px" />
-      <p>Last week stats</p>
+      <div className={"player-face"}>
+        <h3>{playerFirstName} {playerLastName}, {position}</h3>
+        <img src={playerImage} height="100px" width="100px" />
+      </div>
       <div className="stats">
-        <div className="top-row">
+        <h3>Last week stats</h3>
+        <div className={"stats-grid"}>
           <div className="points">
-            <p>Points</p>
+            <h3>Points</h3>
             <p>{lastWeekPoints}</p>
           </div>
           <div className="fanPoints">
-            <p>Fantasy Points</p>
+            <h3>Fantasy Points</h3>
             <p>{lastWeekFan}</p>
           </div>
-        </div>
-        <div className="bottom-row">
           <div className="Block">
-            <p>Blocks</p>
+            <h3>Blocks</h3>
             <p>{lastWeekBlocks}</p>
           </div>
           <div className="Steals">
-            <p>Steals</p>
+            <h3>Steals</h3>
             <p>{lastWeekSteals}</p>
           </div>
         </div>

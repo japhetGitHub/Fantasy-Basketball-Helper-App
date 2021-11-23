@@ -1,32 +1,31 @@
 import styled from 'styled-components';
 
 export const StyledPlayerCards = styled.div`
-  text-align:center;
+  text-align: center;
+  display: 'flex';
+  flex-direction: column;
+
+
+
+  & .player-face {
+    padding: 0.5em 0;
+  }
 
   & .stats {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 0.1em 0;
 
-    & .top-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
+    & p {
+      text-decoration: underline;
+    }
+  }
 
-      & div {
-        border: 1px solid gray;
-      }
-    }
-    
-    & .bottom-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-evenly;
-      
-      & div {
-        border: 1px solid gray;
-      }
-    }
+  & .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    'points fantasyPoints' 
+    'blocks steals';
   }
 `;
 

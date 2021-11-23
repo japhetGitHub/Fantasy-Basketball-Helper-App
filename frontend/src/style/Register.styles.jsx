@@ -3,21 +3,10 @@ import styled from 'styled-components';
 export const StyledRegister = styled.div`
   text-align: center;
 
-  & h3 {
-    padding-top: 35px;
-    padding-bottom: 40px;
+  & form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 110%;
   }
-
-  & div {
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  & button {
-    margin-top: 25px;
-    margin-bottom: 30px;
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
 `;
