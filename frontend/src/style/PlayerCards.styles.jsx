@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const StyledPlayerCards = styled.div`
   text-align: center;
-  display: 'flex';
+  display: flex;
   flex-direction: column;
-
 
 
   & .player-face {

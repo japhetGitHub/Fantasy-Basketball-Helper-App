@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  height: 100vh;
+  height: 100%;
   font-family: 'Merriweather', serif;
   background-color: #FBE8A6;
   box-sizing: border-box;
@@ -11,5 +11,9 @@ body {
 }
 
 #root {
-  height: 100vh;
+  height: 100%;
+}
+
+html {
+  min-height: 100vh;
 }

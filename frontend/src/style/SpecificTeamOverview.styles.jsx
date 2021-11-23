@@ -13,5 +13,7 @@ export const StyledSpecificTeamOverview = styled.div`
 
   & .top-button{
     margin: 1em 0;
+    display: flex;
+    justify-content: space-around;
   }
 `;

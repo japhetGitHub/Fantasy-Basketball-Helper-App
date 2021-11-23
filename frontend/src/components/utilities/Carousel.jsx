@@ -24,8 +24,10 @@ export default function Carousel(props) {
     const slide = mod(index, nbOfSlides);
     return (
       <div
+        className={"test"}
         key={key}
         style={Object.assign({})}
+        
       >
         {slides[slide]}
         <Pagination
