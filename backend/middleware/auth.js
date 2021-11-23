@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
 
   if (user) {
       // Generate an access token and a refresh token
-      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '5m' });
+      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '3s' });
       const refreshToken = jwt.sign({ username: user.username, role: user.role }, refreshTokenSecret);
       
       refreshTokens.push(refreshToken); // add refresh token to array (later should be changed to a db insert)
@@ -47,6 +47,34 @@ router.post('/login', (req, res) => {
   } else {
       res.status(401).send('Username or password incorrect');
   }
+});
+
+router.post('/register', (req, res) => {
+  // Read username and password from request body
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.sendStatus(401);
+  }
+  const user = { 
+    username,
+    password,
+    role: "user"
+  }; 
+  users.push(user);
+
+  // Generate an access token and a refresh token
+  const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '5m' });
+  const refreshToken = jwt.sign({ username: user.username, role: user.role }, refreshTokenSecret);
+  
+  refreshTokens.push(refreshToken); // save refresh token
+
+  console.log("Registration Successful!", user);
+  res.json({
+      accessToken,
+      refreshToken
+  });
+ 
 });
 
 router.post('/token', (req, res) => { // receives requests for new access token  
