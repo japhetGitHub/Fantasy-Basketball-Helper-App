@@ -36,11 +36,19 @@ const logout = () => {
   //TODO: remove accessToken from where it was stored
 };
 
-const register = (email, password) => {
-  return axiosInterceptor.post(API_URL + "register", { // **** backend route not implemented yet *****
-    email,
+const register = (username, password) => {
+  const credentials = {
+    username,
     password
-  });
+  };
+  return axiosInterceptor.post(API_URL + "register", credentials)
+    .then(response => {
+      if (response.data.accessToken) {
+        TokenService.setUser(response.data);
+      }
+
+      return response.data;
+    });
 };
 
 const getCurrentUser = () => {
