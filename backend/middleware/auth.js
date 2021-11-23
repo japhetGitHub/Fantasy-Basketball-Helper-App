@@ -28,7 +28,6 @@ let refreshTokens = [];
 router.post('/login', (req, res) => {
   // Read username and password from request body
   const { username, password } = req.body;
-  // console.log(req.body)
 
   // Filter user from the users array by username and password (later should be changed to a db lookup w/ password digest)
   const user = users.find(u => { return u.username === username && u.password === password });
@@ -45,7 +44,7 @@ router.post('/login', (req, res) => {
           refreshToken
       });
   } else {
-      res.status(401).send('Username or password incorrect');
+      res.status(401).send('Username or Password incorrect');
   }
 });
 
@@ -90,11 +89,12 @@ router.post('/token', (req, res) => { // receives requests for new access token
 
   jwt.verify(token, refreshTokenSecret, (err, user) => { // generates new access token based on verified refresh token
       if (err) {
-          return res.sendStatus(403);
+        console.log("Error: Refresh Token could not be made")
+        return res.sendStatus(403);
       }
 
       const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: '5m' });
-
+      console.log("Success! Access Token reissued");
       res.status(201).json({
           accessToken // returns new access token
       });

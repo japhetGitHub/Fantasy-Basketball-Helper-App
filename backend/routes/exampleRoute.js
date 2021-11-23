@@ -37,7 +37,8 @@ router.post('/books', authenticateJWT, (req, res) => {
   const { role } = req.user;
 
   if (role !== 'admin') {
-      return res.sendStatus(403);
+    console.log("Error: User not authorized for this route");
+    return res.sendStatus(403);
   }
 
 

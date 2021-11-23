@@ -1,4 +1,3 @@
-// const express = require('express');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
@@ -9,23 +8,22 @@ const accessTokenSecret = process.env.TOKEN_SECRET;
 
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers["x-access-token"] || req.headers.authorization;
-  console.log("TEST 1", authHeader);
   if (authHeader) {
     const token = authHeader.split(' ')[1]; // header will receive token as "Bearer xxxxxxxxx.xxxxx..."
-    console.log("TEST 2", token);
     
     jwt.verify(token, accessTokenSecret, (err, user) => {
       if (err) {
-          console.log("TEST 3", err);
+          console.log("Error: Invalid Access Token Received", err);
           return res.sendStatus(403);
         }
         
+        console.log("Access Token Successfully Verified");
         req.user = user;
-        console.log("TEST 4", req.user);
 
         next();
     });
   } else {
+      console.log("Error: Request does not contain access token in appropriate header")
       res.sendStatus(401);
   }
 };

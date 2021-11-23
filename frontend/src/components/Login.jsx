@@ -20,19 +20,15 @@ export default function Login(props) {
 
   const handleLogin = function(event) {
     event.preventDefault();
-    // console.log("In handleLogin:", AuthService);
 
     AuthService.login(email, password).then(() => { // sends credentials to backend and expects to receieve access token & refresh token
       console.log("Logged in!");
-      // props.onClick("HomeLog");
       onClick("TestPage");
-
-      // console.log(results);
-    }).catch((err) => { // unsuccessful error passed here from api.js(interceptors.response)) -> auth.service(login.post) -> here
-      console.log("Err AuthService");
-      // console.log("data:", err.response.data);
-      // console.log("status:", err.response.status);
-      // console.log("headers:", err.response.headers);
+    }).catch((err) => {
+      // unsuccessful error passed here from api.js(interceptors.response)) -> auth.service(login.post) -> here
+      console.log("data:", err.response.data);
+      console.log("status:", err.response.status);
+      console.log("headers:", err.response.headers);
 
       setLoginError({ // enable error message mui component if login was unsuccessful
         hasError: true,

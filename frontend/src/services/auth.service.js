@@ -9,22 +9,11 @@ const login = (username, password) => {
     username,
     password
   };
-  console.log("IN AUTH SERVICE Start");
-  
-  // axios.post(API_URL + 'login', credentials).then((res) => {
-  //   console.log("TEST 1");
-  //   return res;
-  // }).catch(() => console.log("ERROR TEST 1 CAUGHT"));
-
+  console.log("Sending Login Request");
   return axiosInterceptor.post(API_URL + 'login', credentials)
     .then(response => { // expecting an access token
-      console.log("IN AUTH SERVICE POST:",response);
       if (response.data.accessToken) {
         TokenService.setUser(response.data);
-        // localStorage.setItem("user", JSON.stringify(response.data));
-        // TODO: figure out where to store accessToken
-
-        // localStorage.setItem("user", JSON.stringify(response.data.refreshToken));
       }
 
       return response.data;
@@ -33,7 +22,6 @@ const login = (username, password) => {
 
 const logout = () => {
   TokenService.removeUser();
-  //TODO: remove accessToken from where it was stored
 };
 
 const register = (username, password) => {
@@ -41,10 +29,11 @@ const register = (username, password) => {
     username,
     password
   };
+  console.log("Sending Registration Request");
   return axiosInterceptor.post(API_URL + "register", credentials)
     .then(response => {
       if (response.data.accessToken) {
-        TokenService.setUser(response.data);
+        TokenService.setUser(response.data); // logs user in upon successful registration
       }
 
       return response.data;

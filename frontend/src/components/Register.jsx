@@ -6,11 +6,6 @@ import AuthService from '../services/auth.service.js';
 import Button from './utilities/Button.jsx';
 import ErrorAlert from './utilities/ErrorAlert.jsx';
 
-
-// import AuthService from '../services/auth.service';
-
-//STRETCH: form validation
-
 export default function Register(props) {
   const [registerError, setRegisterError] = useState({
     hasError: false,
@@ -26,7 +21,7 @@ export default function Register(props) {
 
     AuthService.register(email, password).then(() => {
       console.log("Registered!");
-      
+
       onClick("TestPage");
     }).catch((err) => {
       setRegisterError({
@@ -75,3 +70,5 @@ export default function Register(props) {
 Register.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired
 };
+
+//STRETCH: form validation
