@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import liveImage from '../image/test.png';
 
+import Button from "./utilities/Button.jsx";
+import AuthService from "../services/auth.service";
+
 import {
   StyledLiveGames,
   StyledHeader
@@ -17,9 +20,17 @@ export default function Header(props) {
       .then((res) => setLiveGames(res.data));
   }, []);
   
+  const logoutHandler = () => {
+    AuthService.logout();
+    props.onClick("HomePage");
+  };
+
   return (
     <div className="header">
       <StyledHeader>Our website name</StyledHeader>
+
+      <Button text={"Logout"} variant="outlined" onClick={logoutHandler} />
+
       {live &&
         <StyledLiveGames className="liveGameBanner">
           <img
