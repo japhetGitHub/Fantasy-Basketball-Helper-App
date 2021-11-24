@@ -41,4 +41,6 @@ team.get('/all', function(req, res) {
     .catch((err) => err);
 });
 
+
+
 module.exports = team;
