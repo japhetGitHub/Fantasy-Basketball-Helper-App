@@ -1,25 +1,35 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import liveImage from '../image/test.png';
+
+import Button from "./utilities/Button.jsx";
+import AuthService from "../services/auth.service";
 
 import {
   StyledLiveGames,
   StyledHeader
-} from '../style/Header.styles';
+} from '../style/Header.styles.jsx';
 
 
 export default function Header(props) {
-  const { live } = props;
+  const { live, onClick } = props;
   const [liveGames, setLiveGames] = useState(null);
-
+  
   useEffect(() => {
     axios.get("https://api.sportsdata.io/v3/nba/scores/json/AreAnyGamesInProgress?key=ce0935001bf94813a935f4593acd1514")
       .then((res) => setLiveGames(res.data));
   }, []);
   
+  const logoutHandler = () => {
+    AuthService.logout();
+    onClick("HomePage");
+  };
+
   return (
     <StyledHeader>
       <h3>Our website name</h3>
+      <Button text={"Logout"} variant="outlined" onClick={logoutHandler} />
       {live &&
         <StyledLiveGames className="liveGameBanner">
           <img
@@ -32,3 +42,9 @@ export default function Header(props) {
     </StyledHeader>
   );
 }
+
+
+Header.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired,
+  live: PropTypes.bool.isRequired
+};

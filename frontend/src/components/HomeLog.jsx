@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TeamOverview from './TeamOverview.jsx';
 import AddNewTeam from './AddNewTeam.jsx';
 import Carousel from './utilities/Carousel.jsx';
 
 
-import { StyledHomeLog } from '../style/HomeLog.styles';
+import { StyledHomeLog } from '../style/HomeLog.styles.jsx';
 
 // these are link to image, take those and the images off when we get the call to the backend
 import zionImage from './../image/zion.png';
@@ -45,6 +46,7 @@ export default function HomeLog(props) {
   const viewArray = data.map((singleTeam) => {
     return (
       <TeamOverview
+        key={singleTeam.teamId}
         teamName={singleTeam.teamName}
         topPerformer={singleTeam.topPerformer}
         worstPerformer={singleTeam.worstPerformer}
@@ -68,3 +70,9 @@ export default function HomeLog(props) {
     </StyledHomeLog>
   );
 }
+
+
+HomeLog.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired,
+  onSelectedTeam: PropTypes.func.isRequired
+};

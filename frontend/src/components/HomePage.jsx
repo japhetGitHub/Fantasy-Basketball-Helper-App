@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Button from './utilities/Button.jsx';
 import AboutUs from "./AboutUs.jsx";
 
 import {
   StyledButtonHomePage,
   StyledHomePage
-} from '../style/HomePage.styles';
+} from '../style/HomePage.styles.jsx';
 
 export default function  HomePage(props) {
   const { onClick } = props;
@@ -28,3 +29,8 @@ export default function  HomePage(props) {
     </StyledHomePage>
   );
 }
+
+
+HomePage.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired,
+};

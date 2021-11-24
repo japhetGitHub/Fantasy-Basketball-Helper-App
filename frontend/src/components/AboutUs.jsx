@@ -2,7 +2,7 @@ import React from 'react';
 import lebronImage from '../image/Lebron.jpeg';
 import trophyImage from '../image/trophy.jpg';
 
-import { StyledAboutUs } from '../style/AboutUs.styles';
+import { StyledAboutUs } from '../style/AboutUs.styles.jsx';
 
 export default function AboutUs() {
   return (

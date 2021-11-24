@@ -1,8 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledPlayerCards } from  '../style/PlayerCards.styles.jsx';
-
-
-
 
 export default function PlayerCards(props) {
   
@@ -21,7 +19,7 @@ export default function PlayerCards(props) {
     <StyledPlayerCards>
       <div className={"player-face"}>
         <h3>{playerFirstName} {playerLastName}, {position}</h3>
-        <img src={playerImage} height="100px" width="100px" />
+        <img src={playerImage} height="100px" width="100px" alt="Player Face"/>
       </div>
       <div className="stats">
         <h3>Last week stats</h3>
@@ -47,3 +45,16 @@ export default function PlayerCards(props) {
     </StyledPlayerCards>
   );
 }
+
+
+PlayerCards.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired,
+  playerFirstName: PropTypes.string.isRequired,
+  playerLastName: PropTypes.string.isRequired,
+  playerImage: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
+  lastWeekPoints: PropTypes.number.isRequired,
+  lastWeekFan: PropTypes.number.isRequired,
+  lastWeekBlocks: PropTypes.number.isRequired,
+  lastWeekSteals: PropTypes.number.isRequired
+};
