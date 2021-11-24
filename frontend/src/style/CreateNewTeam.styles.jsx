@@ -2,28 +2,21 @@ import styled from 'styled-components';
 
 export const StyledCreateNewTeam = styled.div`
   text-align: center;
-  padding-left: 15px;
-
-  & h3 {
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
+  display: flex;
+  flex-direction: column;
+  margin: 1em 0;
 
   & div {
-    margin-bottom: 20px;
+    margin: 0.5em 0;
   }
 
-  & legend {
-    margin-top: 20px;
-    padding-bottom: 30px;
+  & .MuiFormGroup-root {
+    display: flex;
+    flex-direction: column;
+    padding: 1em 2em;
   }
 
   & button {
-    margin-top: 20px;
-    margin-bottom: 205px;
-  }
-  & p {
-    padding-top: 20px;
-    color: red;
+    margin: 0.5em 0;
   }
 `;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import addImage from '../image/add.png';
 
 import { StyledAddNewTeam } from '../style/AddNewTeam.styles';
@@ -9,12 +10,15 @@ export default function AddNewTeam(props) {
     <StyledAddNewTeam>
       <h2>Add a new team</h2>
       <img
-        onClick={() => onClick("CreateNewTeam")}
         src={addImage}
         alt="Add sign"
-        height="200px"
-        weight="200px"
+        onClick={() => onClick("CreateNewTeam")}
       />
     </StyledAddNewTeam>
   );
 }
+
+
+AddNewTeam.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired
+};

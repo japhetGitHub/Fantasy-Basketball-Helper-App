@@ -5,13 +5,15 @@ export const StyledAddNewTeam = styled.div`
   text-align: center;
 
   & h2 {
-    margin-top: 60px;
-    margin-bottom: 50px;
+    padding: 2em 0;
   }
 
   & img {
-    margin-top: 70px;
-    margin-bottom: 155px;
+    padding: 3em 0;
+    height: 200px;
+    height: 200px;
+    margin-bottom: 6.7em;
+    margin-left: 3em;
   }
 
 `;

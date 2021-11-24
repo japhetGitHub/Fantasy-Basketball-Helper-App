@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ButtonMui from '@mui/material/Button';
 
 // variant props can be "text" to get a button without border
 // variant props can be "contained" to have the button filled in color, text colors goes to white
 // variant props can be "outline" to have the text blue, filling white and border blue
 
-// color props can be any color i think
+// color props can be "error" to make it red
 
 // all props are optional
 
@@ -22,8 +23,16 @@ export default function Button(props) {
       onClick={onClick}
       variant={variant}
       color={color}
+      size="small"
     >
       {text}
     </ButtonMui>
   );
 }
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  color: PropTypes.string
+};
