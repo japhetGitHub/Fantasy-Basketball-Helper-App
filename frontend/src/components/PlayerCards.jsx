@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+
 import { StyledPlayerCards } from  '../style/PlayerCards.styles.jsx';
 
 export default function PlayerCards(props) {
@@ -48,7 +50,6 @@ export default function PlayerCards(props) {
 
 
 PlayerCards.propTypes = { // prop-types ensure that props are as component expected
-  onClick: PropTypes.func.isRequired,
   playerFirstName: PropTypes.string.isRequired,
   playerLastName: PropTypes.string.isRequired,
   playerImage: PropTypes.string.isRequired,

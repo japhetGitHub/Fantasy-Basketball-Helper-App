@@ -4,7 +4,6 @@ import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import PropTypes from 'prop-types';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from './../utilities/Button.jsx';
@@ -27,7 +26,7 @@ const data = [
   },
 ];
 
-export default function ListAddPlayer(props) {
+export default function ListAddPlayer() {
   
   // value will be set to the whole object of the player but the only thing that gonna be shown is the label: value
   const [open, setOpen] = React.useState(false);
@@ -59,7 +58,8 @@ export default function ListAddPlayer(props) {
         <Button
           onClick={() => {
             handleClick();
-            console.log(`save that new player(his object is gonna be in the value variable)${value.playerId}`);
+            console.log(`save that new player(his object is gonna be in the value variable)${value.playerId}
+            and refresh the whole page or only this single component if it's possible`);
           }}
           text={"Add player"}
           variant={"contained"}
@@ -69,7 +69,3 @@ export default function ListAddPlayer(props) {
     </StyledListAddPlayer>
   );
 }
-
-ListAddPlayer.propTypes = { // prop-types ensure that props are as component expected
-  
-};

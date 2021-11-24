@@ -31,7 +31,7 @@ export default function ManagePlayer(props) {
   const arrayList = [];
 
   data.map((singlePlayer) => {
-    arrayList.push(<ListPlayerOn key={1} player={singlePlayer} />);
+    arrayList.push(<ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
   });
 
   for (let i = arrayList.length; i < 20; i++) {
