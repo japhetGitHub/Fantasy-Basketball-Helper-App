@@ -92,7 +92,7 @@ export default function SpecificTeamOverview(props) {
           variant={"outlined"}
         />
         <Button
-          onClick={() => console.log("go to Starting Lineups")}
+          onClick={() => onClick("StartingLineups")}
           text={"Starting Lineups"}
           variant={"outlined"}
         />
