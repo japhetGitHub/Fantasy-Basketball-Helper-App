@@ -1,45 +1,30 @@
 import React from 'react';
 import Button from './utilities/Button.jsx';
+import TextLabel from './utilities/TextLabel.jsx';
+
+import { StyledRegister } from '../style/Register.styles';
 
 export default function Register(props) {
   const { onClick } = props;
   return (
-    <div className="Register">
+    <StyledRegister>
       <h3>Register</h3>
       <form>
-        <input
-          className="input-box"
-          name="username"
-          type="text"
-          placeholder="Username"
+        <TextLabel name={"Username"} />
+        <TextLabel name={"Email"} />
+        <TextLabel name={"Password"} />
+        <TextLabel name={"Repeat Password"} />
+        <Button
+          onClick={() => onClick("HomeLog")}
+          text={"Register"}
+          variant={"contained"}
         />
-        <input
-          className="input-box"
-          name="email"
-          type="text"
-          placeholder="Email"
-        />
-        <input
-          className="input-box"
-          name="password"
-          type="text"
-          placeholder="Password"
-        />
-        <input
-          className="input-box"
-          name="repeate_password"
-          type="text"
-          placeholder="Repeat Password"
+        <Button
+          onClick={() => onClick("HomePage")}
+          text={"Back"}
+          variant={"outlined"}
         />
       </form>
-      <Button
-        onClick={() => onClick("HomeLog")}
-        text={"Register"}
-      />
-      <Button
-        onClick={() => onClick("HomePage")}
-        text={"Back"}
-      />
-    </div>
+    </StyledRegister>
   );
 }

@@ -46,7 +46,9 @@ average_tripleDoubles,
 average_fantasyPointsfanduel,
 average_fantasyPointsdraftkings,
 average_fantasyPoints,
-average_fantasyPointsFantasyDraft)
+average_fantasyPointsFantasyDraft,
+average_fantasyYahoo
+)
 VALUES
 (
   20000441,
@@ -93,6 +95,7 @@ VALUES
     20,
       10,
     20,
+  10,
   10,
   10,
   10

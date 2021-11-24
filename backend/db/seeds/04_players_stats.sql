@@ -46,7 +46,9 @@ tripleDoubles,
 fantasyPointsfanduel,
 fantasyPointsdraftkings,
 fantasyPoints,
-fantasyPointsFantasyDraft)
+fantasyPointsFantasyDraft,
+fantasyYahoo
+)
 VALUES
 (
   20000441,
@@ -95,5 +97,6 @@ VALUES
   10,
   10,
     20,
+  10,
   10
 );

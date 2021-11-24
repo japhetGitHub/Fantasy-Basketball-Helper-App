@@ -3,15 +3,17 @@ import styled from 'styled-components';
 
 export const StyledAboutUs = styled.div`
   border-top: 2px solid gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding-bottom: 1em;
 
-  & .aboutUsImage img{
-    padding-top: 10px;
-    margin: 10px;
-  }
   & p {
-    margin-left: 10px;
+    padding: 0 1em;
   }
-  & h3 {
-    margin-left: 10px;
+
+  & div {
+    display: flex;
+    justify-content: space-evenly;
   }
 `;

@@ -1,6 +1,12 @@
 import React from 'react';
 import Button from './utilities/Button.jsx';
 
+import {
+  StyledTeamOverview,
+  StyledHeader,
+  StyledCard
+} from '../style/TeamOverview.styles';
+
 export default function TeamOverview(props) {
   
   const {
@@ -12,20 +18,36 @@ export default function TeamOverview(props) {
   } = props;
 
   return (
-    <div className="TeamOverview">
-      <h3>{teamName}</h3>
-      <Button
-        text={"More..."}
-        onClick={onClick}
-      />
-      <h4>Top performer</h4>
-      <p>image of the top performer {topPerformer.image}</p>
-      <p>{topPerformer.name}</p>
-      <h4>total team fan points</h4>
-      <p>{totalFanPoints}</p>
-      <h4>Worst performer</h4>
-      <p>image of the worst performer {worstPerformer.image}</p>
-      <p>{worstPerformer.name}</p>
-    </div>
+    <StyledTeamOverview>
+
+      <StyledHeader>
+        <h3>{teamName}</h3>
+        <Button
+          text={"More on that team"}
+          onClick={onClick}
+          variant={"outlined"}
+        />
+      </StyledHeader>
+
+      <StyledCard>
+        <h4>Top performer</h4>
+        <img
+          src={topPerformer.image}
+          height="100px"
+          width="100px"
+        />
+        <p>{topPerformer.name}</p>
+        <h4>total team fantasy points last week:</h4>
+        <span>{totalFanPoints}</span>
+        <h4>Worst performer</h4>
+        <img
+          src={worstPerformer.image}
+          height="100px"
+          width="100px"
+        />
+        <p>{worstPerformer.name}</p>
+      </StyledCard>
+
+    </StyledTeamOverview>
   );
 }

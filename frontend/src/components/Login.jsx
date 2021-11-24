@@ -1,33 +1,28 @@
 import React from 'react';
 import Button from './utilities/Button.jsx';
+import TextLabel from './utilities/TextLabel.jsx';
+
+import { StyledLogin } from '../style/Login.styles.jsx';
 
 export default function Login(props) {
   const {onClick} = props;
   return (
-    <div className="Login">
+    <StyledLogin>
       <h3>Login</h3>
       <form>
-        <input
-          className="input-box"
-          name="email"
-          type="text"
-          placeholder="Email"
+        <TextLabel name={"email"} />
+        <TextLabel name={"password"} />
+        <Button
+          onClick={() => onClick("HomeLog")}
+          text={"Login"}
+          variant={"contained"}
         />
-        <input
-          className="input-box"
-          name="password"
-          type="text"
-          placeholder="Password"
+        <Button
+          onClick={() => onClick("HomePage")}
+          text={"Back"}
+          variant={"outlined"}
         />
       </form>
-      <Button
-        onClick={() => onClick("HomeLog")}
-        text={"Login"}
-      />
-      <Button
-        onClick={() => onClick("HomePage")}
-        text={"Back"}
-      />
-    </div>
+    </StyledLogin>
   );
 }
