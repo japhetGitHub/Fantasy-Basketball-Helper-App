@@ -6,3 +6,4 @@ CREATE TABLE teams (
   user_id INTEGER REFERENCES users(id) NOT NULL,
   platform VARCHAR(255) NOT NULL
 );
+

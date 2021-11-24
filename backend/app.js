@@ -188,15 +188,20 @@ app.get('/:userID/:teamID/:playerID/playerstats', function (req, res) {
   .catch((err) => err); 
 });
 
-const getPlayerStatsForDB = async function() {
+const getPlayerStatsForDB = async function(formattedYesterday) {
   
   const headers = {
     "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
   }
-  const today = new Date()
-  console.log("++++++++++++++++++++++++++++++++++++", today);
-  return
-  const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/2021-NOV-20`
+  // const today = new Date()
+  // const formattedDate = today.slice(0, 10)
+  // 2021-11-22
+  // 012345678910
+  console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
+  //  return
+  //  date example: 2021-NOV-20
+  //  note: today's date returns no values 
+  const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
   console.log("URL ===", url)
 
   try {
@@ -206,17 +211,34 @@ const getPlayerStatsForDB = async function() {
     console.log(error)
   }
 }
-const today = new Date();
 
 
+// Only call this function if you need a daily update - change line 215!
+// why does cronjob get called even job.start is commented?
+// var job = new CronJob('* * * * * *', function() {
+//   console.log('You will see this message every second');
 
-var job = new CronJob('* * * * * *', function() {
-  console.log('You will see this message every second');
-  // getPlayerStatsForDB();
-}, null, true, 'America/Los_Angeles');
-job.start();
+//   // const date = new Date()
+//   // const formattedDate = date.toISOString().split('T')[0]
+//   // getPlayerStatsForDB(formattedDate);
 
-getPlayerStatsForDB();
+//   const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+//   const formattedYesterday = yesterday.toISOString().split('T')[0]
+//   // console.log('YESTERDAY', formattedYesterday);
+//   getPlayerStatsForDB(formattedYesterday);
+
+// }, null, true, 'America/Los_Angeles');
+// job.start();
+
+// const date = new Date()
+// let formattedDate = (date.setDate(date.getDate() - 1));
+// formattedDate = date.toISOString().split('T')[0]
+
+// Today's date gives no values, need to input yesterday
+const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+const formattedYesterday = yesterday.toISOString().split('T')[0]
+console.log('YESTERDAY', formattedYesterday);
+getPlayerStatsForDB(formattedYesterday);
 
 // // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
 // app.get('/api/authenticate');
