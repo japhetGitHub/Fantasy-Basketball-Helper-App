@@ -29,14 +29,16 @@ export default function Carousel(props) {
         
       >
         {slides[slide]}
-        <Pagination
-          count={nbOfSlides}
-          page={slide + 1}
-          hidePrevButton
-          hideNextButton
-          size={"small"}
-          variant={"outlined"}
-        />
+        <div className={"pagination"}>
+          <Pagination
+            count={nbOfSlides}
+            page={slide + 1}
+            hidePrevButton
+            hideNextButton
+            size={"small"}
+            variant={"outlined"}
+          />
+        </div>
       </div>
     );
   };
