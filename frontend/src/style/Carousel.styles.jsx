@@ -10,4 +10,8 @@ export const StyledCarousel = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  & .pagination {
+    margin-top: auto;
+  }
 `;

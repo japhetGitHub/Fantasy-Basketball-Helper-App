@@ -87,7 +87,7 @@ export default function SpecificTeamOverview(props) {
       <span>{data.teamName} - 857 fpts</span>
       <div className={"top-button"} >
         <Button
-          onClick={() => console.log("go to manage player")}
+          onClick={() => onClick("ManagePlayer")}
           text={"Manage players"}
           variant={"outlined"}
         />

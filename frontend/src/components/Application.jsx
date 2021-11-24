@@ -9,6 +9,7 @@ import CreateNewTeam from './CreateNewTeam.jsx';
 import SpecificTeamOverview from './SpecificTeamOverview.jsx';
 import Footer from './utilities/Footer.jsx';
 import StartingLineups from './StartingLineups.jsx';
+import ManagePlayer from './ManagePlayer.jsx';
 
 import { StyledApplication } from '../style/Application.styles.jsx';
 
@@ -28,6 +29,7 @@ export default function App() {
       {view === "CreateNewTeam" && <CreateNewTeam onClick={setView} />}
       {view === "SpecificTeamOverview" && <SpecificTeamOverview onClick={setView}  selectedTeam={selectedTeam} onSelectedTeam={setSelectedTeam} />}
       {view === "StartingLineups" && <StartingLineups onClick={setView} />}
+      {view === "ManagePlayer" && <ManagePlayer onClick={setView} />}
 
       {view === "TestPage" && <TestPage onClick={setView} />}
       <Footer/>
