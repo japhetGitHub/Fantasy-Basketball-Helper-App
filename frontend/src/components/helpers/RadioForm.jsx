@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,7 +10,7 @@ export default function RadioForm(props) {
   const { onChange } = props;
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend">What's you fantasy league?</FormLabel>
+      <FormLabel component="legend">What&apos;s you fantasy league?</FormLabel>
       <RadioGroup
         row
         aria-label="fantasy"
@@ -25,3 +26,7 @@ export default function RadioForm(props) {
     </FormControl>
   );
 }
+
+RadioForm.propTypes = {
+  onChange: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import { mod } from 'react-swipeable-views-core';
@@ -7,8 +8,6 @@ import { Pagination } from '@mui/material';
 import { StyledCarousel } from '../../style/Carousel.styles.jsx';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
-
-
 
 // we will need to add the props in the function
 export default function Carousel(props) {
@@ -48,6 +47,9 @@ export default function Carousel(props) {
     </StyledCarousel>
   );
 }
+Carousel.propTypes = {
+  slides: PropTypes.array.isRequired
+};
 
 
 

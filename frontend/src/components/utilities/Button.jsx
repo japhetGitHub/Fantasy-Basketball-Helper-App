@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import ButtonMui from '@mui/material/Button';
 
 // variant props can be "text" to get a button without border
@@ -28,3 +29,10 @@ export default function Button(props) {
     </ButtonMui>
   );
 }
+
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  color: PropTypes.string
+};

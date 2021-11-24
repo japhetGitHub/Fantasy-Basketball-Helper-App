@@ -4,7 +4,7 @@ import facebookImage from '../../image/facebook.png';
 import instagramImage from '../../image/instagram.png';
 import creativeCommonsImage from '../../image/creative-commons.png';
 
-import { StyledFooter } from "../../style/Footer.styles";
+import { StyledFooter } from "../../style/Footer.styles.jsx";
 
 
 export default function Footer() {
@@ -12,25 +12,25 @@ export default function Footer() {
     <StyledFooter>
       <img
         src={creativeCommonsImage}
-        alt="CC image footer"
+        alt="CC footer"
         height="25px"
         width="25px"
       />
       <img
         src={infoImage}
-        alt="info image footer"
+        alt="info footer"
         height="25px"
         width="25px"
       />
       <img
         src={facebookImage}
-        alt="facebook image footer"
+        alt="facebook footer"
         height="25px"
         width="25px"
       />
       <img
         src={instagramImage}
-        alt="instagram image footer"
+        alt="instagram footer"
         height="25px"
         width="25px"
       />
