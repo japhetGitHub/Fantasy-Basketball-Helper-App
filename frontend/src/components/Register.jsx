@@ -5,6 +5,9 @@ import AuthService from '../services/auth.service.js';
 
 import Button from './utilities/Button.jsx';
 import ErrorAlert from './utilities/ErrorAlert.jsx';
+import TextLabel from './utilities/TextLabel.jsx'; // TODO: Refactor Register component to use MUI TextLabel instead of <input>
+
+import { StyledRegister } from '../style/Register.styles.jsx';
 
 export default function Register(props) {
   const [registerError, setRegisterError] = useState({
@@ -32,7 +35,7 @@ export default function Register(props) {
   };
 
   return (
-    <div className="Register">
+    <StyledRegister>
       <h3>Register</h3>
       <form>
         <input
@@ -63,7 +66,7 @@ export default function Register(props) {
 
       { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
 
-    </div>
+    </StyledRegister>
   );
 }
 

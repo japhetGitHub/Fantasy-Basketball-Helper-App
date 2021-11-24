@@ -6,12 +6,14 @@ border-style: solid none;
 color: white;
 `;
 
-export const StyledHeader = styled.h1`
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+export const StyledHeader = styled.div`
   background-color: #B4DFE5;
-  padding-left: 10px;
+
+  & h3 {
+    margin: 0;
+    text-align: center;
+    padding: 1em 0;
+    font-size: 2em;
+  }
 `;
 

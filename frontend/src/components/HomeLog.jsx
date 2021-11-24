@@ -3,19 +3,27 @@ import TeamOverview from './TeamOverview.jsx';
 import AddNewTeam from './AddNewTeam.jsx';
 import Carousel from './utilities/Carousel.jsx';
 
+
+import { StyledHomeLog } from '../style/HomeLog.styles';
+
+// these are link to image, take those and the images off when we get the call to the backend
+import zionImage from './../image/zion.png';
+import stephImage from './../image/steph.png';
+
 // we will need to add the props in the function
-export default function HomeLog() {
+export default function HomeLog(props) {
+  const { onClick, onSelectedTeam } = props;
   const data = [
     {
       teamId: 1,
       teamName: "team1",
       topPerformer: {
         name: "steph",
-        image: "link"
+        image: stephImage
       },
       worstPerformer: {
         name: "zion",
-        image: "link"
+        image: zionImage
       },
       totalFanPoints: 871
     },
@@ -24,11 +32,11 @@ export default function HomeLog() {
       teamName: "team2",
       topPerformer: {
         name: "stephen",
-        image: "link"
+        image: stephImage
       },
       worstPerformer: {
         name: "zion willi",
-        image: "link"
+        image: zionImage
       },
       totalFanPoints: 934
     }
@@ -41,19 +49,22 @@ export default function HomeLog() {
         topPerformer={singleTeam.topPerformer}
         worstPerformer={singleTeam.worstPerformer}
         totalFanPoints={singleTeam.totalFanPoints}
-        onClick={() => console.log(`call the info for the teamid ${singleTeam.teamId}`)}
+        onClick={() => {
+          onClick("SpecificTeamOverview");
+          onSelectedTeam(singleTeam.teamId);
+        }}
       />);
   });
 
   viewArray.push(
     <AddNewTeam
-      onClick={() => console.log("call the add new team")}
+      onClick={onClick}
     />
   );
   
   return (
-    <div className="HomeLog">
+    <StyledHomeLog>
       <Carousel slides={viewArray} />
-    </div>
+    </StyledHomeLog>
   );
 }

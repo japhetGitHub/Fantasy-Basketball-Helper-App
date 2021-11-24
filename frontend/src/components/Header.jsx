@@ -8,7 +8,7 @@ import AuthService from "../services/auth.service";
 import {
   StyledLiveGames,
   StyledHeader
-} from '../style/Header.styles';
+} from '../style/Header.styles.jsx';
 
 
 export default function Header(props) {
@@ -26,20 +26,18 @@ export default function Header(props) {
   };
 
   return (
-    <div className="header">
-      <StyledHeader>Our website name</StyledHeader>
-
+    <StyledHeader>
+      <h3>Our website name</h3>
       <Button text={"Logout"} variant="outlined" onClick={logoutHandler} />
-
       {live &&
         <StyledLiveGames className="liveGameBanner">
           <img
             src={liveImage}
             alt="fake live games"
-            width="375px"
+            width="358px"
           />
         </StyledLiveGames>
       }
-    </div>
+    </StyledHeader>
   );
 }

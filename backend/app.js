@@ -23,10 +23,16 @@ app.use('/api/authenticate', authentication); // must be above all routes
 // create this for every routes group
 const teamRouter = require('./routes/team');
 const exampleRouter = require('./routes/exampleRoute');
+const dbRouter = require('./routes/dbRoutes');
+
+
+// TODO: comment what is this line doing?
+const { application_name } = require('pg/lib/defaults');
 
 // do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
 app.use('/api/team', teamRouter);
 app.use('/api/example', exampleRouter);
+app.use('/api/db', dbRouter);
 
 // // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
 // app.get('/api/authenticate');
@@ -36,6 +42,6 @@ app.use('/api/example', exampleRouter);
 console.log("Listening on port 3001...");
 
 
-app.listen(3001);
+// app.listen(3002);
 
 module.exports = app;

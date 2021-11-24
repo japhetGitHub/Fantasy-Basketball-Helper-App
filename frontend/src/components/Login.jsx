@@ -5,6 +5,11 @@ import AuthService from '../services/auth.service';
 
 import Button from './utilities/Button.jsx';
 import ErrorAlert from './utilities/ErrorAlert.jsx';
+import TextLabel from './utilities/TextLabel.jsx'; // TODO: use this instead of <input>
+// <TextLabel name={"email"} />
+// <TextLabel name={"password"} />
+
+import { StyledLogin } from '../style/Login.styles.jsx';
 
 export default function Login(props) {
   const [loginError, setLoginError] = useState({
@@ -38,7 +43,7 @@ export default function Login(props) {
   };
 
   return (
-    <div className="Login">
+    <StyledLogin>
       <h3>Login</h3>
       <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
         <input
@@ -68,7 +73,7 @@ export default function Login(props) {
       />
 
       { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}
-    </div>
+    </StyledLogin>
   );
 }
 
