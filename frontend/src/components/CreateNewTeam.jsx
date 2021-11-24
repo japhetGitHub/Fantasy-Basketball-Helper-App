@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Button from './utilities/Button.jsx';
 import TextLabel from './utilities/TextLabel.jsx';
 import RadioForm from './helpers/RadioForm.jsx';
 
-import { StyledCreateNewTeam } from '../style/CreateNewTeam.styles';
+import { StyledCreateNewTeam } from '../style/CreateNewTeam.styles.jsx';
 
 export default function CreateNewTeam(props) {
   const [fantasyChoice, setFantasyChoice] = useState(null);
@@ -26,3 +27,8 @@ export default function CreateNewTeam(props) {
     </StyledCreateNewTeam>
   );
 }
+
+
+CreateNewTeam.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired
+};

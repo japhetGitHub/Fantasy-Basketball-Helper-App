@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './utilities/Button.jsx';
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
 import PieChartGraph from './utilities/PieChartGraph.jsx';
 import TwitterZone from './utilities/TwitterZone.jsx';
 
-import { StyledSpecificTeamOverview } from '../style/SpecificTeamOverview.styles';
+import { StyledSpecificTeamOverview } from '../style/SpecificTeamOverview.styles.jsx';
 
 // take these off once connected to DB
 import zionImage from './../image/zion.png';
@@ -120,3 +121,9 @@ export default function SpecificTeamOverview(props) {
     </StyledSpecificTeamOverview>
   );
 }
+
+SpecificTeamOverview.propTypes = { // prop-types ensure that props are as component expected
+  onClick: PropTypes.func.isRequired,
+  selectedTeam: PropTypes.number.isRequired,
+  onSelectedTeam: PropTypes.func.isRequired
+};

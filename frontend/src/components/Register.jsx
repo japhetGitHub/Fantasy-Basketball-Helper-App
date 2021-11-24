@@ -58,10 +58,12 @@ export default function Register(props) {
       <Button
         onClick={handleRegister}
         text={"Register"}
+        variant="outlined"
       />
       <Button
         onClick={() => onClick("HomePage")}
         text={"Back"}
+        variant="outlined"
       />
 
       { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}

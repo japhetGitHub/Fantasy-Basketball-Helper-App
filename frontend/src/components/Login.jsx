@@ -66,10 +66,12 @@ export default function Login(props) {
       <Button
         onClick={handleLogin}
         text={"Login"}
+        variant="outlined"
       />
       <Button
         onClick={() => onClick("HomePage")}
         text={"Back"}
+        variant="outlined"
       />
 
       { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}

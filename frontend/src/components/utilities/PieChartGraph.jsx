@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { VictoryPie, VictoryLabel } from "victory";
 
 export default function PieChartGraph(props) {
@@ -34,3 +35,9 @@ export default function PieChartGraph(props) {
     </svg>
   );
 }
+
+PieChartGraph.propTypes = {
+  foward: PropTypes.number.isRequired,
+  center: PropTypes.number.isRequired,
+  guard: PropTypes.number.isRequired
+};

@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './utilities/Button.jsx';
 
 import {
   StyledTeamOverview,
   StyledHeader,
   StyledCard
-} from '../style/TeamOverview.styles';
+} from '../style/TeamOverview.styles.jsx';
 
 export default function TeamOverview(props) {
   
@@ -35,6 +36,7 @@ export default function TeamOverview(props) {
           src={topPerformer.image}
           height="100px"
           width="100px"
+          alt="Top Performer"
         />
         <p>{topPerformer.name}</p>
         <h4>total team fantasy points last week:</h4>
@@ -44,6 +46,7 @@ export default function TeamOverview(props) {
           src={worstPerformer.image}
           height="100px"
           width="100px"
+          alt="Worst Performer"
         />
         <p>{worstPerformer.name}</p>
       </StyledCard>
@@ -51,3 +54,11 @@ export default function TeamOverview(props) {
     </StyledTeamOverview>
   );
 }
+TeamOverview.propTypes = {
+  teamName: PropTypes.string.isRequired,
+  topPerformer: PropTypes.object.isRequired,
+  worstPerformer: PropTypes.object.isRequired,
+  totalFanPoints: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
