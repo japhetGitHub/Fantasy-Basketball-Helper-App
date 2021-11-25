@@ -1,7 +1,7 @@
 import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from './helpers/ListItem.jsx';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -29,6 +29,7 @@ export default function StartingLineups(props) {
     teamName: "teamNameHere",
     players: [
       {
+        playerId: 200,
         playerFirstName: "Steph",
         playerLastName: "Curry",
         playerImage: stephImage,
@@ -40,6 +41,7 @@ export default function StartingLineups(props) {
         Steals: 5
       },
       {
+        playerId: 201,
         playerFirstName: "Zion",
         playerLastName: "Williamson",
         playerImage: zionImage,
@@ -51,6 +53,7 @@ export default function StartingLineups(props) {
         Steals: 8
       },
       {
+        playerId: 202,
         playerFirstName: "Another",
         playerLastName: "Point guard",
         playerImage: stephImage,
@@ -82,7 +85,7 @@ export default function StartingLineups(props) {
   const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
 
   rankedPlayer.map((singlePlayer) => {
-    arrayListItem.push(<ListItem useThat={
+    arrayListItem.push(<ListItem key={singlePlayer.playerId} useThat={
       <PlayerCards
         playerFirstName={singlePlayer.playerFirstName}
         playerLastName={singlePlayer.playerLastName}
@@ -125,9 +128,10 @@ export default function StartingLineups(props) {
         onClick={() => {
           onClick("SpecificTeamOverview");
         }}
-        text={"Back"}
         variant={"outlined"}
-      />
+      >
+        Back
+      </Button>
     </StyledStartingLineups>
   );
 }

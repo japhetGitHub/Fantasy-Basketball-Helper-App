@@ -1,30 +1,22 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-
-import AuthService from '../services/auth.service.js';
-
-import Button from './utilities/Button.jsx';
-import ErrorAlert from './utilities/ErrorAlert.jsx';
-import TextLabel from './utilities/TextLabel.jsx'; // TODO: Refactor Register component to use MUI TextLabel instead of <input>
-
-import { StyledRegister } from '../style/Register.styles.jsx';
-
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import AuthService from "../services/auth.service.js";
+import Button from '@mui/material/Button';
+import ErrorAlert from "./utilities/ErrorAlert.jsx";
+import TextField from "@mui/material/TextField";
+import { StyledRegister } from "../style/Register.styles.jsx";
 export default function Register(props) {
   const [registerError, setRegisterError] = useState({
     hasError: false,
-    msg: ''
+    msg: ""
   });
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { onClick } = props;
-
   const handleRegister = (event) => {
     event.preventDefault();
-
     AuthService.register(email, password).then(() => {
       console.log("Registered!");
-
       onClick("TestPage");
     }).catch((err) => {
       setRegisterError({
@@ -33,47 +25,40 @@ export default function Register(props) {
       });
     });
   };
-
   return (
     <StyledRegister>
       <h3>Register</h3>
       <form>
-        <input
-          className="input-box"
-          name="email"
-          type="text"
-          placeholder="Email"
+        <TextField
+          label={"email"}
+          type={"email"}
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <input
-          className="input-box"
-          name="password"
-          type="text"
-          placeholder="Password"
+        <TextField
+          label={"password"}
+          type={"password"}
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
       </form>
       <Button
         onClick={handleRegister}
-        text={"Register"}
         variant="outlined"
-      />
+      >
+        Register
+      </Button>
       <Button
         onClick={() => onClick("HomePage")}
-        text={"Back"}
         variant="outlined"
-      />
-
+      >
+        Back
+      </Button>
       { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
-
     </StyledRegister>
   );
 }
-
 Register.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired
 };
-
 //STRETCH: form validation

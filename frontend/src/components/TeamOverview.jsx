@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 
 import {
   StyledTeamOverview,
@@ -24,10 +24,11 @@ export default function TeamOverview(props) {
       <StyledHeader>
         <h3>{teamName}</h3>
         <Button
-          text={"More on that team"}
           onClick={onClick}
           variant={"outlined"}
-        />
+        >
+          More on that team
+        </Button>
       </StyledHeader>
 
       <StyledCard>

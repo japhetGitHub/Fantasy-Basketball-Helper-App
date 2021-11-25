@@ -15,9 +15,9 @@ const bodyParser = require('body-parser');
 // }
 // const knex = require('knex')(options);
 
+
 const app = express();
-const axios = require('axios');
-var CronJob = require('cron').CronJob;
+var CronJob = require('cron').CronJob; // to automate the like aeveryday request
 
 app.use(cors({origin: "*", credential: true}));
 app.use(logger('dev'));
@@ -32,110 +32,181 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authentication = require('./middleware/auth');
 app.use('/api/authenticate', authentication); // must be above all routes
 
+// LINES 135 TO 141 ARE THE PREVIOUS VERSION OF THE CODE USING KNEX. NO LONGER NEEDED, BUT KEPT IN CASE - from 'create this for every routes group' to // module.exports = app;
 // create this for every routes group
-const teamRouter = require('./routes/team');
-const exampleRouter = require('./routes/exampleRoute');
-const dbRouter = require('./routes/dbRoutes');
+// const exampleRouter = require('./routes/exampleRoute');
+// const dbRouter = require('./routes/dbRoutes'); // the file where we smash everything, dont use it just refactor it
 
 
-// TODO: comment what is this line doing?
-const { application_name } = require('pg/lib/defaults');
+// // TODO: comment what is this line doing?
+// const { application_name } = require('pg/lib/defaults');
 
-const getPlayerStatsForDB = async function(formattedYesterday) {
+// const getPlayerStatsForDB = async function(formattedYesterday) {
   
-  const headers = {
-    "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
-  }
-  // const today = new Date()
-  // const formattedDate = today.slice(0, 10)
-  // 2021-11-22
-  // 012345678910
-  // console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
-  //  return
-  //  date example: 2021-NOV-20
-  //  note: today's date returns no values 
+//   const headers = {
+//     "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
+//   }
+//   // const today = new Date()
+//   // const formattedDate = today.slice(0, 10)
+//   // 2021-11-22
+//   // 012345678910
+//   // console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
+//   //  return
+//   //  date example: 2021-NOV-20
+//   //  note: today's date returns no values 
   
-  // use API end point PlayerSeasonStats
-  // const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
-  const url = ` https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2021`
-  console.log("URL ===", url)
+//   // use API end point PlayerSeasonStats
+//   // const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
+//   const url = ` https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2021`
+//   console.log("URL ===", url)
 
-  // Problem: cant access data outside try block
-  // but can input data within knex in try 
-  // const {data} = await axios.get(url, {headers: headers})
-  // // console.log(data)
-  //  knex('players_season_stats').insert(data).then(() => console.log("data inserted"))
-  //   .catch((err) => { console.log(err); throw err })
-  //   .finally(() => {
-  //       knex.destroy();
-  //   });
+//   // Problem: cant access data outside try block
+//   // but can input data within knex in try 
+//   // const {data} = await axios.get(url, {headers: headers})
+//   // // console.log(data)
+//   //  knex('players_season_stats').insert(data).then(() => console.log("data inserted"))
+//   //   .catch((err) => { console.log(err); throw err })
+//   //   .finally(() => {
+//   //       knex.destroy();
+//   //   });
 
-  // KNEX was not needed 
-  // const {data} = await axios.get(url, {headers: headers})
-  // console.log('AXIOS RESPONSE ++++++++++++++++++++++++++++++++++++ ', JSON.stringify(data[0]))
+//   // KNEX was not needed 
+//   // const {data} = await axios.get(url, {headers: headers})
+//   // console.log('AXIOS RESPONSE ++++++++++++++++++++++++++++++++++++ ', JSON.stringify(data[0]))
 
-  // knex('players_season_stats').insert({
-  //   assists: 4.0,
-  //   statid: 812914
-  // }).then(() => console.log("data inserted"))
-  //   .catch((err) => { console.log(err); throw err })
-  //   .finally(() => {
-  //       knex.destroy();
-  //   });
+//   // knex('players_season_stats').insert({
+//   //   assists: 4.0,
+//   //   statid: 812914
+//   // }).then(() => console.log("data inserted"))
+//   //   .catch((err) => { console.log(err); throw err })
+//   //   .finally(() => {
+//   //       knex.destroy();
+//   //   });
 
-  // try {
+//   // try {
    
-  //   // .then(function() {
+//   //   // .then(function() {
     
-  //   // })
+//   //   // })
 
-  // } catch (error) {
-  //   console.log(error)
-  // }
+//   // } catch (error) {
+//   //   console.log(error)
+//   // }
 
   
-}
+// }
 
 
-// Only call this function if you need a daily update - change line 215!
-// why does cronjob get called even job.start is commented?
-// var job = new CronJob('* * * * * *', function() {
-//   console.log('You will see this message every second');
+// // Only call this function if you need a daily update - change line 215!
+// // why does cronjob get called even job.start is commented?
+// // var job = new CronJob('* * * * * *', function() {
+// //   console.log('You will see this message every second');
 
-//   // const date = new Date()
-//   // const formattedDate = date.toISOString().split('T')[0]
-//   // getPlayerStatsForDB(formattedDate);
+// //   // const date = new Date()
+// //   // const formattedDate = date.toISOString().split('T')[0]
+// //   // getPlayerStatsForDB(formattedDate);
 
-//   const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-//   const formattedYesterday = yesterday.toISOString().split('T')[0]
-//   // console.log('YESTERDAY', formattedYesterday);
-//   getPlayerStatsForDB(formattedYesterday);
+// //   const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+// //   const formattedYesterday = yesterday.toISOString().split('T')[0]
+// //   // console.log('YESTERDAY', formattedYesterday);
+// //   getPlayerStatsForDB(formattedYesterday);
 
-// }, null, true, 'America/Los_Angeles');
-// job.start();
+// // }, null, true, 'America/Los_Angeles');
+// // job.start();
 
-// const date = new Date()
-// let formattedDate = (date.setDate(date.getDate() - 1));
-// formattedDate = date.toISOString().split('T')[0]
+// // const date = new Date()
+// // let formattedDate = (date.setDate(date.getDate() - 1));
+// // formattedDate = date.toISOString().split('T')[0]
 
-// Today's date gives no values, need to input yesterday
-const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-const formattedYesterday = yesterday.toISOString().split('T')[0]
-console.log('YESTERDAY', formattedYesterday);
-getPlayerStatsForDB(formattedYesterday);
-// do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
-app.use('/api/team', teamRouter);
-app.use('/api/example', exampleRouter);
-app.use('/api/db', dbRouter);
+// // Today's date gives no values, need to input yesterday
+// const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+// const formattedYesterday = yesterday.toISOString().split('T')[0]
+// console.log('YESTERDAY', formattedYesterday);
+// getPlayerStatsForDB(formattedYesterday);
+// // do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
+// app.use('/api/team', teamRouter);
+// app.use('/api/example', exampleRouter);
+// app.use('/api/db', dbRouter);
 
-// // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
-// app.get('/api/authenticate');
-// app.post('/api/login');
-// app.post('/api/register');
+// // // This is all in the quick start from Francis but it's gonna depend on JWT if we use or not
+// // app.get('/api/authenticate');
+// // app.post('/api/login');
+// // app.post('/api/register');
 
-console.log("Listening on port 3001...");
+// console.log("Listening on port 3001...");
 
 
-// app.listen(3002);
+// // app.listen(3002);
 
-module.exports = app;
+// module.exports = app;
+
+
+
+  //   const headers = {
+    //     "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
+    //   }
+    //   // const today = new Date()
+    //   // const formattedDate = today.slice(0, 10)
+    //   // 2021-11-22
+    //   // 012345678910
+    //   console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
+    //   //  return
+    //   //  date example: 2021-NOV-20
+    //   //  note: today's date returns no values 
+    //   const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
+    //   console.log("URL ===", url)
+    
+    //   try {
+      //     const {data} = await axios.get(url, {headers: headers})
+      //     console.log(data)
+      //   } catch (error) {
+        //     console.log(error)
+        //   }
+        // }
+        
+        
+        // Only call this function if you need a daily update - change line 215!
+        // why does cronjob get called even job.start is commented?
+        // var job = new CronJob('* * * * * *', function() {
+          //   console.log('You will see this message every second');
+          
+          //   // const date = new Date()
+          //   // const formattedDate = date.toISOString().split('T')[0]
+          //   // getPlayerStatsForDB(formattedDate);
+          
+          //   const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+          //   const formattedYesterday = yesterday.toISOString().split('T')[0]
+          //   // console.log('YESTERDAY', formattedYesterday);
+          //   getPlayerStatsForDB(formattedYesterday);
+          
+          // }, null, true, 'America/Los_Angeles');
+          // job.start();
+          
+          // const date = new Date()
+          // let formattedDate = (date.setDate(date.getDate() - 1));
+          // formattedDate = date.toISOString().split('T')[0]
+          
+          // Today's date gives no values, need to input yesterday
+          // const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+          // const formattedYesterday = yesterday.toISOString().split('T')[0]
+          // console.log('YESTERDAY', formattedYesterday);
+          // getPlayerStatsForDB(formattedYesterday);
+          
+          // do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
+          // app.use('/api/example', exampleRouter);
+          // app.use('/api/db', dbRouter); // look at the dbRouter way up
+
+          const teamRouter = require('./routes/team');
+          const sportApi = require('./script/sportApi');
+          
+          app.use('/api/team', teamRouter);
+          app.use('/sportApi', sportApi);
+          
+
+          
+          app.listen(3002, () => {
+            console.log("Listening on port 3001...");
+          });
+          
+          module.exports = app;
+          

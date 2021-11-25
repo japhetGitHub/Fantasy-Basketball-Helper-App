@@ -3,22 +3,14 @@ DROP TABLE IF EXISTS players_season_stats CASCADE;
 -- previously player info
 -- API endpoint: PlayerSeasonStats
 CREATE TABLE players_season_stats (
-  id SERIAL PRIMARY KEY NOT NULL,
-  statID INT  NOT NULL,
-  teamID INT  NOT NULL,
-  playerID INT  NOT NULL UNIQUE,
-  seasonType INT  NOT NULL,
-  season INT  NOT NULL,
-  name VARCHAR(255) NOT NULL,
-  team VARCHAR(255) NOT NULL,
-  position VARCHAR(255) NOT NULL,
-  started INT  NOT NULL,
-  globalTeamID INT  NOT NULL,
-  updated VARCHAR(255) NOT NULL,
-  games INT  NOT NULL,
+  playerID INT  PRIMARY KEY NOT NULL,
+  name VARCHAR(255),
+  team VARCHAR(255),
+  position VARCHAR(255),
+  games INT ,
   fantasyPoints FLOAT(4),
-  minutes INT  NOT NULL,
-  seconds INT  NOT NULL,
+  minutes INT ,
+  seconds INT ,
   fieldGoalsMade FLOAT(4),
   fieldGoalsAttempted FLOAT(4),
   fieldGoalsPercentage FLOAT(4),
@@ -58,8 +50,5 @@ CREATE TABLE players_season_stats (
   plusMinus FLOAT(4),
   doubleDoubles FLOAT(4),
   tripleDoubles FLOAT(4),
-  fantasyPointsFantasyDraft FLOAT(4),
-  isClosed BOOLEAN,--VARCHAR(255) NOT NULL, --should be true or false
-  lineupConfirmed VARCHAR(255), -- always null
-  lineupStatus VARCHAR(255) NOT NULL
+  fantasyPointsFantasyDraft FLOAT(4)
 );
