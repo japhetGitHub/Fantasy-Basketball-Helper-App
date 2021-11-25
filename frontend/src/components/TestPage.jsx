@@ -22,14 +22,16 @@ export default function TestPage(props) {
 
       <Button
         onClick={() => onClick("HomeLog")}
-        text={"Go Home"}
         variant="outlined"
-      />
+      >
+        Go Home
+      </Button>
       <Button
         onClick={getBookHandler}
-        text={"Get Books"}
         variant="outlined"
-      />
+      >
+        Get Books
+      </Button>
       <Button
         onClick={addBookHandler}
         variant="outlined"
