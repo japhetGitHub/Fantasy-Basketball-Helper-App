@@ -14,6 +14,7 @@ import stephImage from './../image/steph.png';
 // we will need to add the props in the function
 export default function HomeLog(props) {
   const { onClick, onSelectedTeam } = props;
+  
   const data = [
     {
       teamId: 1,
@@ -42,6 +43,10 @@ export default function HomeLog(props) {
       totalFanPoints: 934
     }
   ];
+
+  // make a request to "/api/team/all" with the JWT so we can find the user id and return all teams linked to that user
+
+
 
   const viewArray = data.map((singleTeam) => {
     return (
