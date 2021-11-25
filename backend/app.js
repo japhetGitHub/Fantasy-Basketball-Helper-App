@@ -4,16 +4,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors =require("cors");
 const bodyParser = require('body-parser');
-const options = {
-  client: 'pg',
-  connection: {
-      host: '127.0.0.1',
-      user: 'labber',
-      password: 'labber',
-      database: 'fantasy_basket'
-  }
-}
-const knex = require('knex')(options);
+// const options = {
+//   client: 'pg',
+//   connection: {
+//       host: '127.0.0.1',
+//       user: 'labber',
+//       password: 'labber',
+//       database: 'fantasy_basket'
+//   }
+// }
+// const knex = require('knex')(options);
 
 const app = express();
 const axios = require('axios');
@@ -70,17 +70,18 @@ const getPlayerStatsForDB = async function(formattedYesterday) {
   //       knex.destroy();
   //   });
 
-  const {data} = await axios.get(url, {headers: headers})
-  console.log('AXIOS RESPONSE ++++++++++++++++++++++++++++++++++++ ', JSON.stringify(data[0]))
+  // KNEX was not needed 
+  // const {data} = await axios.get(url, {headers: headers})
+  // console.log('AXIOS RESPONSE ++++++++++++++++++++++++++++++++++++ ', JSON.stringify(data[0]))
 
-  knex('players_season_stats').insert({
-    assists: 4.0,
-    statid: 812914
-  }).then(() => console.log("data inserted"))
-    .catch((err) => { console.log(err); throw err })
-    .finally(() => {
-        knex.destroy();
-    });
+  // knex('players_season_stats').insert({
+  //   assists: 4.0,
+  //   statid: 812914
+  // }).then(() => console.log("data inserted"))
+  //   .catch((err) => { console.log(err); throw err })
+  //   .finally(() => {
+  //       knex.destroy();
+  //   });
 
   // try {
    
