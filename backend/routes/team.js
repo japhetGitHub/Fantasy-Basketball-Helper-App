@@ -1,6 +1,7 @@
 const express = require('express');
 const team = express.Router();
 const db = require('../db');
+const authenticateJWT = require('../middleware/authenticateJWT');
 
 // the base of this file is "http://localhost:3001/api/team" SO if you do a team.get("/", ...) 
 // it's gonna answer to a request to "http://localhost:3001/api/team"
@@ -21,6 +22,8 @@ OR if its a PUT or a POST:
       .then(() => console.log("post is completed"));
   }, []);
 */
+
+
 team.get('/all', function(req, res) {
   // const user_id = req.headers["user_id"];
   // const query = {

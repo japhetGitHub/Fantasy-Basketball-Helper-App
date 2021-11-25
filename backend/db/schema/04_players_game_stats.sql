@@ -1,44 +1,13 @@
-DROP TABLE IF EXISTS player_stats CASCADE;
+DROP TABLE IF EXISTS players_game_stats CASCADE;
 
   -- API endpoint: PlayerGameStatsByDate
 CREATE TABLE players_game_stats (
   id SERIAL PRIMARY KEY NOT NULL,
-  statID INT  NOT NULL,
-  teamID INT  NOT NULL,
   playerID INT REFERENCES players_season_stats(playerID) NOT NULL,
-  seasonType INT  NOT NULL,
-  season INT  NOT NULL,
   name VARCHAR(255) NOT NULL,
   team VARCHAR(255) NOT NULL,
   position  VARCHAR(255) NOT NULL,
-  started INT  NOT NULL,
-  fanDuelSalary INT  NOT NULL,
-  draftKingsSalary INT  NOT NULL,
-  fantasyDataSalary INT  NOT NULL,
-  yahooSalary INT  NOT NULL,
-  injuryStatus VARCHAR(255) NOT NULL,
-  injuryBodyPart VARCHAR(255) NOT NULL,
-  injuryStartDate VARCHAR(255),
-  injuryNotes VARCHAR(255) NOT NULL,
-  fanDuelPosition VARCHAR(255) NOT NULL,
-  draftKingsPosition VARCHAR(255) NOT NULL,
-  yahooPosition VARCHAR(255) NOT NULL,
-  opponentRank INT  NOT NULL,
-  opponentPositionRank INT  NOT NULL,
-  globalTeamID INT  NOT NULL,
-  fantasyDraftSalary INT,
-  fantasyDraftPosition VARCHAR(255) NOT NULL,
-  gameID INT  NOT NULL,
-  opponentID INT  NOT NULL,
-  opponent VARCHAR(255) NOT NULL,
   day VARCHAR(255) NOT NULL,
-  dateTime VARCHAR(255) NOT NULL,
-  homeOrAway VARCHAR(255) NOT NULL,
-  isGameOver BOOLEAN, ---VARCHAR(255) NOT NULL, --boolean
-  globalGameID INT  NOT NULL,
-  globalOpponentID INT  NOT NULL,
-  updated VARCHAR(255) NOT NULL,
-  games INT  NOT NULL,
   fantasyPoints FLOAT(4),
   minutes INT  NOT NULL,
   seconds INT  NOT NULL,
@@ -81,8 +50,5 @@ CREATE TABLE players_game_stats (
   plusMinus FLOAT(4),
   doubleDoubles FLOAT(4),
   tripleDoubles FLOAT(4),
-  fantasyPointsFantasyDraft FLOAT(4),
-  isClosed BOOLEAN,
-  lineupConfirmed BOOLEAN, --VARCHAR(255) NOT NULL, --boolean
-  lineupStatus VARCHAR(255) NOT NULL
+  fantasyPointsFantasyDraft FLOAT(4)
 );

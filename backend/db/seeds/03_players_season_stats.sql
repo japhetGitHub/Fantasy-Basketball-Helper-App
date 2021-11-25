@@ -1,16 +1,9 @@
 INSERT INTO 
 players_season_stats(
-  statID,
-  teamID,
   playerID,
-  seasonType,
-  season,
   name,
   team,
   position,
-  started,
-  globalTeamID,
-  updated,
   games,
   fantasyPoints,
   minutes,
@@ -54,24 +47,14 @@ players_season_stats(
   plusMinus,
   doubleDoubles,
   tripleDoubles,
-  fantasyPointsFantasyDraft,
-  isClosed, --should be true or false
-  lineupConfirmed, -- always null
-  lineupStatus
-)
-VALUES
-(
-  812914,
-  1,
-  20000441,
-  1,
-  2021,
+  fantasyPointsFantasyDraft
+)VALUES(
+  20,
   'Bradley Beal',
   'WAS',
   'SG',
   60,
   20000001,
-  '2021-07-31T22:19:06',
   61,
   4027.4,
   3313,
@@ -113,10 +96,5 @@ VALUES
   4303.0,
   4167.8,
   -9.3,
-  9.5,
-  0.0,
-  4303.0,
-  false,
-  null,
-  'Scrambled'
+  9.5
 );
