@@ -30,6 +30,7 @@ const books = [
 ];
 
 router.get('/books', authenticateJWT, (req, res) => {
+  console.log(req.user)
   res.json(books);
 });
 
