@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AuthService from '../services/auth.service';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import ErrorAlert from './utilities/ErrorAlert.jsx';
 import TextField from '@mui/material/TextField';
+
 import { StyledLogin } from '../style/Login.styles.jsx';
+
 export default function Login(props) {
   const [loginError, setLoginError] = useState({
     hasError: false,
@@ -49,14 +51,16 @@ export default function Login(props) {
       </form>
       <Button
         onClick={handleLogin}
-        text={"Login"}
         variant="outlined"
-      />
+      >
+        Login
+      </Button>
       <Button
         onClick={() => onClick("HomePage")}
-        text={"Back"}
         variant="outlined"
-      />
+      >
+        Back
+      </Button>
       { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}
     </StyledLogin>
   );

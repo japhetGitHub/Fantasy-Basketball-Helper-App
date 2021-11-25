@@ -1,7 +1,7 @@
 import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from './helpers/ListItem.jsx';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -128,9 +128,10 @@ export default function StartingLineups(props) {
         onClick={() => {
           onClick("SpecificTeamOverview");
         }}
-        text={"Back"}
         variant={"outlined"}
-      />
+      >
+        Back
+      </Button>
     </StyledStartingLineups>
   );
 }

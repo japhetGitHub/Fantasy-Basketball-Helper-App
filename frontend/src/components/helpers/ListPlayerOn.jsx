@@ -5,7 +5,7 @@ import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import PropTypes from 'prop-types';
-import Button from './../utilities/Button.jsx';
+import Button from '@mui/material/Button';
 
 import { StyledListPlayerOn } from './../../style/ListPlayerOn.styles.jsx';
 
@@ -32,16 +32,18 @@ export default function ListPlayerOn(props) {
             handleClick();
             console.log("call the delete for that player");
           }}
-          text={"Delete"}
           variant={"contained"}
           color={"error"}
-        />
+        >
+          Delete
+        </Button>
       
         <Button
           onClick={handleClick}
-          text={"Cancel"}
           variant={"outlined"}
-        />
+        >
+          Cancel
+        </Button>
       
       </Collapse>
     </StyledListPlayerOn>

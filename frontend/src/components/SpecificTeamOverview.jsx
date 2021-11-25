@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
 import PieChartGraph from './utilities/PieChartGraph.jsx';
@@ -88,14 +88,16 @@ export default function SpecificTeamOverview(props) {
       <div className={"top-button"} >
         <Button
           onClick={() => onClick("ManagePlayer")}
-          text={"Manage players"}
           variant={"outlined"}
-        />
+        >
+          Manage players
+        </Button>
         <Button
           onClick={() => onClick("StartingLineups")}
-          text={"Starting Lineups"}
           variant={"outlined"}
-        />
+        >
+          Starting Lineups
+        </Button>
       </div>
       
       <Carousel slides={carouselArray} />
@@ -108,15 +110,17 @@ export default function SpecificTeamOverview(props) {
             onClick("HomeLog");
             onSelectedTeam(null);
           }}
-          text={"Back"}
           variant={"outlined"}
-        />
+        >
+          Back
+        </Button>
         <Button
           onClick={() => console.log("go to delete team")}
-          text={"Delete team"}
           variant={"contained"}
           color={"error"}
-        />
+        >
+          Delete team
+        </Button>
       </div>
     </StyledSpecificTeamOverview>
   );

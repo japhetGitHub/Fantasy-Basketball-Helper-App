@@ -6,7 +6,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Button from './../utilities/Button.jsx';
+import Button from '@mui/material/Button';
 
 
 import { StyledListAddPlayer } from './../../style/ListAddPlayer.styles.jsx';
@@ -61,9 +61,10 @@ export default function ListAddPlayer() {
             console.log(`save that new player(his object is gonna be in the value variable)${value.playerId}
             and refresh the whole page or only this single component if it's possible`);
           }}
-          text={"Add player"}
           variant={"contained"}
-        />
+        >
+          Add player
+        </Button>
       
       </Collapse>
     </StyledListAddPlayer>

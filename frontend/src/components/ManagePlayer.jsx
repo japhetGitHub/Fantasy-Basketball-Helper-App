@@ -1,6 +1,6 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import ListPlayerOn from './helpers/ListPlayerOn.jsx';
 import ListAddPlayer from './helpers/ListAddPlayer.jsx';
@@ -68,9 +68,10 @@ export default function ManagePlayer(props) {
 
       <Button
         onClick={() => onClick("SpecificTeamOverview")}
-        text={"Keep that team state"}
         variant={"outlined"}
-      />
+      >
+        Keep that team state
+      </Button>
 
     </StyledManagePlayer>
   );

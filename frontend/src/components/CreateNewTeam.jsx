@@ -1,29 +1,39 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Button from './utilities/Button.jsx';
-import TextLabel from './utilities/TextLabel.jsx';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import RadioForm from './helpers/RadioForm.jsx';
 
 import { StyledCreateNewTeam } from '../style/CreateNewTeam.styles.jsx';
 
 export default function CreateNewTeam(props) {
   const [fantasyChoice, setFantasyChoice] = useState(null);
+  const [teamName, setTeamName] = useState("");
   const { onClick } = props;
   return (
     <StyledCreateNewTeam>
       <h3>Create a new team</h3>
-      <TextLabel name={"Name of the team"} />
+      <TextField
+        label={"Name of the team"}
+        type={"teamName"}
+        value={teamName}
+        onChange={(event) => setTeamName(event.target.value)}
+      />
+        
       <RadioForm onChange={setFantasyChoice} />
+
       <Button
         onClick={() => onClick("HomeLog")}
-        text={"Create!"}
         variant={"contained"}
-      />
+      >
+        Create!
+      </Button>
       <Button
         onClick={() => onClick("HomeLog")}
-        text={"Back"}
         variant={"outlined"}
-      />
+      >
+        Back
+      </Button>
     </StyledCreateNewTeam>
   );
 }
