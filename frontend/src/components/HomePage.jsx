@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import AboutUs from "./AboutUs.jsx";
 
 import {
@@ -16,14 +16,16 @@ export default function  HomePage(props) {
       <StyledButtonHomePage>
         <Button
           onClick={() => onClick("Login")}
-          text={"Login"}
           variant={"contained"}
-        />
+        >
+          Login
+        </Button>
         <Button
           onClick={() => onClick("Register")}
-          text={"Register"}
           variant={"outlined"}
-        />
+        >
+          Register
+        </Button>
       </StyledButtonHomePage>
       <AboutUs />
     </StyledHomePage>

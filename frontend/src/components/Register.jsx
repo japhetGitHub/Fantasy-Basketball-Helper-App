@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import AuthService from "../services/auth.service.js";
-import Button from "./utilities/Button.jsx";
+import Button from '@mui/material/Button';
 import ErrorAlert from "./utilities/ErrorAlert.jsx";
 import TextField from "@mui/material/TextField";
 import { StyledRegister } from "../style/Register.styles.jsx";
@@ -44,14 +44,16 @@ export default function Register(props) {
       </form>
       <Button
         onClick={handleRegister}
-        text={"Register"}
         variant="outlined"
-      />
+      >
+        Register
+      </Button>
       <Button
         onClick={() => onClick("HomePage")}
-        text={"Back"}
         variant="outlined"
-      />
+      >
+        Back
+      </Button>
       { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
     </StyledRegister>
   );

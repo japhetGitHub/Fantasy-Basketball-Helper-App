@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // import api from '../services/api';
-import Button from './utilities/Button.jsx';
+import Button from '@mui/material/Button';
 import ExampleService from '../services/example.service.js';
 
 export default function TestPage(props) {
@@ -32,9 +32,10 @@ export default function TestPage(props) {
       />
       <Button
         onClick={addBookHandler}
-        text={"Add Book - Admin Only"}
         variant="outlined"
-      />
+      >
+        Add Book - Admin Only
+      </Button>
     </div>
   );
 }

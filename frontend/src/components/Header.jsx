@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import liveImage from '../image/test.png';
-
-import Button from "./utilities/Button.jsx";
+import Button from '@mui/material/Button';
 import AuthService from "../services/auth.service";
 
 import {
@@ -29,7 +28,14 @@ export default function Header(props) {
   return (
     <StyledHeader>
       <h3>Our website name</h3>
-      <Button text={"Logout"} variant="outlined" onClick={logoutHandler} />
+      
+      <Button
+        variant="outlined"
+        onClick={logoutHandler}
+      >
+        Logout
+      </Button>
+      
       {live &&
         <StyledLiveGames className="liveGameBanner">
           <img
