@@ -9,7 +9,7 @@ const fillSeasonTable = () => {
       queryInputSeasonStats += `(${player.PlayerID}, '${player.Name.split("'").join("")}', '${player.Team}', '${player.Position}', ${player.Games}, ${player.FantasyPoints}, ${player.Minutes}, ${player.Seconds}, ${player.FieldGoalsMade}, ${player.FieldGoalsAttempted}, ${player.FieldGoalsPercentage}, ${player.EffectiveFieldGoalsPercentage}, ${player.TwoPointersMade}, ${player.TwoPointersAttempted}, ${player.TwoPointersPercentage}, ${player.ThreePointersMade}, ${player.ThreePointersAttempted}, ${player.ThreePointersPercentage}, ${player.FreeThrowsMade}, ${player.FreeThrowsAttempted}, ${player.FreeThrowsPercentage}, ${player.OffensiveRebounds}, ${player.DefensiveRebounds}, ${player.Rebounds}, ${player.OffensiveReboundsPercentage}, ${player.DefensiveReboundsPercentage}, ${player.TotalReboundsPercentage}, ${player.Assists}, ${player.Steals}, ${player.BlockedShots}, ${player.Turnovers}, ${player.PersonalFouls}, ${player.Points}, ${player.TrueShootingAttempts}, ${player.TrueShootingPercentage}, ${player.PlayerEfficiencyRating}, ${player.AssistsPercentage}, ${player.StealsPercentage}, ${player.BlocksPercentage}, ${player.TurnOversPercentage}, ${player.UsageRatePercentage}, ${player.FantasyPointsFanDuel}, ${player.FantasyPointsDraftKings}, ${player.FantasyPointsYahoo}, ${player.PlusMinus},${player.DoubleDoubles}, ${player.TripleDoubles}, ${player.FantasyPointsFantasyDraft}),`
     })
     queryInputSeasonStats = queryInputSeasonStats.slice(0, -1) + ";";
-    queryInputSeasonStats.split("/n").join("")
+    
     return db 
       .query(queryInputSeasonStats)
       .then((result) => {
