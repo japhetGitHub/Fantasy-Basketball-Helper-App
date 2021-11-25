@@ -1,21 +1,15 @@
 const express = require('express');
 const sportApi = express.Router();
-const fillSeasonTable = require('./fillSeasonTable.js');
-const fillGameTable = require('./fillGameTable.js');
-
-
-
-
-
+const fillTables = require('./fillTables.js');
 
 sportApi.get('/all', function(req, res) {
 
-  fillSeasonTable();
-  fillGameTable("2021-NOV-23");
-  fillGameTable("2021-NOV-22");
-  fillGameTable("2021-NOV-21");
-  fillGameTable("2021-NOV-20");
-  fillGameTable("2021-NOV-19");
+  Promise.all([fillTables()]).then(() => {
+    res.status(201).json({ msg: "Great Success!"});
+  }).catch((err) => {
+    console.log(err);
+    res.status(404).json({ msg: "Error"});
+  });
 
 })
 
