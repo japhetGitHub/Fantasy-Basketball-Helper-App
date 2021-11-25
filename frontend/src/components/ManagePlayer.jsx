@@ -28,11 +28,32 @@ export default function ManagePlayer(props) {
     },
   ];
 
-  const arrayList = [];
-
-  data.map((singlePlayer) => {
-    arrayList.push(<ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
-  });
+  
+  const rankThePositions = (position) => {
+    switch (position) {
+    case "PG":
+      return 6;
+        
+    case "SG":
+      return 5;
+          
+    case "SF":
+      return 4;
+            
+    case "PF":
+      return 3;
+              
+    case "C":
+      return 2;
+                
+    default:
+      return 1;
+    }
+  };
+              
+  const rankedPlayer = data.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0);
+              
+  const arrayList = rankedPlayer.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
 
   for (let i = arrayList.length; i < 20; i++) {
     arrayList.push(<ListAddPlayer key={i} />);
