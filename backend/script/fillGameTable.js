@@ -11,13 +11,12 @@ const fillGameTable = (date) => {
     })
     queryInputGamesStats = queryInputGamesStats.slice(0, -1) + ";";
     
-    return db 
+     return db 
       .query(queryInputGamesStats)
       .then((result) => {
-        console.log("in the DB")
-        res.json({data: result.rows})
+        console.log("fillGameTable: insterted into the DB", date)
       })
-      .catch((err) => err);
+      .catch((err) => console.log("@fillGameTable, Date:", date, " Error:", err));
   })
   .catch(error => {
     console.log(error);
