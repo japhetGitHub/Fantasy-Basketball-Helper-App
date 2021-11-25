@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS player_stats CASCADE;
+DROP TABLE IF EXISTS players_game_stats CASCADE;
 
   -- API endpoint: PlayerGameStatsByDate
 CREATE TABLE players_game_stats (

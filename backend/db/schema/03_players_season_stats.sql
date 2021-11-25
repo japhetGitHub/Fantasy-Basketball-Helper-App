@@ -38,7 +38,7 @@ CREATE TABLE players_season_stats (
   offensiveReboundsPercentage FLOAT(4),
   defensiveReboundsPercentage FLOAT(4),
   totalReboundsPercentage FLOAT(4),
-  assists FLOAT(4),
+  Assists FLOAT(4),
   steals FLOAT(4),
   blockedShots FLOAT(4),
   turnovers FLOAT(4),

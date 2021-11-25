@@ -34,7 +34,7 @@ players_season_stats(
   offensiveReboundsPercentage,
   defensiveReboundsPercentage,
   totalReboundsPercentage,
-  assists,
+  Assists,
   steals,
   blockedShots,
   turnovers,

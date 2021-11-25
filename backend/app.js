@@ -4,6 +4,16 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors =require("cors");
 const bodyParser = require('body-parser');
+const options = {
+  client: 'pg',
+  connection: {
+      host: '127.0.0.1',
+      user: 'labber',
+      password: 'labber',
+      database: 'fantasy_basket'
+  }
+}
+const knex = require('knex')(options);
 
 const app = express();
 const axios = require('axios');
@@ -40,19 +50,49 @@ const getPlayerStatsForDB = async function(formattedYesterday) {
   // const formattedDate = today.slice(0, 10)
   // 2021-11-22
   // 012345678910
-  console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
+  // console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
   //  return
   //  date example: 2021-NOV-20
   //  note: today's date returns no values 
-  const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
+  
+  // use API end point PlayerSeasonStats
+  // const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
+  const url = ` https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2021`
   console.log("URL ===", url)
 
-  try {
-    const {data} = await axios.get(url, {headers: headers})
-    console.log(data)
-  } catch (error) {
-    console.log(error)
-  }
+  // Problem: cant access data outside try block
+  // but can input data within knex in try 
+  // const {data} = await axios.get(url, {headers: headers})
+  // // console.log(data)
+  //  knex('players_season_stats').insert(data).then(() => console.log("data inserted"))
+  //   .catch((err) => { console.log(err); throw err })
+  //   .finally(() => {
+  //       knex.destroy();
+  //   });
+
+  const {data} = await axios.get(url, {headers: headers})
+  console.log('AXIOS RESPONSE ++++++++++++++++++++++++++++++++++++ ', JSON.stringify(data[0]))
+
+  knex('players_season_stats').insert({
+    assists: 4.0,
+    statid: 812914
+  }).then(() => console.log("data inserted"))
+    .catch((err) => { console.log(err); throw err })
+    .finally(() => {
+        knex.destroy();
+    });
+
+  // try {
+   
+  //   // .then(function() {
+    
+  //   // })
+
+  // } catch (error) {
+  //   console.log(error)
+  // }
+
+  
 }
 
 
