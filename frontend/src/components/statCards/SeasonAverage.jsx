@@ -1,17 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledLatestGame } from "../../style/LatestGame.styles";
+import { StyledSeasonAverage } from "../../style/SeasonAverage.styles";
 
 import { Grid } from "@mui/material";
 
-export default function LatestGame(props) {
+export default function SeasonAverage(props) {
   const { data } = props;
 
   return (
-    <StyledLatestGame>
+    <StyledSeasonAverage>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h3>Latest - {data.fantasypointsyahoo} fan points - {Math.floor((Date.now() - Date.parse(data.day)) / (1000 * 60 * 60 * 24))} days ago</h3>
+          <h3>Season - {data.fantasypointsyahoo.toFixed(2)} Total Fan Points</h3>
         </Grid>
         
         <Grid item xs={4}>
@@ -71,10 +71,10 @@ export default function LatestGame(props) {
           </div>
         </Grid>
       </Grid>
-    </StyledLatestGame>
+    </StyledSeasonAverage>
   );
 }
 
-LatestGame.propTypes = {
+SeasonAverage.propTypes = {
   data: PropTypes.object
 };
