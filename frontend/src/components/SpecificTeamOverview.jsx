@@ -19,6 +19,7 @@ export default function SpecificTeamOverview(props) {
   }, []);
 
   const carouselArray = [];
+  let totalTeamFanPoints = 0;
   if (data) {
     const rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
     carouselArray.push(<PlayerCards
@@ -42,11 +43,13 @@ export default function SpecificTeamOverview(props) {
       lastWeekSteals={rankedPlayer[rankedPlayer.length - 1].lastWeekSteals}
     />);
     carouselArray.push(<PieChartGraph foward={200} center={600} guard={100} />);
+    
+    data.players.forEach((player) => totalTeamFanPoints += player.lastWeekFan);
   }
 
   return (
     <StyledSpecificTeamOverview>
-      <span>{data && data.teamName} - 857 fpts</span>
+      <span>{data && data.teamName} - {data && totalTeamFanPoints} fpts</span>
       <div className={"top-button"} >
         <Button
           onClick={() => onClick("ManagePlayer")}

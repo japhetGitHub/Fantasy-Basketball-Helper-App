@@ -87,16 +87,12 @@ export default function ManagePlayer(props) {
   let arrayList = [];
 
   if (userTeam) {
-    console.log("all player in league", allPlayerInLeague);
-    console.log("user team", userTeam);
-
     const adjustTheLeague = () => {
       for (let i = 0; i < allPlayerInLeague.length; i++) {
         for (let j = 0; j < userTeam.length; j++) {
           if (allPlayerInLeague[i].playerId === userTeam[j].playerId) {
             allPlayerInLeague.splice(i, 1);
             setAllPlayerInLeague(allPlayerInLeague);
-          
           }
         }
       }
@@ -107,8 +103,23 @@ export default function ManagePlayer(props) {
       player && setUserTeam(userTeam => [...userTeam, player]);
     };
 
+    const removePlayerInTeam = (player) => {
+      if (player) {
+        setAllPlayerInLeague(allPlayerInLeague => [...allPlayerInLeague, player]);
 
-    arrayList = userTeam.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} data={userTeam} setData={setUserTeam} />);
+        for (let i = 0; i < userTeam.length; i++) {
+          if (player.playerId === userTeam[i].playerId) {
+            userTeam.splice(i, 1);
+            setUserTeam(userTeam);
+          }
+        }
+      }
+    };
+
+    userTeam.forEach((singlePlayer) => {
+      arrayList.push(<ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} removePlayerInTeam={removePlayerInTeam} />);
+    });
+
     for (let i = arrayList.length; i < 20; i++) {
       arrayList.push(<ListAddPlayer key={i} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
     }
@@ -122,10 +133,19 @@ export default function ManagePlayer(props) {
       </List>
 
       <Button
+        onClick={() => {
+          onClick("SpecificTeamOverview");
+          console.log("teamstate ", userTeam); // PUT to update the state of the team in the DB
+        }}
+        variant={"contained"}
+      >
+        Keep that team state
+      </Button>
+      <Button
         onClick={() => onClick("SpecificTeamOverview")}
         variant={"outlined"}
       >
-        Keep that team state
+        Back
       </Button>
 
     </StyledManagePlayer>
