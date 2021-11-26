@@ -98,6 +98,10 @@ team.delete('/delete/:teamId', authenticateJWT, function(req, res) {
   console.log("call to delete team")
 });
 
+team.post('/create', authenticateJWT, function(req, res) {
+  // delete the team coming from the :teamId
+  console.log("call to create team: ", req.body);
+});
 
 
 module.exports = team;

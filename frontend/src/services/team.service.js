@@ -67,13 +67,18 @@ const deleteTeam = (teamId) => {
   return axiosInterceptor.delete(API_URL + `/delete/${teamId}`);
 };
 
+const createTeam = (name, plateform) => {
+  return axiosInterceptor.post(API_URL + `/create`, {name, plateform});
+};
+
 const teamService = {
   getAllTeamForUser,
   getAllPlayerForTeam,
   getPlayersToManage,
   getStartingLineups,
   putUserTeam,
-  deleteTeam
+  deleteTeam,
+  createTeam
 };
 
 export default teamService;
