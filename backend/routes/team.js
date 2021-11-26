@@ -42,7 +42,7 @@ team.get('/all', authenticateJWT, function(req, res) {
 
 team.get('/overview/:teamId', authenticateJWT, function(req, res) {
   // gives back every player this team is having, used in the manage player too
-
+  console.log("gets the team")
   const data = {
     teamName: "teamNameHere",
     players: [
@@ -88,6 +88,20 @@ team.get('/overview/:teamId', authenticateJWT, function(req, res) {
   return res.json(data);
 });
 
+team.put('/update/:teamId', authenticateJWT, function(req, res) {
+  // update the team array
+  console.log("req: ", req.body.playerIdArray); // replace the array of the player in the team by this array
+});
+
+team.delete('/delete/:teamId', authenticateJWT, function(req, res) {
+  // delete the team coming from the :teamId
+  console.log("call to delete team")
+});
+
+team.post('/create', authenticateJWT, function(req, res) {
+  // delete the team coming from the :teamId
+  console.log("call to create team: ", req.body);
+});
 
 
 module.exports = team;

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
@@ -11,9 +11,8 @@ import { StyledListPlayerOn } from './../../style/ListPlayerOn.styles.jsx';
 
 
 export default function ListPlayerOn(props) {
-  const { playerName, position } = props.player;
-  
-  const [open, setOpen] = React.useState(false);
+  const { player, removePlayerInTeam } = props;
+  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
@@ -21,7 +20,7 @@ export default function ListPlayerOn(props) {
   return (
     <StyledListPlayerOn>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary={`${playerName} - ${position}`} />
+        <ListItemText primary={`${player.playerName} - ${player.position}`} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -30,7 +29,7 @@ export default function ListPlayerOn(props) {
         <Button
           onClick={() => {
             handleClick();
-            console.log("call the delete for that player");
+            removePlayerInTeam(player);
           }}
           variant={"contained"}
           color={"error"}
@@ -44,12 +43,12 @@ export default function ListPlayerOn(props) {
         >
           Cancel
         </Button>
-      
       </Collapse>
     </StyledListPlayerOn>
   );
 }
 
 ListPlayerOn.propTypes = { // prop-types ensure that props are as component expected
-  player: PropTypes.object
+  player: PropTypes.any,
+  removePlayerInTeam: PropTypes.func
 };

@@ -32,10 +32,12 @@ app.use('/api/example', exampleRouter);
 
 const sportApi = require('./script/sportApi');
 const teamRouter = require('./routes/team');
+const leagueRouter = require('./routes/league');
 
 
 app.use('/sportApi', sportApi);
 app.use('/api/team', teamRouter);
+app.use('/api/league', leagueRouter);
 
 
 app.listen(3001, () => {

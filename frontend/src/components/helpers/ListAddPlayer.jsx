@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
@@ -7,34 +7,35 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import PropTypes from 'prop-types';
 
 import { StyledListAddPlayer } from './../../style/ListAddPlayer.styles.jsx';
 
-const data = [
-  {
-    label: "Steph Curry - PG",
-    playerId: 2000
-  },
-  {
-    label: "Zion Williamson - PF",
-    playerId: 2001
-  },
-  {
-    label: "Another Pointguard - PG",
-    playerId: 2002
-  },
-];
-
-export default function ListAddPlayer() {
+export default function ListAddPlayer(props) {
+  const { allPlayerInLeague,  addPlayerInTeam } = props;
+  const [open, setOpen] = useState(false);
+  const allPlayersLabel = [];
   
+  allPlayerInLeague.forEach((player) => {
+    allPlayersLabel.push({label: `${player.playerName} - ${player.position}`, playerId: player.playerId}); // set pour label
+  });
+  const [value, setValue] = useState(allPlayersLabel[0]);
+
   // value will be set to the whole object of the player but the only thing that gonna be shown is the label: value
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(data[0]);
 
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const addPlayer = (playerObject) => {
+    allPlayerInLeague.forEach((unique) => {
+      if (unique.playerId === playerObject.playerId) { // tcheck dans le tas qui vien de DB qui fit genre objet avec ccee quon a choisis
+        addPlayerInTeam(unique);
+        return;
+      }
+    });
+  };
+  // trouble live: faut filter les option pour drop ceux deja dans la team sinon ca fuck up pi on double le key donc react est mad
   return (
     <StyledListAddPlayer>
       <ListItemButton onClick={handleClick}>
@@ -50,7 +51,7 @@ export default function ListAddPlayer() {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
-          options={data}
+          options={allPlayersLabel}
           sx={{ width: 300 }}
           renderInput={(params) => <TextField {...params} label="Find your player" />}
         />
@@ -58,8 +59,7 @@ export default function ListAddPlayer() {
         <Button
           onClick={() => {
             handleClick();
-            console.log(`save that new player(his object is gonna be in the value variable)${value.playerId}
-            and refresh the whole page or only this single component if it's possible`);
+            addPlayer(value);
           }}
           variant={"contained"}
         >
@@ -70,3 +70,8 @@ export default function ListAddPlayer() {
     </StyledListAddPlayer>
   );
 }
+
+ListAddPlayer.propTypes = { // prop-types ensure that props are as component expected
+  addPlayerInTeam: PropTypes.func.isRequired,
+  allPlayerInLeague: PropTypes.array.isRequired
+};

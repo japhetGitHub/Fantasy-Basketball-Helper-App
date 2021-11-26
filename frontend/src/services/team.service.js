@@ -57,11 +57,28 @@ const getStartingLineups = (teamId) => {
     });
 };
 
+const putUserTeam = (teamId, teamArray) => {
+  const playerIdArray = [];
+  teamArray.forEach((player) => playerIdArray.push(player.playerId));
+  return axiosInterceptor.put(API_URL + `/update/${teamId}`, { playerIdArray });
+};
+
+const deleteTeam = (teamId) => {
+  return axiosInterceptor.delete(API_URL + `/delete/${teamId}`);
+};
+
+const createTeam = (name, plateform) => {
+  return axiosInterceptor.post(API_URL + `/create`, {name, plateform});
+};
+
 const teamService = {
   getAllTeamForUser,
   getAllPlayerForTeam,
   getPlayersToManage,
-  getStartingLineups
+  getStartingLineups,
+  putUserTeam,
+  deleteTeam,
+  createTeam
 };
 
 export default teamService;
