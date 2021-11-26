@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const StyledAddNewTeam = styled.div`
   text-align: center;
+  background-color: #14346C;
+  color: white;
 
   & h2 {
     padding: 2em 0;

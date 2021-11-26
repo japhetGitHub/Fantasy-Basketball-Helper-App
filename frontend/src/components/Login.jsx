@@ -34,34 +34,36 @@ export default function Login(props) {
   };
   return (
     <StyledLogin>
-      <h3>Login</h3>
-      <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
-        <TextField
-          label={"email"}
-          type={"email"}
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <TextField
-          label={"password"}
-          type={"password"}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </form>
-      <Button
-        onClick={handleLogin}
-        variant="outlined"
-      >
-        Login
-      </Button>
-      <Button
-        onClick={() => onClick("HomePage")}
-        variant="outlined"
-      >
-        Back
-      </Button>
-      { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}
+      <p>
+        {/* <h3>Login</h3> */}
+        <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
+          <TextField
+            label={"email"}
+            type={"email"}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            label={"password"}
+            type={"password"}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </form>
+        <Button
+          onClick={handleLogin}
+          variant="outlined"
+        >
+          Login
+        </Button>
+        <Button
+          onClick={() => onClick("HomePage")}
+          variant="outlined"
+        >
+          Back
+        </Button>
+        { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}
+      </p>
     </StyledLogin>
   );
 }

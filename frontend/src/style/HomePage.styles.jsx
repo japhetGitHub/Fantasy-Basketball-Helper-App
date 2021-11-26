@@ -12,7 +12,7 @@ export const StyledButtonHomePage = styled.div`
 `;
 
 export const StyledHomePage = styled.div`
-  background-color: #D2FDFF;
+  background-color: #14346C;
 
   & h3 {
     margin: 0;
@@ -20,5 +20,14 @@ export const StyledHomePage = styled.div`
     font-size: 30px;
     font-weight: normal;
     padding: 1em 1em;;
+    color: white;
   }
+
+  & .MuiButton-root {
+    color: white;
+    background-color: #1976d2;
+    width: 7em;
+    height: 3em;
+  }
+
 `;

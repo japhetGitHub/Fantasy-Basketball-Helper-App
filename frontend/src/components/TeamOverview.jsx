@@ -20,38 +20,38 @@ export default function TeamOverview(props) {
 
   return (
     <StyledTeamOverview>
+      <div className="box">
+        <StyledHeader>
+          <h3>{teamName}</h3>
+          <Button
+            onClick={onClick}
+            variant={"outlined"}
+          >
+            More on that team
+          </Button>
+        </StyledHeader>
 
-      <StyledHeader>
-        <h3>{teamName}</h3>
-        <Button
-          onClick={onClick}
-          variant={"outlined"}
-        >
-          More on that team
-        </Button>
-      </StyledHeader>
-
-      <StyledCard>
-        <h4>Top performer</h4>
-        <img
-          src={topPerformer.image}
-          height="100px"
-          width="100px"
-          alt="Top Performer"
-        />
-        <p>{topPerformer.name}</p>
-        <h4>total team fantasy points last week:</h4>
-        <span>{totalFanPoints}</span>
-        <h4>Worst performer</h4>
-        <img
-          src={worstPerformer.image}
-          height="100px"
-          width="100px"
-          alt="Worst Performer"
-        />
-        <p>{worstPerformer.name}</p>
-      </StyledCard>
-
+        <StyledCard>
+          <h4>Top performer</h4>
+          <img
+            src={topPerformer.image}
+            height="100px"
+            width="100px"
+            alt="Top Performer"
+          />
+          <p>{topPerformer.name}</p>
+          <h4>total team fantasy points last week:</h4>
+          <span>{totalFanPoints}</span>
+          <h4>Worst performer</h4>
+          <img
+            src={worstPerformer.image}
+            height="100px"
+            width="100px"
+            alt="Worst Performer"
+          />
+          <p>{worstPerformer.name}</p>
+        </StyledCard>
+      </div>
     </StyledTeamOverview>
   );
 }

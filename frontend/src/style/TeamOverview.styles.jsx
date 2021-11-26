@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const StyledTeamOverview = styled.div`
   margin-top: 1em;
+  background-color: #14346C; 
+  color: white;
+
 `;
 
 export const StyledHeader = styled.div`
@@ -12,6 +15,10 @@ export const StyledHeader = styled.div`
   
   & button {
     padding: 0.3em 0.4em;
+    color: white;
+    background-color: #1976d2;
+    width: 13em;
+    height: 3em;
   }
 `;
 
@@ -20,4 +27,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   align-items: center;
   height: 50%;
+
+ 
+
 `;

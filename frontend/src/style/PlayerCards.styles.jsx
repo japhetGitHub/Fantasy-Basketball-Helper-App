@@ -4,7 +4,7 @@ export const StyledPlayerCards = styled.div`
   text-align: center;
   display: flex;
   flex-direction: column;
-
+  background-color: #14346C;
 
   & .player-face {
     padding: 0.5em 0;

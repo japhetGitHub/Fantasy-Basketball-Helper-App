@@ -11,9 +11,20 @@ export const StyledSpecificTeamOverview = styled.div`
     padding: 1em 1em;
   }
 
+  & .header {
+    color: white;
+    background-color: #14346C;
+  }
+
   & .top-button{
     margin: 1em 0;
     display: flex;
     justify-content: space-around;
   }
+
+  & .MuiButton-root{
+    color: white;
+    background-color: #1976d2;
+  }
+
 `;

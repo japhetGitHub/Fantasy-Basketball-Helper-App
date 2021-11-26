@@ -84,14 +84,16 @@ export default function SpecificTeamOverview(props) {
 
   return (
     <StyledSpecificTeamOverview>
-      <span>{data.teamName} - 857 fpts</span>
+      <span className="header">{data.teamName} - 857 fpts</span>
       <div className={"top-button"} >
-        <Button
-          onClick={() => onClick("ManagePlayer")}
-          variant={"outlined"}
-        >
-          Manage players
-        </Button>
+        <div className={"left-button"} >
+          <Button
+            onClick={() => onClick("ManagePlayer")}
+            variant={"outlined"}
+          >
+            Manage players
+          </Button>
+        </div>
         <Button
           onClick={() => onClick("StartingLineups")}
           variant={"outlined"}

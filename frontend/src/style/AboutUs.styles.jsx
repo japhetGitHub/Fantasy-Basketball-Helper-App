@@ -9,7 +9,11 @@ export const StyledAboutUs = styled.div`
   padding-bottom: 1em;
 
   & p {
-    padding: 0 1em;
+
+    padding: 0 1.5em;
+    margin-top: 0;
+    color: white;
+    margin-bottom: 1.5em;
   }
 
   & div {

@@ -12,4 +12,6 @@ export const StyledFooter = styled.div`
      margin-left: 2px;
      margin-right: 2px;
   }
+
+  
 `;
