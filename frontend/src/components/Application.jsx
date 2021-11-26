@@ -28,8 +28,8 @@ export default function App() {
       {view === "HomeLog" && <HomeLog onClick={setView} onSelectedTeam={setSelectedTeam} />}
       {view === "CreateNewTeam" && <CreateNewTeam onClick={setView} />}
       {view === "SpecificTeamOverview" && <SpecificTeamOverview onClick={setView}  selectedTeam={selectedTeam} onSelectedTeam={setSelectedTeam} />}
-      {view === "StartingLineups" && <StartingLineups onClick={setView} />}
-      {view === "ManagePlayer" && <ManagePlayer onClick={setView} />}
+      {view === "StartingLineups" && <StartingLineups onClick={setView} selectedTeam={selectedTeam} />}
+      {view === "ManagePlayer" && <ManagePlayer onClick={setView} selectedTeam={selectedTeam} />}
 
       {view === "TestPage" && <TestPage onClick={setView} />}
       <Footer/>

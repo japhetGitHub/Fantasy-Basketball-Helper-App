@@ -3,45 +3,89 @@ const team = express.Router();
 const db = require('../db');
 const authenticateJWT = require('../middleware/authenticateJWT');
 
-// the base of this file is "http://localhost:3001/api/team" SO if you do a team.get("/", ...) 
-// it's gonna answer to a request to "http://localhost:3001/api/team"
+// "http://localhost:3001/api/team"
+
+team.get('/all', authenticateJWT, function(req, res) {
+  // gives back every team this user is having
+  const data = [
+    {
+      teamId: 1,
+      teamName: "team1",
+      topPerformer: {
+        name: "steph",
+        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+      },
+      worstPerformer: {
+        name: "zion",
+        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
+      },
+      totalFanPoints: 871
+    },
+    {
+      teamId: 2,
+      teamName: "team2",
+      topPerformer: {
+        name: "stephen",
+        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+      },
+      worstPerformer: {
+        name: "zion willi",
+        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
+      },
+      totalFanPoints: 934
+    }
+  ];
+
+  return res.json(data);
+});
 
 
+team.get('/overview/:teamId', authenticateJWT, function(req, res) {
+  // gives back every player this team is having, used in the manage player too
 
-/* return all team from a user where his id is passed as a header 
+  const data = {
+    teamName: "teamNameHere",
+    players: [
+      {
+        playerId: 20000,
+        playerFirstName: "Steph",
+        playerLastName: "Curry",
+        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+        position: "PG",
+        lastWeekPoints: 200,
+        lastWeekFan: 50,
+        lastWeekBlocks: 30,
+        lastWeekSteals: 10,
+        lastWeekGame:10
+      },
+      {
+        playerId: 20001,
+        playerFirstName: "Zion",
+        playerLastName: "Williamson",
+        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png",
+        position: "PF",
+        lastWeekPoints: 100,
+        lastWeekFan: 10,
+        lastWeekBlocks: 10,
+        lastWeekSteals: 10,
+        lastWeekGame:9
+      },
+      {
+        playerId: 20002,
+        playerFirstName: "Another",
+        playerLastName: "Point guard",
+        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+        position: "PG",
+        lastWeekPoints: 150,
+        lastWeekFan: 30,
+        lastWeekBlocks: 20,
+        lastWeekSteals: 10,
+        lastWeekGame:14
+      },
+    ]
+  };
 
-quick note:   
-  useEffect(() => {
-    axios.get("http://localhost:3001/api/team/all", { headers: { 'user_id': theId}})
-      .then((res) => setLiveGames(res.data));
-  }, []);
-
-OR if its a PUT or a POST: 
-  useEffect(() => {
-    axios.post("http://localhost:3001/api/team/all", { *this is the body so the data*}, { headers: { 'user_id': theId}})
-      .then(() => console.log("post is completed"));
-  }, []);
-*/
-
-
-team.get('/all', function(req, res) {
-  // const user_id = req.headers["user_id"];
-  // const query = {
-  //   text: `SELECT * FROM teams WHERE user_id=${user_id}`
-  // }
-  // console.log('HELLO');
-  // res.send('HELLO')
-  return db 
-    // .query(query)
-    // console.log('HELLO')
-    .query(`SELECT * FROM teams`)
-    // res.json({data: result.rows}
-    // .then (res.send())
-    .then((result) => {
-      console.log('RESULT', result)
-      res.json({data: result.rows})
-    })
-    .catch((err) => err);
+  return res.json(data);
 });
 
 

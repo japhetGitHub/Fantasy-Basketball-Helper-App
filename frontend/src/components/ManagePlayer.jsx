@@ -1,32 +1,21 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import Button from '@mui/material/Button';
 import PropTypes from 'prop-types';
 import ListPlayerOn from './helpers/ListPlayerOn.jsx';
 import ListAddPlayer from './helpers/ListAddPlayer.jsx';
+import teamService from '../services/team.service.js';
 
 import { StyledManagePlayer } from '../style/ManagePlayer.styles.jsx';
 
 export default function ManagePlayer(props) {
-  const { onClick } = props;
+  const { onClick, selectedTeam } = props;
+  const [data, setData] = useState(null);
 
-  const data = [
-    {
-      playerName: "Steph Curry",
-      position: "PG",
-      playerId: 2000
-    },
-    {
-      playerName: "Zion Williamson",
-      position: "PF",
-      playerId: 2001
-    },
-    {
-      playerName: "Another Point guard",
-      position: "PG",
-      playerId: 2002
-    },
-  ];
+  useEffect(() => {
+    teamService.getPlayersToManage(selectedTeam)
+      .then((response) => setData(response));
+  }, []);
 
   
   const rankThePositions = (position) => {
@@ -50,13 +39,17 @@ export default function ManagePlayer(props) {
       return 1;
     }
   };
-              
-  const rankedPlayer = data.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0);
-              
-  const arrayList = rankedPlayer.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
+  
+  let arrayList = [];
 
-  for (let i = arrayList.length; i < 20; i++) {
-    arrayList.push(<ListAddPlayer key={i} />);
+  if (data) {
+    const rankedPlayer = data.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0);
+              
+    arrayList = rankedPlayer.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
+
+    for (let i = arrayList.length; i < 20; i++) {
+      arrayList.push(<ListAddPlayer key={i} />);
+    }
   }
 
   return (
@@ -78,5 +71,6 @@ export default function ManagePlayer(props) {
 }
 
 ManagePlayer.propTypes = { // prop-types ensure that props are as component expected
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  selectedTeam: PropTypes.number.isRequired
 };
