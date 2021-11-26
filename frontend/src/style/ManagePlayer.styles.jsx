@@ -6,6 +6,7 @@ export const StyledManagePlayer = styled.div`
 
   & h3 {
     color: white;
+    padding-left: 1em;
   }
 
   & .MuiList-root{
@@ -15,6 +16,8 @@ export const StyledManagePlayer = styled.div`
   & .MuiButton-root{
     color: white;
     background-color: #1976d2;
+    margin-left: 5em;
+    margin-bottom: 1em;
   }
 
 `;

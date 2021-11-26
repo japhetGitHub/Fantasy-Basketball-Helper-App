@@ -32,7 +32,7 @@ export default function TeamOverview(props) {
         </StyledHeader>
 
         <StyledCard>
-          <h4>Top performer</h4>
+          <h4>Top Performer</h4>
           <img
             src={topPerformer.image}
             height="100px"
@@ -40,9 +40,9 @@ export default function TeamOverview(props) {
             alt="Top Performer"
           />
           <p>{topPerformer.name}</p>
-          <h4>total team fantasy points last week:</h4>
+          <h4>Total Team Fantasy Points Last Week:</h4>
           <span>{totalFanPoints}</span>
-          <h4>Worst performer</h4>
+          <h4>Worst Performer</h4>
           <img
             src={worstPerformer.image}
             height="100px"

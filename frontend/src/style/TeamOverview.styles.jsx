@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const StyledTeamOverview = styled.div`
-  margin-top: 1em;
+  height: 37em;
   background-color: #14346C; 
   color: white;
+
 
 `;
 

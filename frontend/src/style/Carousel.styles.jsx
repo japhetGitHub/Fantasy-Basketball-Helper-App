@@ -19,10 +19,7 @@ export const StyledCarousel = styled.div`
     margin-top: auto;
     background-color: #14346C;
     color: white;
-  }
-
-  & .test {
-    color: white; 
+    border-color: #ddd;
   }
 
 `;

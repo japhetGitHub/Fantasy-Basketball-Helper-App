@@ -107,22 +107,26 @@ export default function SpecificTeamOverview(props) {
       <TwitterZone />
 
       <div className={"bottom-button"}>
-        <Button
-          onClick={() => {
-            onClick("HomeLog");
-            onSelectedTeam(null);
-          }}
-          variant={"outlined"}
-        >
-          Back
-        </Button>
-        <Button
-          onClick={() => console.log("go to delete team")}
-          variant={"contained"}
-          color={"error"}
-        >
-          Delete team
-        </Button>
+        <div className={"bottom-left-button"}>
+          <Button
+            onClick={() => {
+              onClick("HomeLog");
+              onSelectedTeam(null);
+            }}
+            variant={"outlined"}
+          >
+            Back
+          </Button>
+        </div>
+        <div className={"bottom-right-button"}>
+          <Button
+            onClick={() => console.log("go to delete team")}
+            variant={"contained"}
+            color={"error"}
+          >
+            Delete team
+          </Button>
+        </div>
       </div>
     </StyledSpecificTeamOverview>
   );
