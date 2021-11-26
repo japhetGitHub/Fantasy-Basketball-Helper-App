@@ -1,8 +1,11 @@
 const axios = require('axios');
 const db = require('../db');
+const fillGameTable = require('./fillGameTable.js');
+
 
 const fillSeasonTable = () => {
   let queryInputSeasonStats = "INSERT INTO players_season_stats(playerID, name, team, position, games, fantasyPoints, minutes, seconds, fieldGoalsMade, fieldGoalsAttempted, fieldGoalsPercentage, effectiveFieldGoalsPercentage, twoPointersMade, twoPointersAttempted, twoPointersPercentage, threePointersMade, threePointersAttempted, threePointersPercentage, freeThrowsMade, freeThrowsAttempted, freeThrowsPercentage, offensiveRebounds, defensiveRebounds, rebounds, offensiveReboundsPercentage, defensiveReboundsPercentage, totalReboundsPercentage, assists, steals, blockedShots, turnovers, personalFouls, points, trueShootingAttempts, trueShootingPercentage, playerEfficiencyRating, assistsPercentage, stealsPercentage, blocksPercentage, turnOversPercentage, usageRatePercentage, fantasyPointsFanDuel, fantasyPointsDraftKings, fantasyPointsYahoo, plusMinus, doubleDoubles, tripleDoubles, fantasyPointsFantasyDraft) VALUES";
+
   axios.get('https://api.sportsdata.io/v3/nba/stats/json/PlayerSeasonStats/2022', {headers: {"Ocp-Apim-Subscription-Key":"ce0935001bf94813a935f4593acd1514"}})
   .then(response => {
     response.data.map((player) => {
@@ -10,13 +13,19 @@ const fillSeasonTable = () => {
     })
     queryInputSeasonStats = queryInputSeasonStats.slice(0, -1) + ";";
     
-    return db 
+     return db 
       .query(queryInputSeasonStats)
       .then((result) => {
-        console.log("in the DB")
-        res.json({data: result.rows})
+        console.log("fillSeasonTable: inserted into the DB");
+        Promise.all([
+          fillGameTable("2021-NOV-23"),
+          fillGameTable("2021-NOV-22"),
+          fillGameTable("2021-NOV-21"),
+          fillGameTable("2021-NOV-20"),
+          fillGameTable("2021-NOV-19")
+        ]);
       })
-      .catch((err) => err);
+      .catch((err) => console.log("@fillSeasonTable, Error:", err));
   })
   .catch(error => {
     console.log(error);
