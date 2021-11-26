@@ -42,7 +42,7 @@ team.get('/all', authenticateJWT, function(req, res) {
 
 team.get('/overview/:teamId', authenticateJWT, function(req, res) {
   // gives back every player this team is having, used in the manage player too
-
+  console.log("gets the team")
   const data = {
     teamName: "teamNameHere",
     players: [

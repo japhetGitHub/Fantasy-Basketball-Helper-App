@@ -10,14 +10,8 @@ import { StyledManagePlayer } from '../style/ManagePlayer.styles.jsx';
 
 export default function ManagePlayer(props) {
   const { onClick, selectedTeam } = props;
-  const [data, setData] = useState(null);
+  const [userTeam, setUserTeam] = useState(null);
 
-  useEffect(() => {
-    teamService.getPlayersToManage(selectedTeam)
-      .then((response) => setData(response));
-  }, []);
-
-  
   const rankThePositions = (position) => {
     switch (position) {
     case "PG":
@@ -25,30 +19,98 @@ export default function ManagePlayer(props) {
         
     case "SG":
       return 5;
-          
+      
     case "SF":
       return 4;
-            
+      
     case "PF":
       return 3;
-              
+        
     case "C":
       return 2;
-                
+          
     default:
       return 1;
     }
   };
-  
+        
+  useEffect(() => {
+    teamService.getPlayersToManage(selectedTeam)
+      .then((response) => setUserTeam(response.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0)));
+  }, []);
+
+
+  const allPlayers = [ // all the players in the league
+    {
+      playerName: "Steph Curry",
+      position: "PG",
+      playerId: 20000
+    },
+    {
+      playerName: "Zion Williamson",
+      position: "PF",
+      playerId: 20001
+    },
+    {
+      playerName: "Another Pointguard",
+      position: "PG",
+      playerId: 20002
+    },
+    {
+      playerName: "some guy",
+      position: "PF",
+      playerId: 2003
+    },
+    {
+      playerName: "Yep Th",
+      position: "C",
+      playerId: 2004
+    },
+    {
+      playerName: "AJ TO",
+      position: "SG",
+      playerId: 2005
+    },
+    {
+      playerName: "GASD DASdas",
+      position: "SF",
+      playerId: 2006
+    },
+    {
+      playerName: "dasdas dasdasdasdasdas",
+      position: "SF",
+      playerId: 2007
+    },
+  ];
+
+  const [allPlayerInLeague, setAllPlayerInLeague] = useState(allPlayers);
   let arrayList = [];
 
-  if (data) {
-    const rankedPlayer = data.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0);
-              
-    arrayList = rankedPlayer.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} />);
+  if (userTeam) {
+    console.log("all player in league", allPlayerInLeague);
+    console.log("user team", userTeam);
 
+    const adjustTheLeague = () => {
+      for (let i = 0; i < allPlayerInLeague.length; i++) {
+        for (let j = 0; j < userTeam.length; j++) {
+          if (allPlayerInLeague[i].playerId === userTeam[j].playerId) {
+            allPlayerInLeague.splice(i, 1);
+            setAllPlayerInLeague(allPlayerInLeague);
+          
+          }
+        }
+      }
+    };
+    adjustTheLeague();
+
+    const addPlayerInTeam = (player) => {
+      player && setUserTeam(userTeam => [...userTeam, player]);
+    };
+
+
+    arrayList = userTeam.map((singlePlayer) => <ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} data={userTeam} setData={setUserTeam} />);
     for (let i = arrayList.length; i < 20; i++) {
-      arrayList.push(<ListAddPlayer key={i} />);
+      arrayList.push(<ListAddPlayer key={i} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
     }
   }
 
