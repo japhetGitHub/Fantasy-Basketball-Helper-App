@@ -10,10 +10,13 @@ import PropTypes from 'prop-types';
 import teamService from '../services/team.service.js';
 
 // take these off once connected to DB
-import PlayerCards from './PlayerCards.jsx';
+import zionImage from './../image/zion.png';
+import stephImage from './../image/steph.png';
+// import PlayerCards from './PlayerCards.jsx';
 
 
 import { StyledStartingLineups } from '../style/StartingLineups.styles.jsx';
+import playerStats from './PlayerStats.jsx';
 
 
 export default function StartingLineups(props) {
@@ -24,6 +27,182 @@ export default function StartingLineups(props) {
     setSortType(event.target.value);
   };
   
+  const oldData = {
+    teamName: "teamNameHere",
+    players: [
+      {
+        playerId: 200,
+        playerFirstName: "Steph",
+        playerLastName: "Curry",
+        playerImage: stephImage,
+        position: "PG",
+        Game: 10,
+        Points: 200,
+        "Fantasy Points": 50,
+        Blocks: 30,
+        Steals: 5,
+        lastWeekPoints: 130,
+        lastWeekFan: 300,
+        lastWeekBlocks: 3,
+        lastWeekSteals: 11
+      },
+      {
+        playerId: 201,
+        playerFirstName: "Zion",
+        playerLastName: "Williamson",
+        playerImage: zionImage,
+        position: "PF",
+        Game: 15,
+        Points: 100,
+        "Fantasy Points": 10,
+        Blocks: 10,
+        Steals: 8,
+        lastWeekPoints: 130,
+        lastWeekFan: 300,
+        lastWeekBlocks: 3,
+        lastWeekSteals: 11
+      },
+      {
+        playerId: 202,
+        playerFirstName: "Another",
+        playerLastName: "Point guard",
+        playerImage: stephImage,
+        position: "PG",
+        Game: 20,
+        Points: 150,
+        "Fantasy Points": 30,
+        Blocks: 20,
+        Steals: 12,
+        lastWeekPoints: 130,
+        lastWeekFan: 300,
+        lastWeekBlocks: 3,
+        lastWeekSteals: 11
+      },
+    ]
+  };
+
+  const playerLatestGameData = {
+    id: 1,
+    playerid: 20,
+    name: "Bradley Beal",
+    team: "PHI",
+    position: "SG",
+    day: "2021-11-11T00:00:00",
+    fantasypoints: 77.5,
+    minutes: 61,
+    seconds: 64,
+    fieldgoalsmade: 18.9,
+    fieldgoalsattempted: 29.8,
+    fieldgoalspercentage: 99.3,
+    effectivefieldgoalspercentage: 99.3,
+    twopointersmade: 17.3,
+    twopointersattempted: 25.1,
+    twopointerspercentage: 108.1,
+    threepointersmade: 2.5,
+    threepointersattempted: 7.4,
+    threepointerspercentage: 52.3,
+    freethrowsmade: 12.6,
+    freethrowsattempted: 12.6,
+    freethrowspercentage: 157.1,
+    offensiverebounds: 0,
+    defensiverebounds: 9.9,
+    rebounds: 9.9,
+    offensivereboundspercentage: 0,
+    defensivereboundspercentage: 16.5,
+    totalreboundspercentage: 13.9,
+    assists: 12.3,
+    steals: 2.5,
+    blockedshots: 4.9,
+    turnovers: 4.9,
+    personalfouls: 4.9,
+    points: 51.8,
+    trueshootingattempts: 35.4,
+    trueshootingpercentage: 115.2,
+    playerefficiencyrating: 55.6,
+    assistspercentage: 37.3,
+    stealspercentage: 3.1,
+    blockspercentage: 9.5,
+    turnoverspercentage: 12.8,
+    usageratepercentage: 43,
+    fantasypointsfanduel: 82.2,
+    fantasypointsdraftkings: 80.1,
+    fantasypointsyahoo: 82.2,
+    plusminus: 14.1,
+    doubledoubles: 0,
+    tripledoubles: 0,
+    fantasypointsfantasydraft: 80.1
+  };
+
+  const playerSeasonStats = {
+    playerid: 20,
+    name: "Bradley Beal",
+    team: "WAS",
+    position: "SG",
+    games: 60,
+    fantasypoints: 2e+07,
+    minutes: 61,
+    seconds: 4027,
+    fieldgoalsmade: 3313,
+    fieldgoalsattempted: 23,
+    fieldgoalspercentage: 1033.8,
+    effectivefieldgoalspercentage: 2132.4,
+    twopointersmade: 74.8,
+    twopointersattempted: 82.1,
+    twopointerspercentage: 833.2,
+    threepointersmade: 1556.9,
+    threepointersattempted: 82.6,
+    threepointerspercentage: 200.6,
+    freethrowsmade: 575.5,
+    freethrowsattempted: 53.9,
+    freethrowspercentage: 629.5,
+    offensiverebounds: 708.2,
+    defensiverebounds: 137.2,
+    rebounds: 111.1,
+    offensivereboundspercentage: 325.6,
+    defensivereboundspercentage: 436.7,
+    totalreboundspercentage: 8.5,
+    assists: 16,
+    steals: 10.8,
+    blockedshots: 408.9,
+    turnovers: 106.5,
+    personalfouls: 33.9,
+    points: 288.5,
+    trueshootingattempts: 216,
+    trueshootingpercentage: 2897.8,
+    playerefficiencyrating: 2444.1,
+    assistspercentage: 91.5,
+    stealspercentage: 44.3,
+    blockspercentage: 32.8,
+    turnoverspercentage: 3.5,
+    usageratepercentage: 2,
+    fantasypointsfanduel: 16.3,
+    fantasypointsdraftkings: 52.9,
+    fantasypointsyahoo: 4167.8,
+    plusminus: 4303,
+    doubledoubles: 4167.8,
+    tripledoubles: -9.3,
+    fantasypointsfantasydraft: 9.5,
+  };
+
+  const playerSeasonFanPoints = [
+    { x: 0, y: 37.7 },
+    { x: 1, y: 17.2 },
+    { x: 2, y: 62.8 },
+    { x: 3, y: 45 },
+    { x: 4, y: 18.6 },
+    { x: 5, y: 19.5 },
+    { x: 6, y: 25.3 },
+    { x: 8, y: 23.8 },
+    { x: 9, y: 29 },
+    { x: 10, y: 24.5 },
+    { x: 11, y: 24.3 },
+    { x: 12, y: 37.9 },
+    { x: 13, y: 15.6 },
+    { x: 14, y: 21.7 },
+    { x: 15, y: 25.2 },
+    { x: 16, y: 16.5 },
+    { x: 17, y: 25.8 }
+  ];
   useEffect(() => {
     teamService.getStartingLineups(selectedTeam)
       .then((response) => setData(response));
@@ -47,22 +226,12 @@ export default function StartingLineups(props) {
   if (data) {
     const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
 
-
     rankedPlayer.map((singlePlayer) => {
-      arrayListItem.push(<ListItem key={singlePlayer.playerId} useThat={
-        <PlayerCards
-          playerFirstName={singlePlayer.playerFirstName}
-          playerLastName={singlePlayer.playerLastName}
-          playerImage={singlePlayer.playerImage}
-          position={singlePlayer.position}
-          lastWeekPoints={singlePlayer.Points}
-          lastWeekFan={singlePlayer["Fantasy Points"]}
-          lastWeekBlocks={singlePlayer.Blocks}
-          lastWeekSteals={singlePlayer.Steals}
-        />}
-      firstName={singlePlayer.playerFirstName}
-      lastName={singlePlayer.playerLastName}
-      position={singlePlayer.position}
+      arrayListItem.push(<ListItem key={singlePlayer.playerId}
+        useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
+        firstName={singlePlayer.playerFirstName}
+        lastName={singlePlayer.playerLastName}
+        position={singlePlayer.position}
       />);
     });
   }
