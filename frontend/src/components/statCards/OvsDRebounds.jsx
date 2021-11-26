@@ -17,7 +17,7 @@ export default function OvsDRebounds(props) {
         standalone={false}
         width={300} height={300}
         innerRadius={60}
-        labelRadius={71}
+        labelRadius={72}
         labels={['offensive', 'defensive']}
         data={pieHalves}
         style={{ labels: { fontSize: 15, fill: "white" } }}
