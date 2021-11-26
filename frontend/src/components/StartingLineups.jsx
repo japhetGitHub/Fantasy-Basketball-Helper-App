@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@mui/material/List';
 import ListItem from './helpers/ListItem.jsx';
 import Button from '@mui/material/Button';
@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
+import teamService from '../services/team.service.js';
 
 // take these off once connected to DB
 import zionImage from './../image/zion.png';
@@ -15,18 +16,18 @@ import stephImage from './../image/steph.png';
 
 
 import { StyledStartingLineups } from '../style/StartingLineups.styles.jsx';
-import playerStats from './playerStats.jsx';
+import playerStats from './PlayerStats.jsx';
 
 
 export default function StartingLineups(props) {
-  const { onClick } = props;
-
+  const { onClick, selectedTeam } = props;
+  const [data, setData] = useState(null);
   const [sortType, setSortType] = React.useState('Game');
   const handleChange = (event) => {
     setSortType(event.target.value);
   };
   
-  const data = {
+  const oldData = {
     teamName: "teamNameHere",
     players: [
       {
@@ -202,6 +203,11 @@ export default function StartingLineups(props) {
     { x: 16, y: 16.5 },
     { x: 17, y: 25.8 }
   ];
+  useEffect(() => {
+    teamService.getStartingLineups(selectedTeam)
+      .then((response) => setData(response));
+  }, []);
+  
   /*
     How it's working: sort the array of player based on whats in the sortType variable, this follows the selected prompt
       in the scrolling thing(i dont know the word).
@@ -217,17 +223,18 @@ export default function StartingLineups(props) {
   */
   
   const arrayListItem = [];
-  const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
+  if (data) {
+    const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
 
-  rankedPlayer.map((singlePlayer) => {
-    arrayListItem.push(<ListItem key={singlePlayer.playerId}
-      useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
-      firstName={singlePlayer.playerFirstName}
-      lastName={singlePlayer.playerLastName}
-      position={singlePlayer.position}
-    />);
-  });
- 
+    rankedPlayer.map((singlePlayer) => {
+      arrayListItem.push(<ListItem key={singlePlayer.playerId}
+        useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
+        firstName={singlePlayer.playerFirstName}
+        lastName={singlePlayer.playerLastName}
+        position={singlePlayer.position}
+      />);
+    });
+  }
  
   return (
     <StyledStartingLineups>
@@ -263,5 +270,6 @@ export default function StartingLineups(props) {
 }
 
 StartingLineups.propTypes = { // prop-types ensure that props are as component expected
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  selectedTeam: PropTypes.number.isRequired,
 };
