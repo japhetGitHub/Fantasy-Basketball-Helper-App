@@ -30,11 +30,13 @@ app.use('/api/authenticate', authentication); // must be above all routes
 exampleRouter = require('./routes/exampleRoute');
 app.use('/api/example', exampleRouter);
 
-const teamRouter = require('./routes/team');
 const sportApi = require('./script/sportApi');
+const teamRouter = require('./routes/team');
 
-app.use('/api/team', teamRouter);
+
 app.use('/sportApi', sportApi);
+app.use('/api/team', teamRouter);
+
 
 app.listen(3001, () => {
   console.log("Listening on port 3001...");
