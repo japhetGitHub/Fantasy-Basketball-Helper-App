@@ -80,7 +80,7 @@ export default function SpecificTeamOverview(props) {
           Back
         </Button>
         <Button
-          onClick={() => console.log("go to delete team")}
+          onClick={() => teamService.deleteTeam()}
           variant={"contained"}
           color={"error"}
         >

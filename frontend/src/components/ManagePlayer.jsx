@@ -92,7 +92,8 @@ export default function ManagePlayer(props) {
       <Button
         onClick={() => {
           onClick("SpecificTeamOverview");
-          console.log("teamstate ", userTeam); // PUT to update the state of the team in the DB
+          teamService.putUserTeam(selectedTeam, userTeam)
+            .then(() => onClick("SpecificTeamOverview"));
         }}
         variant={"contained"}
       >

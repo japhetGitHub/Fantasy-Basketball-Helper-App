@@ -88,6 +88,16 @@ team.get('/overview/:teamId', authenticateJWT, function(req, res) {
   return res.json(data);
 });
 
+team.put('/update/:teamId', authenticateJWT, function(req, res) {
+  // update the team array
+  console.log("req: ", req.body.playerIdArray); // replace the array of the player in the team by this array
+});
+
+team.delete('/delete/:teamId', authenticateJWT, function(req, res) {
+  // delete the team coming from the :teamId
+  console.log("call to delete team")
+});
+
 
 
 module.exports = team;
