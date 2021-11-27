@@ -27,7 +27,7 @@ export default function ListItem(props) {
       <Collapse in={open} timeout="auto" unmountOnExit>
 
 
-        <Carousel slides={[useThat]} />
+        <Carousel slides={useThat} />
       
       
       </Collapse>
@@ -36,7 +36,7 @@ export default function ListItem(props) {
 }
 
 ListItem.propTypes = { // prop-types ensure that props are as component expected
-  useThat: PropTypes.object,
+  useThat: PropTypes.array,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   position: PropTypes.string

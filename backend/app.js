@@ -22,81 +22,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authentication = require('./middleware/auth');
 app.use('/api/authenticate', authentication); // must be above all routes
 
-// create this for every routes group
-// const exampleRouter = require('./routes/exampleRoute');
+
+
 // const dbRouter = require('./routes/dbRoutes'); // the file where we smash everything, dont use it just refactor it
+// app.use('/api/db', dbRouter); // look at the dbRouter wayconst
+
+exampleRouter = require('./routes/exampleRoute');
+app.use('/api/example', exampleRouter);
+
+const sportApi = require('./script/sportApi');
+const teamRouter = require('./routes/team');
+const leagueRouter = require('./routes/league');
 
 
-// // TODO: comment what is this line doing?
-// const { application_name } = require('pg/lib/defaults');
+app.use('/sportApi', sportApi);
+app.use('/api/team', teamRouter);
+app.use('/api/league', leagueRouter);
 
-// const getPlayerStatsForDB = async function(formattedYesterday) {
-  
-  //   const headers = {
-    //     "Ocp-Apim-Subscription-Key": "ce0935001bf94813a935f4593acd1514"
-    //   }
-    //   // const today = new Date()
-    //   // const formattedDate = today.slice(0, 10)
-    //   // 2021-11-22
-    //   // 012345678910
-    //   console.log("++++++++++++++++++++++++++++++++++++", formattedYesterday);
-    //   //  return
-    //   //  date example: 2021-NOV-20
-    //   //  note: today's date returns no values 
-    //   const url = `https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${formattedYesterday}`
-    //   console.log("URL ===", url)
-    
-    //   try {
-      //     const {data} = await axios.get(url, {headers: headers})
-      //     console.log(data)
-      //   } catch (error) {
-        //     console.log(error)
-        //   }
-        // }
-        
-        
-        // Only call this function if you need a daily update - change line 215!
-        // why does cronjob get called even job.start is commented?
-        // var job = new CronJob('* * * * * *', function() {
-          //   console.log('You will see this message every second');
-          
-          //   // const date = new Date()
-          //   // const formattedDate = date.toISOString().split('T')[0]
-          //   // getPlayerStatsForDB(formattedDate);
-          
-          //   const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-          //   const formattedYesterday = yesterday.toISOString().split('T')[0]
-          //   // console.log('YESTERDAY', formattedYesterday);
-          //   getPlayerStatsForDB(formattedYesterday);
-          
-          // }, null, true, 'America/Los_Angeles');
-          // job.start();
-          
-          // const date = new Date()
-          // let formattedDate = (date.setDate(date.getDate() - 1));
-          // formattedDate = date.toISOString().split('T')[0]
-          
-          // Today's date gives no values, need to input yesterday
-          // const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-          // const formattedYesterday = yesterday.toISOString().split('T')[0]
-          // console.log('YESTERDAY', formattedYesterday);
-          // getPlayerStatsForDB(formattedYesterday);
-          
-          // do this for every routes group, it's gonna use the file in routes/'name of the route' so create that file too
-          // app.use('/api/example', exampleRouter);
-          // app.use('/api/db', dbRouter); // look at the dbRouter way up
 
-          const teamRouter = require('./routes/team');
-          const sportApi = require('./script/sportApi');
-          
-          app.use('/api/team', teamRouter);
-          app.use('/sportApi', sportApi);
-          
-
-          
-          app.listen(3002, () => {
-            console.log("Listening on port 3001...");
-          });
-          
-          module.exports = app;
-          
+app.listen(3001, () => {
+  console.log("Listening on port 3001...");
+});
+module.exports = app;

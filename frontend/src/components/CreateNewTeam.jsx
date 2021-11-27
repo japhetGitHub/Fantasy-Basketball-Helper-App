@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import RadioForm from './helpers/RadioForm.jsx';
+import teamService from '../services/team.service.js';
 
 import { StyledCreateNewTeam } from '../style/CreateNewTeam.styles.jsx';
 
 export default function CreateNewTeam(props) {
-  const [fantasyChoice, setFantasyChoice] = useState(null);
+  const [fantasyChoice, setFantasyChoice] = useState('Yahoo');
   const [teamName, setTeamName] = useState("");
   const { onClick } = props;
   return (
@@ -23,7 +24,10 @@ export default function CreateNewTeam(props) {
       <RadioForm onChange={setFantasyChoice} />
 
       <Button
-        onClick={() => onClick("HomeLog")}
+        onClick={() => {
+          teamService.createTeam(teamName, fantasyChoice);
+          onClick("HomeLog");
+        }}
         variant={"contained"}
       >
         Create!
