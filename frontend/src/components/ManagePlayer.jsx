@@ -84,7 +84,7 @@ export default function ManagePlayer(props) {
 
   return (
     <StyledManagePlayer>
-      <h3>Adjust your team roaster</h3>
+      <h3>Adjust Your Team Roster</h3>
       <List>
         {arrayList}
       </List>

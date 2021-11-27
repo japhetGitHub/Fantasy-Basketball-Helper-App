@@ -49,14 +49,16 @@ export default function SpecificTeamOverview(props) {
 
   return (
     <StyledSpecificTeamOverview>
-      <span>{data && data.teamName} - {data && totalTeamFanPoints} fpts</span>
+      <span className="header">{data && data.teamName} - {data && totalTeamFanPoints} fpts</span>
       <div className={"top-button"} >
-        <Button
-          onClick={() => onClick("ManagePlayer")}
-          variant={"outlined"}
-        >
-          Manage players
-        </Button>
+        <div className={"left-button"} >
+          <Button
+            onClick={() => onClick("ManagePlayer")}
+            variant={"outlined"}
+          >
+            Manage players
+          </Button>
+        </div>
         <Button
           onClick={() => onClick("StartingLineups")}
           variant={"outlined"}
@@ -70,22 +72,26 @@ export default function SpecificTeamOverview(props) {
       <TwitterZone />
 
       <div className={"bottom-button"}>
-        <Button
-          onClick={() => {
-            onClick("HomeLog");
-            onSelectedTeam(null);
-          }}
-          variant={"outlined"}
-        >
-          Back
-        </Button>
-        <Button
-          onClick={() => teamService.deleteTeam()}
-          variant={"contained"}
-          color={"error"}
-        >
-          Delete team
-        </Button>
+        <div className={"bottom-left-button"}>
+          <Button
+            onClick={() => {
+              onClick("HomeLog");
+              onSelectedTeam(null);
+            }}
+            variant={"outlined"}
+          >
+            Back
+          </Button>
+        </div>
+        <div className={"bottom-right-button"}>
+          <Button
+            onClick={() => teamService.deleteTeam()}
+            variant={"contained"}
+            color={"error"}
+          >
+            Delete team
+          </Button>
+        </div>
       </div>
     </StyledSpecificTeamOverview>
   );

@@ -10,7 +10,7 @@ export default function AddNewTeam(props) {
   const { onClick } = props;
   return (
     <StyledAddNewTeam>
-      <h2>Add a new team</h2>
+      <h2>Add a New Team</h2>
       <img
         src={addImage}
         alt="Add sign"

@@ -4,6 +4,7 @@ import axios from 'axios';
 import liveImage from '../image/test.png';
 import Button from '@mui/material/Button';
 import AuthService from "../services/auth.service";
+import companyLogo from '../image/logo_transparent.png';
 
 import {
   StyledLiveGames,
@@ -27,8 +28,16 @@ export default function Header(props) {
 
   return (
     <StyledHeader>
-      <h3>Our website name</h3>
-      
+      {/* <h3>Our website name</h3> */}
+      <p>
+        <img
+          src={companyLogo}
+          alt="Add sign"
+          height="180em"
+          weight="180em"
+        />
+      </p>
+     
       <Button
         variant="outlined"
         onClick={logoutHandler}

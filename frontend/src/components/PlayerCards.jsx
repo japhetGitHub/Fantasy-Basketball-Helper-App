@@ -24,7 +24,7 @@ export default function PlayerCards(props) {
         <img src={playerImage} height="100px" width="100px" alt="Player Face"/>
       </div>
       <div className="stats">
-        <h3>Last week stats</h3>
+        <h3>Last Week Stats</h3>
         <div className={"stats-grid"}>
           <div className="points">
             <h3>Points</h3>
