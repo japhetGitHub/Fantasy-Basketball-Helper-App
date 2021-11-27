@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { VictoryPie, VictoryLabel, VictoryContainer } from 'victory';
+import { VictoryPie, VictoryLabel } from 'victory';
 
 export default function OvsDRebounds(props) {
 
@@ -12,7 +12,7 @@ export default function OvsDRebounds(props) {
   ];
 
   return (
-    <VictoryContainer height={300}>
+    <svg viewBox="0 0 300 300" >
       <VictoryPie
         standalone={false}
         width={300} height={300}
@@ -29,7 +29,7 @@ export default function OvsDRebounds(props) {
         x={150} y={150}
         text="Rebounds"
       />
-    </VictoryContainer>
+    </svg>
   );
 }
 
