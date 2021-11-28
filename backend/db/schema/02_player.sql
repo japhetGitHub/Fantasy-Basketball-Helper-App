@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS player CASCADE;
+
+CREATE TABLE player (
+  id SERIAL PRIMARY KEY NOT NULL,
+  player_id INTEGER NOT NULL UNIQUE,
+  team_id INTEGER REFERENCES nba_team(team_id) ON DELETE CASCADE NOT NULL,
+  team VARCHAR(10) REFERENCES nba_team(team_key) ON DELETE CASCADE NOT NULL,
+  position_category VARCHAR(10) NOT NULL,
+  position VARCHAR(10) NOT NULL,
+  player_name VARCHAR(255) NOT NULL,
+  photo_url VARCHAR(255) NOT NULL
+);
