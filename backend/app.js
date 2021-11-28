@@ -33,41 +33,16 @@ app.use('/api/example', exampleRouter);
 const sportApi = require('./script/sportApi');
 const teamRouter = require('./routes/team');
 const leagueRouter = require('./routes/league');
-
+const scoreRouter = require('./routes/score');
 
 app.use('/sportApi', sportApi);
 app.use('/api/team', teamRouter);
 app.use('/api/league', leagueRouter);
-
+app.use('/api/score', scoreRouter);
 
 app.listen(3001, () => {
   console.log("Listening on port 3001...");
 });
 
-
-app.get('/getLiveGameScore', function(req,res) {
-
-  const arr = [];
-
-  // Step 1: Obtain yesterday's date 
-  const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
-  // Step 2: Format yesterday's date 
-  const formattedYesterday = yesterday.toISOString().split('T')[0]
-  // Step 3: Do an API call to endpoint
-  axios.get(`https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/${formattedYesterday}`, {headers: {"Ocp-Apim-Subscription-Key":"ce0935001bf94813a935f4593acd1514"}})
-  .then(response => {
-
-    // Step 4: extract the information AwayTeam, HomeTeam, AwayTeamScore, HomeTeamScore into array
-    arr.push(response.data[0].AwayTeam, response.data[0].HomeTeam, response.data[0].AwayTeamScore, response.data[0].HomeTeamScore)
-    console.log('1', arr);
-    // Step 5: Return the array
-    return res.json(arr);
-
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
-});
 
 module.exports = app; 
