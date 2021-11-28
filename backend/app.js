@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors =require("cors");
 const bodyParser = require('body-parser');
-
+const axios = require('axios');
 
 const app = express();
 var CronJob = require('cron').CronJob; // to automate the like aeveryday request
@@ -43,4 +43,31 @@ app.use('/api/league', leagueRouter);
 app.listen(3001, () => {
   console.log("Listening on port 3001...");
 });
-module.exports = app;
+
+
+app.get('/getLiveGameScore', function(req,res) {
+
+  const arr = [];
+
+  // Step 1: Obtain yesterday's date 
+  const yesterday = new Date(new Date().setDate(new Date().getDate()-1));
+  // Step 2: Format yesterday's date 
+  const formattedYesterday = yesterday.toISOString().split('T')[0]
+  // Step 3: Do an API call to endpoint
+  axios.get(`https://api.sportsdata.io/v3/nba/scores/json/GamesByDate/${formattedYesterday}`, {headers: {"Ocp-Apim-Subscription-Key":"ce0935001bf94813a935f4593acd1514"}})
+  .then(response => {
+
+    // Step 4: extract the information AwayTeam, HomeTeam, AwayTeamScore, HomeTeamScore into array
+    arr.push(response.data[0].AwayTeam, response.data[0].HomeTeam, response.data[0].AwayTeamScore, response.data[0].HomeTeamScore)
+    console.log('1', arr);
+    // Step 5: Return the array
+    return res.json(arr);
+
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+});
+
+module.exports = app; 
