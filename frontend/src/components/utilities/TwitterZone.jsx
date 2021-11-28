@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import leagueService from '../../services/league.service.js';
 
-// api key: MHtXxER1IwVUgqbRlp0fIZOpr
-// api key secret: 00qSET1c2qtxctHKlo1l8334jxOARYNZTAyvSAkQ6ADbOshMkP
-// bearer token: AAAAAAAAAAAAAAAAAAAAANh1WAEAAAAA5ZfmUqlTbs9gzfKhxico%2FeWrrog%3DjNW9iwqWkH61G4ftsNCJVrm00QRux0zirgkohaEFejVjwIM0Ua
+import { StyledTwitterZone } from './../../style/TwitterZone.styles.jsx';
 
 
-export default function TwitterZone() {
+export default function TwitterZone(props) {
+  const { playerId } = props;
+  const [news, setNews] = useState(null);
+  useEffect(() => {
+    leagueService.getNewsForPlayer("20002284") // put playerId inside of it once the real data will be there
+      .then((response) => setNews(response[0]));
+  }, []);
+
   return (
-    <div className="TwitterZone">
-      <a
-        className="twitter-timeline"
-        href="https://twitter.com/TwitterDev"
-        data-chrome="nofooter noborders"
-      >
-        Tweets by @TwitterDev
-      </a>
-    </div>
+    <StyledTwitterZone>
+      <h3>{news && news.Title}</h3>
+      <div>{news && news.TimeAgo}</div>
+      <span>
+        {news && news.Content}
+      </span>
+      <span>
+        source: {news && news.Url}
+      </span>
+    </StyledTwitterZone>
   );
 }
+
+TwitterZone.propTypes = { // prop-types ensure that props are as component expected
+  playerId: PropTypes.any
+};

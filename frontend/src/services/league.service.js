@@ -8,9 +8,17 @@ const getAllPlayerInLeague = () => {
     .then((response) => response.data);
 };
 
+const getNewsForPlayer = (playerId) => {
+  return axiosInterceptor.get(API_URL + `/news/${playerId}`)
+    .then((response) => {
+      return response.data;
+    });
+};
+
 
 const leagueService = {
-  getAllPlayerInLeague
+  getAllPlayerInLeague,
+  getNewsForPlayer,
 };
 
 export default leagueService;
