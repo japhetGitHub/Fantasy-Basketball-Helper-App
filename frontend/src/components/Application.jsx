@@ -17,11 +17,11 @@ import { StyledApplication } from '../style/Application.styles.jsx';
 export default function App() {
   const [view, setView] = useState("HomePage");
   const [selectedTeam, setSelectedTeam] = useState(null);
-  const [showLiveGame, setShowLiveGame] = useState(true);
+
 
   return (
     <StyledApplication>
-      <Header live={showLiveGame} onClick={setView} />
+      <Header onClick={setView} />
       {view === "HomePage" && <HomePage onClick={setView} />}
       {view === "Register" && <Register onClick={setView} />}
       {view === "Login" && <Login onClick={setView} />}

@@ -17,6 +17,26 @@ export const StyledHeader = styled.div`
     color: white;
   }
 
+  & .liveGamePlayers {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-color: black;
+    color: black;
+    width: 50%;
+    margin-left: 6em;
+  }
+
+  & .liveGameScores {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-color: black;
+    color: black;
+    width: 50%;
+    margin-left: 6em;
+  }
+
   & p {
     margin-left: 5.5em;
   }
