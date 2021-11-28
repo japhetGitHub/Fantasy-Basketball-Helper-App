@@ -21,6 +21,7 @@ export default function SpecificTeamOverview(props) {
   const carouselArray = [];
   let totalTeamFanPoints = 0;
   let rankedPlayer = [];
+  
   if (data) {
     rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
     carouselArray.push(<PlayerCards
