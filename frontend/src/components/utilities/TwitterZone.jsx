@@ -15,8 +15,10 @@ export default function TwitterZone(props) {
 
   return (
     <StyledTwitterZone>
-      <h3>{news && news.Title}</h3>
-      <div>{news && news.TimeAgo}</div>
+      <div className="header">
+        <h3>{news && news.Title}</h3>
+        {news && news.TimeAgo}
+      </div>
       <span>
         {news && news.Content}
       </span>

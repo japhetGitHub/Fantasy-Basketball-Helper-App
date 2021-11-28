@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import List from '@mui/material/List';
-import ListItem from './helpers/ListItem.jsx';
-import Button from '@mui/material/Button';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import PropTypes from 'prop-types';
-import teamService from '../services/team.service.js';
+import React, { useState, useEffect } from "react";
+import List from "@mui/material/List";
+import ListItem from "./helpers/ListItem.jsx";
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import PropTypes from "prop-types";
+import teamService from "../services/team.service.js";
 
-// take these off once connected to DB
-import zionImage from './../image/zion.png';
-import stephImage from './../image/steph.png';
-// import PlayerCards from './PlayerCards.jsx';
-
-
-import { StyledStartingLineups } from '../style/StartingLineups.styles.jsx';
-import playerStats from './PlayerStats.jsx';
-
+import { StyledStartingLineups } from "../style/StartingLineups.styles.jsx";
+import playerStats from "./PlayerStats.jsx";
 
 export default function StartingLineups(props) {
   const { onClick, selectedTeam } = props;
   const [data, setData] = useState(null);
-  const [sortType, setSortType] = React.useState('Game');
+  const [sortType, setSortType] = React.useState("Game");
   const handleChange = (event) => {
     setSortType(event.target.value);
   };
@@ -76,7 +69,7 @@ export default function StartingLineups(props) {
     plusminus: 14.1,
     doubledoubles: 0,
     tripledoubles: 0,
-    fantasypointsfantasydraft: 80.1
+    fantasypointsfantasydraft: 80.1,
   };
 
   const playerSeasonStats = {
@@ -85,7 +78,7 @@ export default function StartingLineups(props) {
     team: "WAS",
     position: "SG",
     games: 60,
-    fantasypoints: 2e+07,
+    fantasypoints: 2e7,
     minutes: 61,
     seconds: 4027,
     fieldgoalsmade: 3313,
@@ -147,13 +140,14 @@ export default function StartingLineups(props) {
     { x: 14, y: 21.7 },
     { x: 15, y: 25.2 },
     { x: 16, y: 16.5 },
-    { x: 17, y: 25.8 }
+    { x: 17, y: 25.8 },
   ];
   useEffect(() => {
-    teamService.getStartingLineups(selectedTeam)
+    teamService
+      .getStartingLineups(selectedTeam)
       .then((response) => setData(response));
   }, []);
-  
+
   /*
     How it's working: sort the array of player based on whats in the sortType variable, this follows the selected prompt
       in the scrolling thing(i dont know the word).
@@ -167,42 +161,47 @@ export default function StartingLineups(props) {
     IF IT DONT WORK, the ListItem component, in the carousel the slides is set as slides={[useThat]} SOOO drop the [], i made the testing without
       passing useThat an array and only a component so it was my easy fix to test everything.
   */
-  
+
   const arrayListItem = [];
   if (data) {
-    const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
+    const rankedPlayer = data.players.sort((a, b) =>
+      a[`${sortType}`] < b[`${sortType}`]
+        ? 1
+        : a[`${sortType}`] > b[`${sortType}`]
+          ? -1
+          : 0
+    );
 
     rankedPlayer.map((singlePlayer) => {
-      arrayListItem.push(<ListItem key={singlePlayer.playerId}
-        useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
-        firstName={singlePlayer.playerFirstName}
-        lastName={singlePlayer.playerLastName}
-        position={singlePlayer.position}
-      />);
+      arrayListItem.push(
+        <ListItem
+          key={singlePlayer.playerId}
+          useThat={playerStats(
+            playerLatestGameData,
+            playerSeasonStats,
+            playerSeasonFanPoints
+          )}
+          firstName={singlePlayer.playerFirstName}
+          lastName={singlePlayer.playerLastName}
+          position={singlePlayer.position}
+        />
+      );
     });
   }
- 
+
   return (
     <StyledStartingLineups>
       <FormControl fullWidth>
         <InputLabel>Rank list by:</InputLabel>
-        <Select
-          value={sortType}
-          label="Rank list by:"
-          onChange={handleChange}
-        >
-
+        <Select value={sortType} label="Rank list by:" onChange={handleChange}>
           <MenuItem value={"Game"}>Game</MenuItem>
           <MenuItem value={"Fantasy Points"}>Fantasy Points</MenuItem>
           <MenuItem value={"Points"}>Points</MenuItem>
           <MenuItem value={"Blocks"}>Blocks</MenuItem>
           <MenuItem value={"Steals"}>Steals</MenuItem>
-
         </Select>
       </FormControl>
-      <List>
-        {arrayListItem}
-      </List>
+      <List>{arrayListItem}</List>
       <Button
         onClick={() => {
           onClick("SpecificTeamOverview");
@@ -215,7 +214,8 @@ export default function StartingLineups(props) {
   );
 }
 
-StartingLineups.propTypes = { // prop-types ensure that props are as component expected
+StartingLineups.propTypes = {
+  // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired,
   selectedTeam: PropTypes.number.isRequired,
 };
