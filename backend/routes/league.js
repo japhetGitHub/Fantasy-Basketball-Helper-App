@@ -67,7 +67,7 @@ league.get('/allPlayer', authenticateJWT, function(req, res) {
 
 league.get('/news/:playerId', function(req, res) {
   
-  return axios.get(`https://api.sportsdata.io/v3/nba/scores/json/NewsByPlayerID/${req.params.playerId}`, {headers: {"Ocp-Apim-Subscription-Key":"ce0935001bf94813a935f4593acd1514"}})
+  return axios.get(`https://api.sportsdata.io/v3/nba/scores/json/NewsByPlayerID/${req.params.playerId}`, {headers: {"Ocp-Apim-Subscription-Key":"a670e2e31fbf47369d09c70d535d8fb8"}})
   .then(response => res.json(response.data));
 
 });
