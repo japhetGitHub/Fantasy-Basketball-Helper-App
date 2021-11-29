@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axiosInterceptor from './custom.axios-interceptor';
 
 const API_URL = 'http://localhost:3001/api/team';
@@ -20,9 +21,9 @@ const getPlayersToManage = (teamId) => {
 
       response.data.players.forEach((playerInfo) => {
         managePlayers.push({
-          playerName: playerInfo.playerFirstName + " " + playerInfo.playerLastName,
+          player_name: playerInfo.playerFirstName + " " + playerInfo.playerLastName,
           position: playerInfo.position,
-          playerId: playerInfo.playerId
+          player_id: playerInfo.playerId
         });
       });
 
@@ -59,7 +60,7 @@ const getStartingLineups = (teamId) => {
 
 const putUserTeam = (teamId, teamArray) => {
   const playerIdArray = [];
-  teamArray.forEach((player) => playerIdArray.push(player.playerId));
+  teamArray.forEach((player) => playerIdArray.push(player.player_id));
   return axiosInterceptor.put(API_URL + `/update/${teamId}`, { playerIdArray });
 };
 
