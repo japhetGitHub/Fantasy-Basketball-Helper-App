@@ -20,7 +20,8 @@
     "knex": "^0.95.14",
     "morgan": "~1.9.1",
     "pg": "^8.7.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "twit": "^2.2.11"
   },
   "devDependencies": {
     "dotenv": "^10.0.0",
