@@ -15,7 +15,9 @@ export default function Login(props) {
   // states for controlled components
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const { onClick } = props;
+
   const handleLogin = function(event) {
     event.preventDefault();
     AuthService.login(email, password).then(() => { // sends credentials to backend and expects to receieve access token & refresh token

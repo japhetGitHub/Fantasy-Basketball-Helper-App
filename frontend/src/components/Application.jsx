@@ -18,7 +18,6 @@ export default function App() {
   const [view, setView] = useState("HomePage");
   const [selectedTeam, setSelectedTeam] = useState(null);
 
-
   return (
     <StyledApplication>
       <Header onClick={setView} />

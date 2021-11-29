@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import AuthService from "../services/auth.service";
 import companyLogo from '../image/logo_transparent.png';
 import scoreService from '../services/livegame.service.js';
+import Login from "./Login";
 
 import {
   StyledLiveGames,
@@ -26,11 +27,6 @@ export default function Header(props) {
     scoreService.getLiveScore()
       .then((response) => setLiveGames(response));
   }, []);
-  
-  if (liveGames) {
-    console.log(liveGames);
-    console.log(liveGames[0]);
-  }
 
   const logoutHandler = () => {
     AuthService.logout();
@@ -48,14 +44,12 @@ export default function Header(props) {
           weight="180em"
         />
       </p>
-     
       <Button
         variant="outlined"
         onClick={logoutHandler}
       >
         Logout
       </Button>
-      
       {liveGames &&
         <StyledLiveGames className="liveGamePlayers">
           {liveGames[0]} VS. {liveGames[1]}
