@@ -23,6 +23,7 @@ export default function Header(props) {
   
   const logoutHandler = () => {
     AuthService.logout();
+    props.setLogin(false);
     onClick("HomePage");
   };
 
@@ -37,14 +38,14 @@ export default function Header(props) {
           weight="180em"
         />
       </p>
-     
-      <Button
-        variant="outlined"
-        onClick={logoutHandler}
-      >
-        Logout
-      </Button>
-      
+      { props.login &&
+        <Button
+          variant="outlined"
+          onClick={logoutHandler}
+        >
+          Logout
+        </Button>
+      }
       {live &&
         <StyledLiveGames className="liveGameBanner">
           <img
@@ -61,5 +62,7 @@ export default function Header(props) {
 
 Header.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired,
-  live: PropTypes.bool.isRequired
+  live: PropTypes.bool.isRequired,
+  setLogin: PropTypes.func.isRequired,
+  login: PropTypes.bool.isRequired
 };

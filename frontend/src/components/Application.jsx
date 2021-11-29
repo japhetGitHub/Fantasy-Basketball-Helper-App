@@ -18,13 +18,14 @@ export default function App() {
   const [view, setView] = useState("HomePage");
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [showLiveGame, setShowLiveGame] = useState(true);
+  const [login, setLogin] = useState(false);
 
   return (
     <StyledApplication>
-      <Header live={showLiveGame} onClick={setView} />
+      <Header live={showLiveGame} onClick={setView} setLogin={setLogin} login={login} />
       {view === "HomePage" && <HomePage onClick={setView} />}
       {view === "Register" && <Register onClick={setView} />}
-      {view === "Login" && <Login onClick={setView} />}
+      {view === "Login" && <Login onClick={setView} setLogin={setLogin}/>}
       {view === "HomeLog" && <HomeLog onClick={setView} onSelectedTeam={setSelectedTeam} />}
       {view === "CreateNewTeam" && <CreateNewTeam onClick={setView} />}
       {view === "SpecificTeamOverview" && <SpecificTeamOverview onClick={setView}  selectedTeam={selectedTeam} onSelectedTeam={setSelectedTeam} />}
