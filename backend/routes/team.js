@@ -230,7 +230,7 @@ team.get('/overview/:teamId', function(req, res) {
         }
 
         // results['teamName'] = player.team_name;
-        console.log(data);
+        // console.log(data);
         console.log("Player Season Data Sent Successfully!"); 
         res.json(data);
       })

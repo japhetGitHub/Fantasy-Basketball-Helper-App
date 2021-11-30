@@ -79,7 +79,7 @@ export default function SpecificTeamOverview(props) {
       
       <Carousel slides={carouselArray} />
 
-      <TwitterZone playerId={rankedPlayer[0] && rankedPlayer[0].playerId} />
+      {/* <TwitterZone playerId={rankedPlayer[0] && rankedPlayer[0].playerId} /> */}
 
       <div className={"bottom-button"}>
         <div className={"bottom-left-button"}>

@@ -11,7 +11,7 @@ export default function LatestGame(props) {
     <StyledLatestGame>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <h3>Latest - {data.fantasypointsyahoo} fan points - {Math.floor((Date.now() - Date.parse(data.day)) / (1000 * 60 * 60 * 24))} days ago</h3>
+          <h3>Latest - {data.fantasypointsyahoo} fan points - {Math.floor((Date.now() - Date.parse(data.datetime)) / (1000 * 60 * 60 * 24)) + 1} days ago</h3>
         </Grid>
         
         <Grid item xs={4}>

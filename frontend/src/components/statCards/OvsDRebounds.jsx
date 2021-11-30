@@ -18,7 +18,7 @@ export default function OvsDRebounds(props) {
         width={300} height={300}
         innerRadius={60}
         labelRadius={72}
-        labels={['offensive', 'defensive']}
+        labels={[`offensive ${data.offensiverebounds}`, `defensive ${data.defensiverebounds}`]}
         data={pieHalves}
         style={{ labels: { fontSize: 15, fill: "white" } }}
         colorScale={"qualitative"}

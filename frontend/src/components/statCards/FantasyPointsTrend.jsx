@@ -25,7 +25,7 @@ export default function FantasyPointsTrend(props) {
     <VictoryChart height={390}>
       <VictoryLabel x={100} y={25} text={"Fantasy Points (Season)"} style={{ fontSize: 30 }}/>
       <VictoryLine
-        interpolation={"cardinal"} data={data}
+        interpolation={"linear"} data={data}
         style={{ data: { stroke: "#c43a31" } }}
       />
       <VictoryScatter data={data}

@@ -20,9 +20,11 @@ import playerStats from './PlayerStats.jsx';
 
 export default function StartingLineups(props) {
   const { onClick, selectedTeam } = props;
-  const [data, setData] = useState(null);
-  const [sortType, setSortType] = React.useState('Game');
+  const [lastWeekData, setLastWeekData] = useState(null);
+  const [sortType, setSortType] = React.useState('lastWeekPoints');
   const [seasonData, setSeasonData] = useState();
+  const [latestGameData, setLatestGameData] = useState();
+  const [seasonFanPoints, setSeasonFanPoints] = useState();
 
   const handleChange = (event) => {
     setSortType(event.target.value);
@@ -150,14 +152,23 @@ export default function StartingLineups(props) {
     { x: 16, y: 16.5 },
     { x: 17, y: 25.8 }
   ];
+  // useEffect(() => {
+  // }, []);
+  
   useEffect(() => {
     teamService.getStartingLineups(selectedTeam)
-      .then((response) => setData(response));
-  }, []);
+      .then((response) => setLastWeekData(response));
 
-  useEffect(() => {
     teamService.getSpecificTeamSeasonData(selectedTeam)
       .then((response) => setSeasonData(response));
+
+    teamService.getSpecificTeamLatestGameData(selectedTeam)
+      .then((response) => setLatestGameData(response));
+
+    teamService.getPlayerFantasyPointsHistory(selectedTeam)
+      .then((response) => setSeasonFanPoints(response));
+
+
   }, []);
   
   /*
@@ -177,14 +188,28 @@ export default function StartingLineups(props) {
   
   
   const arrayListItem = [];
-  if (data) {
-    // const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
-
-    data.players.map((singlePlayer) => {
+  if (lastWeekData && latestGameData && seasonData && seasonFanPoints) {
+    const rankedPlayers = lastWeekData.players.sort((a, b) => b[`${sortType}`] - a[`${sortType}`]);
+    console.log(rankedPlayers);
+    // console.log("LAST WEEK'S DATA", lastWeekData);
+    // console.log("SEASON DATA", seasonData);
+    // console.log("LATEST GAME DATA", latestGameData);
+    rankedPlayers.map((singlePlayer) => {
+    //   // singlePlayer.playerName // = "Bradley Beal"
+    //   // console.log(`SINGLE PLAYER: ${singlePlayer.playerName} :: `, latestGameData.data.find(({ playername }) => playername === singlePlayer.playerName));
+      // console.log(seasonFanPoints.find(({ playerName }) => playerName === singlePlayer.playerName).games);
+      // seasonData.data.find(({ playername }) => playername === singlePlayer.playerName)
+      // latestGameData.data.find(({ playername }) => playername === singlePlayer.playerName)
       arrayListItem.push(<ListItem key={singlePlayer.playerId}
-        useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
+        useThat={ playerStats(
+          latestGameData.data.find(({ playername }) => playername === singlePlayer.playerName),
+          seasonData.data.find(({ playername }) => playername === singlePlayer.playerName),
+          seasonFanPoints.find(({ playerName }) => playerName === singlePlayer.playerName).games,
+        ) }
         playerName={singlePlayer.playerName}
         position={singlePlayer.position}
+        sortType={sortType}
+        stat={singlePlayer[`${sortType}`]}
       />);
     });
   }
@@ -202,7 +227,7 @@ export default function StartingLineups(props) {
           {/* <MenuItem value={"Game"}>Game</MenuItem> */}
           <MenuItem value={"lastWeekFantasyPointsYahoo"}>Fantasy Points</MenuItem>
           <MenuItem value={"lastWeekPoints"}>Points</MenuItem>
-          <MenuItem value={"lastWeekBlocks"}>Blocks</MenuItem>
+          <MenuItem value={"lastWeekBlockedShots"}>Blocks</MenuItem>
           <MenuItem value={"lastWeekSteals"}>Steals</MenuItem>
 
         </Select>
