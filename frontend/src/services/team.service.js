@@ -55,7 +55,7 @@ const getStartingLineups = (teamId) => {
       // });
 
       return response.data;
-    });
+    }).catch((err) => console.log(err));
 };
 
 const putUserTeam = (teamId, teamArray) => {
@@ -73,7 +73,30 @@ const createTeam = (name, plateform) => {
 };
 
 const getSpecificTeamSeasonData = (teamId) => {
-  return axiosInterceptor.get(API_URL + `/api/myteam/season/${teamId}`);
+  return axiosInterceptor.get(`http://localhost:3001/api/myteam/season/${teamId}`);
+};
+const getSpecificTeamLatestGameData = (teamId) => {
+  return axiosInterceptor.get(`http://localhost:3001/api/myteam/latest/${teamId}`);
+};
+const getPlayerFantasyPointsHistory = (teamId) => {
+  return axiosInterceptor.get(`http://localhost:3001/api/myteam/${teamId}/fanpoints/all`)
+    .then((results) => {
+      console.log(results);
+      results = results.data.map((player) => {
+        const data = {
+          games: [],
+          playerName: player[0].playername
+        };
+        player.forEach((game, index) => {
+          data.games.push({
+            x: index,
+            y: game.fantasypointsyahoo
+          });
+        });
+        return data;
+      });
+      return results;
+    });
 };
 
 const teamService = {
@@ -84,7 +107,9 @@ const teamService = {
   putUserTeam,
   deleteTeam,
   createTeam,
-  getSpecificTeamSeasonData
+  getSpecificTeamSeasonData,
+  getSpecificTeamLatestGameData,
+  getPlayerFantasyPointsHistory
 };
 
 export default teamService;
