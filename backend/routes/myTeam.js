@@ -14,40 +14,83 @@ const options = {
 }
 const knex = require('knex')(options);
 
-router.get('/season/:teamID', authenticateJWT, (req, res) => {
-
-  knex('users')
-    .where({ email: username })
-    .select('id')
-    .then((user) => knex('teams').where({ user_id: user[0].id }).select())
-    .then((teams) => {
-      // do some code here to determine the best and worst performer for each team in teams[] then add that data to teamData
-      // -> do a lookup in players_in_team for all relevant player_id's 
-      // -> then do a lookup (1 user team at a time) in players_season_stats retrieving the fantasy_points_(blank) for the correct platform
-      // -> then sort the resulting array of fantasy points and single out the highest and lowest for best and worst player respectively. also summ all the fantasy points for totalFanPoints property
-      // -> then do a last lookup in player table by the player_id of the best and worst players to retrieve their name and image link
-      
-      const teamData = teams.map((team) => ({ 
-        id: team.id, 
-        team_name: team.team_name, 
-        platform: team.platform 
-      }));
-      console.log("teamData:", teamData);
-      res.sendStatus(200);
-    })
-    .catch((err) => console.log(err));
-
-  knex.select().from('players_season_stats').where({name: 'Stephen Curry'})
-    .then((rows) => {
-      for (row of rows) {
-        console.log(row);
-      }
-    }).catch((err) => console.log(err))
-    .finally(() => {
-        knex.destroy();
+router.get('/season/:teamId', authenticateJWT, (req, res) => {
+  knex('players_in_team')
+    .where({ team_id: req.params.teamId })
+    .select('player_id')
+    .then((players) => {
+      Promise.all(players.map(player => (
+        //look up player season stats for each playerId
+        knex('players_season_stats')
+          .join('player', {'players_season_stats.player_id': 'player.player_id'})
+          .where({ 'player.player_id': player.player_id })
+          .select()
+          .then((playerSeasonData) => {
+            const {
+              id,
+              position_category,
+              photo_url,
+              team_id,
+              ...finalPlayerSeasonData
+            } = playerSeasonData[0];
+            const entries = [];
+            for (const [key, value] of Object.entries(finalPlayerSeasonData)) {
+              entries.push([key.replace(/_/g, '').toLowerCase(), value]);
+            }
+            const cleanedPlayerSeasonData = Object.fromEntries(entries);
+            return cleanedPlayerSeasonData;
+          })
+      ))).then((results) =>{ 
+        console.log("Player Season Data Sent Successfully!"); 
+        res.json(results);
+      })
+    }).catch(err => { 
+      console.log(err); 
+      res.sendStatus(500)
     });
-  // console.log(req.user)
-  res.sendStatus(200);
+});
+
+router.get('/latest/:teamId', authenticateJWT, (req, res) => {
+  knex('players_in_team')
+    .where({ team_id: req.params.teamId })
+    .select('player_id')
+    .then((players) => {
+      Promise.all(players.map(player => (
+        //look up player season stats for each playerId
+        knex('players_game_stats')
+          .join('player', {'players_game_stats.player_id': 'player.player_id'})
+          .where({ 'player.player_id': player.player_id })
+          .select()
+          .limit(1)
+          .then((playerGameData) => {
+            const {
+              opponent_rank,
+              opponent_position_rank,
+              global_team_id,
+              game_id,
+              opponent_id,
+              home_or_away,
+              position_category,
+              photo_url,
+              team_id,
+              ...finalPlayerGameData
+            } = playerGameData[0];
+            const entries = [];
+            for (const [key, value] of Object.entries(finalPlayerGameData)) {
+              entries.push([key.replace(/_/g, '').toLowerCase(), value]);
+            }
+            const cleanedPlayerGameData = Object.fromEntries(entries);
+            console.log(cleanedPlayerGameData);
+            return cleanedPlayerGameData;
+          })
+      ))).then((results) =>{ 
+        console.log("Latest Player Game Data Sent Successfully!"); 
+        res.sendStatus(200);
+      })
+    }).catch(err => { 
+      console.log(err); 
+      res.sendStatus(500);
+    })
 });
 
 router.post('/books', authenticateJWT, (req, res) => {
