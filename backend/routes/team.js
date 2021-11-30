@@ -1,6 +1,8 @@
 const express = require('express');
 const team = express.Router();
 const db = require('../db');
+const chalk = require('chalk');
+
 const options = {
   client: 'pg',
   connection: {
@@ -16,134 +18,225 @@ const authenticateJWT = require('../middleware/authenticateJWT');
 
 // "http://localhost:3001/api/team"
 
-team.get('/all', function(req, res) {
+const lookupPlayersInTeam = (teamId) => {
+  return knex('players_in_team')
+    .where({ team_id: teamId })
+    .select('player_id')
+    .then((playerIds) => playerIds)
+};
+
+team.get('/all', authenticateJWT, function(req, res) {
   // gives back every team this user is having
-  const data = [
-    {
-      teamId: 1,
-      teamName: "team1",
-      topPerformer: {
-        name: "steph",
-        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
-      },
-      worstPerformer: {
-        name: "zion",
-        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
-      },
-      totalFanPoints: 871
-    },
-    {
-      teamId: 2,
-      teamName: "team2",
-      topPerformer: {
-        name: "stephen",
-        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
-      },
-      worstPerformer: {
-        name: "zion willi",
-        image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
-      },
-      totalFanPoints: 934
-    }
-  ];
-  // knex('users')
-  //   .join('teams', 'users.id', 'teams.user_id')
-  //   .join('players_in_team', 'players_in_team.team_id', 'teams.id')
-  //   .join('players_season_stats', 'players_season_stats.player_id', 'players_in_team.player_id')
-  //   .join('player', 'players_season_stats.player_id', 'player.player_id')
-  //   .select()
-    
-    
-    
-    
-  //   .then((playersData) => {
-  //     const platformName = (platform) => {
-  //       switch(platform) {
-  //         case "Yahoo":
-  //           return "fantasy_points_yahoo";
+  // const data = [
+  //   {
+  //     teamId: 1,
+  //     teamName: "team1",
+  //     topPerformer: {
+  //       name: "steph",
+  //       image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+  //     },
+  //     worstPerformer: {
+  //       name: "zion",
+  //       image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
+  //     },
+  //     totalFanPoints: 871
+  //   },
+  //   {
+  //     teamId: 2,
+  //     teamName: "team2",
+  //     topPerformer: {
+  //       name: "stephen",
+  //       image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+  //     },
+  //     worstPerformer: {
+  //       name: "zion willi",
+  //       image: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png"
+  //     },
+  //     totalFanPoints: 934
+  //   }
+  // ];
 
-  //         case "Fan Duel":
-  //           return "fantasy_points_fan_duel";
+  // get this user from users table
+  const { username } = req.user;
 
-  //         case "Fantasy Draft":
-  //           return "fantasy_points_fantasy_draft";
+  knex('users')
+    .where({ email: username })
+    .select('id')
+    .then((user) => knex('teams').where({ user_id: user[0].id }).select())
+    .then((teams) => {
+      // do some code here to determine the best and worst performer for each team in teams[] then add that data to teamData
+      // -> do a lookup in players_in_team for all relevant player_id's 
+      Promise.all(teams.map((team) => lookupPlayersInTeam(team.id)))
+        .then((allTeamsPlayers) => {
+          // -> then do a lookup (1 user team at a time) in players_season_stats retrieving the fantasy_points_(blank) for the correct platform
+          Promise.all(allTeamsPlayers.map((teamsPlayers, index) =>
+            Promise.all(teamsPlayers.map((player) => (
+              knex('players_season_stats')
+                .where({ player_id: player.player_id })
+                .select(`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`, 'player_id')
+                .then((final) => final[0])
+                .catch((err) => console.log(err))
+            )))
+          )).then(allTeamsFantasyPoints => {
+            // -> then sort the resulting array of fantasy points and single out the highest and lowest for best and worst player respectively. also summ all the fantasy points for totalFanPoints property
+            allTeamsFantasyPoints = allTeamsFantasyPoints.map((teamFantasyPoints, index) => teamFantasyPoints.sort((firstEl, secondEl) => 
+              firstEl[`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`] - secondEl[`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`]
+            ))
+            const bestWorstTeamsPlayers = allTeamsFantasyPoints.map((teamFantasyPoints) => ({ topPerformer: teamFantasyPoints[teamFantasyPoints.length - 1], worstPerformer: teamFantasyPoints[0] }));
 
-  //         case "Draft King":
-  //           return "fantasy_points_draft_kings";
-  //       }
-  //     }
-  //     const data = [];
+            const teamsTotalFantasyPoints = allTeamsFantasyPoints.map((sortedTeamFantasyPoints, index) => {
+              let accumulator = 0;
+              for (const playerFantasyPoints of sortedTeamFantasyPoints) {
+                accumulator += playerFantasyPoints[`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`];
+              }
+              return accumulator;
+            });
 
-  //     console.log(playersData)
-  //     for (let i = 0; i < playersData.length - 1; i++) {
-  //     }
+            // -> then do a last lookup in player table by the player_id of the topPerformer and worstPerformer players to retrieve their name and image link
+            Promise.all(bestWorstTeamsPlayers.map((bestWorst, index) => (
+              knex('player')
+                .where({ player_id: bestWorst['topPerformer'].player_id })
+                .select('player_name', 'photo_url')
+                .then((result) => { 
+                  const playerDetails = { 
+                    'player_name': result[0].player_name, 
+                    'photo_url': result[0].photo_url 
+                  };
+                  bestWorst['topPerformer'] = { ...playerDetails }
+                  return knex('player')
+                    .where({ player_id: bestWorst['worstPerformer'].player_id })
+                    .select('player_name', 'photo_url')
+                    .then((result) => { 
+                      const playerDetails = { 
+                        'player_name': result[0].player_name, 
+                        'photo_url': result[0].photo_url 
+                      };
+                      bestWorst['worstPerformer'] = { ...playerDetails }
+                      bestWorst['totalFanPoints'] = teamsTotalFantasyPoints[index];
+                      bestWorst['teamName'] = teams[index].team_name;
+                      bestWorst['teamId'] = teams[index].id;
+                      return bestWorst;
+                    })
+                })
+            ))).then((finalData) => { 
+              console.log("final data:", finalData);
+              res.json(finalData);
 
-  //   })
-    
-   return res.json(data);
-
+            })
+          });
+          
+        })
+    })
+    .catch((err) => {console.log(err); res.sendStatus(500)});
 });
 
 
 team.get('/overview/:teamId', function(req, res) {
   // gives back every player this team is having, used in the manage player too
-  const data = {
-    teamName: "teamNameHere",
-    players: [
-      {
-        playerId: 20000441,
-        playerFirstName: "Steph",
-        playerLastName: "Curry",
-        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
-        position: "PG",
-        lastWeekPoints: 200,
-        lastWeekFan: 50,
-        lastWeekBlocks: 30,
-        lastWeekSteals: 10,
-        lastWeekGame:10
-      },
-      {
-        playerId: 20000442,
-        playerFirstName: "Zion",
-        playerLastName: "Williamson",
-        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png",
-        position: "PF",
-        lastWeekPoints: 100,
-        lastWeekFan: 10,
-        lastWeekBlocks: 10,
-        lastWeekSteals: 10,
-        lastWeekGame:9
-      },
-      {
-        playerId: 20000443,
-        playerFirstName: "Another",
-        playerLastName: "Point guard",
-        playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
-        position: "PG",
-        lastWeekPoints: 150,
-        lastWeekFan: 30,
-        lastWeekBlocks: 20,
-        lastWeekSteals: 10,
-        lastWeekGame:14
-      },
-    ]
-  };
-  return res.json(data)
+  console.log("gets the team")
+  // const data = {
+  //   teamName: "teamNameHere",
+  //   players: [
+  //     {
+  //       playerId: 20000,
+  //       playerFirstName: "Steph",
+  //       playerLastName: "Curry",
+  //       playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+  //       position: "PG",
+  //       lastWeekPoints: 200,
+  //       lastWeekFan: 50,
+  //       lastWeekBlocks: 30,
+  //       lastWeekSteals: 10,
+  //       lastWeekGame:10
+  //     },
+  //     {
+  //       playerId: 20001,
+  //       playerFirstName: "Zion",
+  //       playerLastName: "Williamson",
+  //       playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20002271.png",
+  //       position: "PF",
+  //       lastWeekPoints: 100,
+  //       lastWeekFan: 10,
+  //       lastWeekBlocks: 10,
+  //       lastWeekSteals: 10,
+  //       lastWeekGame:9
+  //     },
+  //     {
+  //       playerId: 20002,
+  //       playerFirstName: "Another",
+  //       playerLastName: "Point guard",
+  //       playerImage: "https://s3-us-west-2.amazonaws.com/static.fantasydata.com/headshots/nba/low-res/20000485.png",
+  //       position: "PG",
+  //       lastWeekPoints: 150,
+  //       lastWeekFan: 30,
+  //       lastWeekBlocks: 20,
+  //       lastWeekSteals: 10,
+  //       lastWeekGame:14
+  //     },
+  //   ]
+  // };
 
-  // return knex('teams')
-  // .join('players_in_team', 'players_in_team.team_id', 'teams.id')
-  // .where('teams.id', req.params.teamId)
-  // .join('player', 'players_in_team.player_id', 'player.player_id')
-  // .join('players_game_stats', 'players_game_stats.player_id', 'player.player_id')
-  // .select('team_name', 'player_name', 'photo_url', 'position', 'player_id')
-  // .sum('points')
-  // .groupBy('players_game_stats.player_id')
-  // .then((info) => {
-    
-  //   return res.json(info);
-  // })
+  knex('players_in_team')
+    .join('teams', {'players_in_team.team_id': 'teams.id'})
+    .where({ team_id: req.params.teamId })
+    .select('player_id', 'team_name')
+    .then((players) => {
+      Promise.all(players.map(player => (
+        lastWeekPlayerStats(player.player_id)
+          .then((playerGameData) => {
+            const filteredData = playerGameData.map(game => {
+              // const {
+              //   opponent_rank,
+              //   opponent_position_rank,
+              //   global_team_id,
+              //   game_id,
+              //   opponent_id,
+              //   home_or_away,
+              //   position_category,
+              //   team_id,
+              //   ...finalPlayerGameData
+              // } = game;
+              // console.log(finalPlayerGameData);
+              const entries = [];
+              for (const [key, value] of Object.entries(game)) {
+                entries.push([key.toLowerCase().replace(/([-_]\w)/g, g => g[1].toUpperCase()), value]);
+              }
+              const cleanedPlayerData = Object.fromEntries(entries);
+              return cleanedPlayerData;
+            })
 
+            return filteredData[0];
+          })
+      ))).then((results) =>{ 
+        const data = {
+          teamName: players[0].team_name,
+          players: results
+        }
+
+        // results['teamName'] = player.team_name;
+        console.log(data);
+        console.log("Player Season Data Sent Successfully!"); 
+        res.json(data);
+      })
+    }).catch(err => { 
+      console.log(err); 
+      res.sendStatus(500)
+    });
 });
+
+const lastWeekPlayerStats = (playerId) => {
+  const currentDate = new Date();
+  const pastDate = new Date(currentDate);
+  const daysAgo = 10;
+  pastDate.setDate(pastDate.getDate() - daysAgo);
+  const dateStr = `${pastDate.getFullYear()}-${pastDate.getMonth()}-${pastDate.toLocaleString('default', { day: '2-digit' })}`;
+  console.log(chalk.red(dateStr));
+  // console.log(lastWeekStats[0].player_name + '...' + chalk.underline(lastWeekStats[0].date_time))
+  return knex.select(knex.raw(` ROUND(AVG(field_goals_made)::numeric, 2) as last_week_field_goals_made, ROUND(AVG(field_goals_attempted)::numeric, 2) as last_week_field_goals_attempted, ROUND(AVG(field_goals_percentage)::numeric, 2) as last_week_field_goals_percentage, ROUND(AVG(effective_field_goals_percentage)::numeric, 2) as last_week_effective_field_goals_percentage, ROUND(AVG(two_pointers_made)::numeric, 2) as last_week_two_pointers_made, ROUND(AVG(two_pointers_attempted)::numeric, 2) as last_week_two_pointers_attempted, ROUND(AVG(two_pointers_percentage)::numeric, 2) as last_week_two_pointers_percentage, ROUND(AVG(three_pointers_made)::numeric, 2) as last_week_three_pointers_made, ROUND(AVG(three_pointers_attempted)::numeric, 2) as last_week_three_pointers_attempted, ROUND(AVG(three_pointers_percentage)::numeric, 2) as last_week_three_pointers_percentage, ROUND(AVG(free_throws_made)::numeric, 2) as last_week_free_throws_made, ROUND(AVG(free_throws_attempted)::numeric, 2) as last_week_free_throws_attempted, ROUND(AVG(free_throws_percentage)::numeric, 2) as last_week_free_throws_percentage, ROUND(AVG(offensive_rebounds)::numeric, 2) as last_week_offensive_rebounds, ROUND(AVG(defensive_rebounds)::numeric, 2) as last_week_defensive_rebounds, ROUND(AVG(rebounds)::numeric, 2) as last_weekrebounds, ROUND(AVG(offensive_rebounds_percentage)::numeric, 2) as last_week_offensive_rebounds_percentage, ROUND(AVG(defensive_rebounds_percentage)::numeric, 2) as last_week_defensive_rebounds_percentage, ROUND(AVG(total_rebounds_percentage)::numeric, 2) as last_week_total_rebounds_percentage, ROUND(AVG(assists)::numeric, 2) as last_week_assists, ROUND(AVG(steals)::numeric, 2) as last_week_steals, ROUND(AVG(blocked_shots)::numeric, 2) as last_week_blocked_shots, ROUND(AVG(turnovers)::numeric, 2) as last_week_turnovers, ROUND(AVG(personal_fouls)::numeric, 2) as last_week_personal_fouls, ROUND(AVG(points)::numeric, 2) as last_week_points, ROUND(AVG(true_shooting_attempts)::numeric, 2) as last_week_true_shooting_attempts, ROUND(AVG(true_shooting_percentage)::numeric, 2) as last_week_true_shooting_percentage, ROUND(AVG(player_efficiency_rating)::numeric, 2) as last_week_player_efficiency_rating, ROUND(AVG(assists_percentage)::numeric, 2) as last_week_assists_percentage, ROUND(AVG(steals_percentage)::numeric, 2) as last_week_steals_percentage, ROUND(AVG(blocks_percentage)::numeric, 2) as last_week_blocks_percentage, ROUND(AVG(turn_overs_percentage)::numeric, 2) as last_week_turn_overs_percentage, ROUND(AVG(usage_rate_percentage)::numeric, 2) as last_week_usage_rate_percentage, ROUND(AVG(fantasy_points_fan_duel)::numeric, 2) as last_week_fantasy_points_fan_duel, ROUND(AVG(fantasy_points_draft_kings)::numeric, 2) as last_week_fantasy_points_draft_kings, ROUND(AVG(fantasy_points_yahoo)::numeric, 2) as last_week_fantasy_points_yahoo, ROUND(AVG(plus_minus)::numeric, 2) as last_week_plus_minus, ROUND(AVG(double_doubles)::numeric, 2) as last_week_double_doubles, ROUND(AVG(triple_doubles)::numeric, 2) as last_week_triple_doubles, ROUND(AVG(fantasy_points_fantasy_draft)::numeric, 2) as last_week_fantasy_points_fantasy_draft, player.player_id as player_id, player.player_name as player_name, player.photo_url as player_image, player.position as position from players_game_stats join player on players_game_stats.player_id = player.player_id where date_time > '${dateStr}' and player.player_id=${playerId} group by player.id`)).then(lastWeekStats => {
+    
+    return lastWeekStats
+  })
+};
 
 team.put('/update/:teamId', authenticateJWT, function(req, res) {
   // update the team array
