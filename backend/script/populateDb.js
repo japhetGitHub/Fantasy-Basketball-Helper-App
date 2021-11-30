@@ -52,7 +52,7 @@ const fillPlayersTable = () => {
           team: player.Team,
           position_category: player.PositionCategory,
           position: player.Position,
-          player_name: player.YahooName,
+          player_name: `${player.FirstName} ${player.LastName}`,
           photo_url: player.PhotoUrl
         };
       });
