@@ -8,15 +8,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import PropTypes from 'prop-types';
 import teamService from '../services/team.service.js';
-
-// take these off once connected to DB
-import zionImage from './../image/zion.png';
-import stephImage from './../image/steph.png';
-// import PlayerCards from './PlayerCards.jsx';
-
+import playerStats from './PlayerStats.jsx';
 
 import { StyledStartingLineups } from '../style/StartingLineups.styles.jsx';
-import playerStats from './PlayerStats.jsx';
 
 export default function StartingLineups(props) {
   const { onClick, selectedTeam } = props;

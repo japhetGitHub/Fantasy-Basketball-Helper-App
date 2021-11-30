@@ -21,7 +21,7 @@ export default function Login(props) {
     AuthService.login(email, password).then(() => { // sends credentials to backend and expects to receieve access token & refresh token
       console.log("Logged in!");
       setLogin(true);
-      onClick("TestPage");
+      onClick("HomeLog");
     }).catch((err) => {
       // unsuccessful error passed here from api.js(interceptors.response)) -> auth.service(login.post) -> here
       console.log("data:", err.response.data);
