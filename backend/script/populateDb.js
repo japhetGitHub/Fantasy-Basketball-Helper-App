@@ -52,7 +52,7 @@ const fillPlayersTable = () => {
           team: player.Team,
           position_category: player.PositionCategory,
           position: player.Position,
-          player_name: player.YahooName,
+          player_name: `${player.FirstName} ${player.LastName}`,
           photo_url: player.PhotoUrl
         };
       });
@@ -136,64 +136,65 @@ const fillGameStatsTable = () => { // retreives game stats data for every game i
           players.forEach(player => {
             return axios.get(`https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsBySeason/2022/${player.player_id}/all`)
               .then(response => { 
-                const allRelevantPlayerGameData = response.data.map(playerGame => {
-                  return {
-                    player_id: playerGame.PlayerID,
-                    opponent_rank: playerGame.OpponentRank,
-                    opponent_position_rank: playerGame.OpponentPositionRank,
-                    global_team_id: playerGame.GlobalTeamID,
-                    game_id: playerGame.GameID,
-                    opponent_id: playerGame.OpponentID,
-                    date_time: playerGame.DateTime,
-                    home_or_away: playerGame.HomeOrAway,
-                    minutes: playerGame.Minutes,
-                    seconds: playerGame.Seconds,
-                    field_goals_made: playerGame.FieldGoalsMade,
-                    field_goals_attempted: playerGame.FieldGoalsAttempted,
-                    field_goals_percentage: playerGame.FieldGoalsPercentage,
-                    effective_field_goals_percentage: playerGame.EffectiveFieldGoalsPercentage,
-                    two_pointers_made: playerGame.TwoPointersMade,
-                    two_pointers_attempted: playerGame.TwoPointersAttempted,
-                    two_pointers_percentage: playerGame.TwoPointersPercentage,
-                    three_pointers_made: playerGame.ThreePointersMade,
-                    three_pointers_attempted: playerGame.ThreePointersAttempted,
-                    three_pointers_percentage: playerGame.ThreePointersPercentage,
-                    free_throws_made: playerGame.FreeThrowsMade,
-                    free_throws_attempted: playerGame.FreeThrowsAttempted,
-                    free_throws_percentage: playerGame.FreeThrowsPercentage,
-                    offensive_rebounds: playerGame.OffensiveRebounds,
-                    defensive_rebounds: playerGame.DefensiveRebounds,
-                    rebounds: playerGame.Rebounds,
-                    offensive_rebounds_percentage: playerGame.OffensiveReboundsPercentage,
-                    defensive_rebounds_percentage: playerGame.DefensiveReboundsPercentage,
-                    total_rebounds_percentage: playerGame.TotalReboundsPercentage,
-                    assists: playerGame.Assists,
-                    steals: playerGame.Steals,
-                    blocked_shots: playerGame.BlockedShots,
-                    turnovers: playerGame.Turnovers,
-                    personal_fouls: playerGame.PersonalFouls,
-                    points: playerGame.Points,
-                    true_shooting_attempts: playerGame.TrueShootingAttempts,
-                    true_shooting_percentage: playerGame.TrueShootingPercentage,
-                    player_efficiency_rating: playerGame.PlayerEfficiencyRating,
-                    assists_percentage: playerGame.AssistsPercentage,
-                    steals_percentage: playerGame.StealsPercentage,
-                    blocks_percentage: playerGame.BlocksPercentage,
-                    turn_overs_percentage: playerGame.TurnOversPercentage,
-                    usage_rate_percentage: playerGame.UsageRatePercentage,
-                    fantasy_points_fan_duel: playerGame.FantasyPointsFanDuel,
-                    fantasy_points_draft_kings: playerGame.FantasyPointsDraftKings,
-                    fantasy_points_yahoo: playerGame.FantasyPointsYahoo,
-                    plus_minus: playerGame.PlusMinus,
-                    double_doubles: playerGame.DoubleDoubles,
-                    triple_doubles: playerGame.TripleDoubles,
-                    fantasy_points_fantasy_draft: playerGame.FantasyPointsFantasyDraft
-                  };
-                });
+                console.log(response);
+                // const allRelevantPlayerGameData = response.data.map(playerGame => {
+                //   return {
+                //     player_id: playerGame.PlayerID,
+                //     opponent_rank: playerGame.OpponentRank,
+                //     opponent_position_rank: playerGame.OpponentPositionRank,
+                //     global_team_id: playerGame.GlobalTeamID,
+                //     game_id: playerGame.GameID,
+                //     opponent_id: playerGame.OpponentID,
+                //     date_time: playerGame.DateTime,
+                //     home_or_away: playerGame.HomeOrAway,
+                //     minutes: playerGame.Minutes,
+                //     seconds: playerGame.Seconds,
+                //     field_goals_made: playerGame.FieldGoalsMade,
+                //     field_goals_attempted: playerGame.FieldGoalsAttempted,
+                //     field_goals_percentage: playerGame.FieldGoalsPercentage,
+                //     effective_field_goals_percentage: playerGame.EffectiveFieldGoalsPercentage,
+                //     two_pointers_made: playerGame.TwoPointersMade,
+                //     two_pointers_attempted: playerGame.TwoPointersAttempted,
+                //     two_pointers_percentage: playerGame.TwoPointersPercentage,
+                //     three_pointers_made: playerGame.ThreePointersMade,
+                //     three_pointers_attempted: playerGame.ThreePointersAttempted,
+                //     three_pointers_percentage: playerGame.ThreePointersPercentage,
+                //     free_throws_made: playerGame.FreeThrowsMade,
+                //     free_throws_attempted: playerGame.FreeThrowsAttempted,
+                //     free_throws_percentage: playerGame.FreeThrowsPercentage,
+                //     offensive_rebounds: playerGame.OffensiveRebounds,
+                //     defensive_rebounds: playerGame.DefensiveRebounds,
+                //     rebounds: playerGame.Rebounds,
+                //     offensive_rebounds_percentage: playerGame.OffensiveReboundsPercentage,
+                //     defensive_rebounds_percentage: playerGame.DefensiveReboundsPercentage,
+                //     total_rebounds_percentage: playerGame.TotalReboundsPercentage,
+                //     assists: playerGame.Assists,
+                //     steals: playerGame.Steals,
+                //     blocked_shots: playerGame.BlockedShots,
+                //     turnovers: playerGame.Turnovers,
+                //     personal_fouls: playerGame.PersonalFouls,
+                //     points: playerGame.Points,
+                //     true_shooting_attempts: playerGame.TrueShootingAttempts,
+                //     true_shooting_percentage: playerGame.TrueShootingPercentage,
+                //     player_efficiency_rating: playerGame.PlayerEfficiencyRating,
+                //     assists_percentage: playerGame.AssistsPercentage,
+                //     steals_percentage: playerGame.StealsPercentage,
+                //     blocks_percentage: playerGame.BlocksPercentage,
+                //     turn_overs_percentage: playerGame.TurnOversPercentage,
+                //     usage_rate_percentage: playerGame.UsageRatePercentage,
+                //     fantasy_points_fan_duel: playerGame.FantasyPointsFanDuel,
+                //     fantasy_points_draft_kings: playerGame.FantasyPointsDraftKings,
+                //     fantasy_points_yahoo: playerGame.FantasyPointsYahoo,
+                //     plus_minus: playerGame.PlusMinus,
+                //     double_doubles: playerGame.DoubleDoubles,
+                //     triple_doubles: playerGame.TripleDoubles,
+                //     fantasy_points_fantasy_draft: playerGame.FantasyPointsFantasyDraft
+                //   };
+                // });
                 // first removes existing data in table (to avoid breaking Unique constraint beacause of duplicate data)
-                return knex('players_game_stats').insert(allRelevantPlayerGameData)
-                  .then(() => console.log(`${chalk.green("players_game_stats data inserted")}`))
-                  .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); throw err });
+                // return knex('players_game_stats').insert(allRelevantPlayerGameData)
+                //   .then(() => console.log(`${chalk.green("players_game_stats data inserted")}`))
+                //   .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); throw err });
               }).catch((err) => { console.log(`${chalk.red("Error retrieving players_game_stats data from sportsdata.io")}`); throw err });
           })
         ));
@@ -213,6 +214,8 @@ const altFillGameStatsTable = () => { // retreives last (14) days game stats dat
           const dateStr = `${pastDate.getFullYear()}-${pastDate.toLocaleString('default', { month: 'short' })}-${pastDate.toLocaleString('default', { day: '2-digit' })}`;
           return axios.get(`https://api.sportsdata.io/v3/nba/stats/json/PlayerGameStatsByDate/${dateStr}`)
             .then(response => { 
+              // console.log(response);
+
               const allRelevantPlayerGameData = response.data.map(playerGame => {
                 return {
                   player_id: playerGame.PlayerID,
@@ -270,7 +273,7 @@ const altFillGameStatsTable = () => { // retreives last (14) days game stats dat
               // first removes existing data in table (to avoid breaking Unique constraint beacause of duplicate data)
               return knex('players_game_stats').insert(allRelevantPlayerGameData)
                 .then(() => console.log(`${chalk.green("players_game_stats data inserted")}`))
-                .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); throw err });
+                .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); console.log(`${chalk.blue("skip this one")}`); });
             }).catch((err) => { console.log(`${chalk.red("Error retrieving players_game_stats data from sportsdata.io")}`); throw err });
         })
         .then(() => console.log(`Inserted game stats for ${daysAgo} day(s) ago`))
