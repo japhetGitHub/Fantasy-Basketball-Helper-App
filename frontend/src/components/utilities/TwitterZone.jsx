@@ -8,8 +8,9 @@ import { StyledTwitterZone } from './../../style/TwitterZone.styles.jsx';
 export default function TwitterZone(props) {
   const { playerId } = props;
   const [news, setNews] = useState(null);
+  
   useEffect(() => {
-    leagueService.getNewsForPlayer("20002284") // put playerId inside of it once the real data will be there
+    leagueService.getNewsForPlayer(playerId) // put playerId inside of it once the real data will be there
       .then((response) => setNews(response[0]));
   }, []);
 
@@ -21,7 +22,7 @@ export default function TwitterZone(props) {
         {news && news.Content}
       </span>
       <span>
-        source: {news && news.Url}
+        source: { news && <a id="newsSource" href={news.Url}>{news.Source}</a>}
       </span>
     </StyledTwitterZone>
   );

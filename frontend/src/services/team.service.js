@@ -21,7 +21,7 @@ const getPlayersToManage = (teamId) => {
 
       response.data.players.forEach((playerInfo) => {
         managePlayers.push({
-          player_name: playerInfo.playerFirstName + " " + playerInfo.playerLastName,
+          player_name: playerInfo.playerName,
           position: playerInfo.position,
           player_id: playerInfo.playerId
         });

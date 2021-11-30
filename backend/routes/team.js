@@ -68,16 +68,20 @@ team.get('/all', authenticateJWT, function(req, res) {
       // -> do a lookup in players_in_team for all relevant player_id's 
       Promise.all(teams.map((team) => lookupPlayersInTeam(team.id)))
         .then((allTeamsPlayers) => {
+
           // -> then do a lookup (1 user team at a time) in players_season_stats retrieving the fantasy_points_(blank) for the correct platform
-          Promise.all(allTeamsPlayers.map((teamsPlayers, index) =>
-            Promise.all(teamsPlayers.map((player) => (
-              knex('players_season_stats')
-                .where({ player_id: player.player_id })
-                .select(`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`, 'player_id')
-                .then((final) => final[0])
-                .catch((err) => console.log(err))
-            )))
-          )).then(allTeamsFantasyPoints => {
+          Promise.all(allTeamsPlayers.map((teamsPlayers, index) => {
+            // if (!teamsPlayers[0]) {
+            //   return {};
+            // }
+              return Promise.all(teamsPlayers.map((player) => (
+                knex('players_season_stats')
+                  .where({ player_id: player.player_id })
+                  .select(`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`, 'player_id')
+                  .then((final) => final[0])
+                  .catch((err) => console.log(err))
+              )))
+            })).then(allTeamsFantasyPoints => {
             // -> then sort the resulting array of fantasy points and single out the highest and lowest for best and worst player respectively. also summ all the fantasy points for totalFanPoints property
             allTeamsFantasyPoints = allTeamsFantasyPoints.map((teamFantasyPoints, index) => teamFantasyPoints.sort((firstEl, secondEl) => 
               firstEl[`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`] - secondEl[`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`]
@@ -93,36 +97,48 @@ team.get('/all', authenticateJWT, function(req, res) {
             });
 
             // -> then do a last lookup in player table by the player_id of the topPerformer and worstPerformer players to retrieve their name and image link
-            Promise.all(bestWorstTeamsPlayers.map((bestWorst, index) => (
-              knex('player')
-                .where({ player_id: bestWorst['topPerformer'].player_id })
-                .select('player_name', 'photo_url')
-                .then((result) => { 
-                  const playerDetails = { 
-                    'player_name': result[0].player_name, 
-                    'photo_url': result[0].photo_url 
-                  };
-                  bestWorst['topPerformer'] = { ...playerDetails }
-                  return knex('player')
-                    .where({ player_id: bestWorst['worstPerformer'].player_id })
-                    .select('player_name', 'photo_url')
-                    .then((result) => { 
-                      const playerDetails = { 
-                        'player_name': result[0].player_name, 
-                        'photo_url': result[0].photo_url 
-                      };
-                      bestWorst['worstPerformer'] = { ...playerDetails }
-                      bestWorst['totalFanPoints'] = teamsTotalFantasyPoints[index];
-                      bestWorst['teamName'] = teams[index].team_name;
-                      bestWorst['teamId'] = teams[index].id;
-                      return bestWorst;
-                    })
-                })
-            ))).then((finalData) => { 
+            Promise.all(bestWorstTeamsPlayers.map((bestWorst, index) => {
+              if(bestWorst.topPerformer) {
+                return knex('player')
+                  .where({ player_id: bestWorst['topPerformer'].player_id })
+                  .select('player_name', 'photo_url')
+                  .then((result) => { 
+                    const playerDetails = { 
+                      'player_name': result[0].player_name, 
+                      'photo_url': result[0].photo_url 
+                    };
+                    bestWorst['topPerformer'] = { ...playerDetails }
+                    return knex('player')
+                      .where({ player_id: bestWorst['worstPerformer'].player_id })
+                      .select('player_name', 'photo_url')
+                      .then((result) => { 
+                        const playerDetails = { 
+                          'player_name': result[0].player_name, 
+                          'photo_url': result[0].photo_url 
+                        };
+                        bestWorst['worstPerformer'] = { ...playerDetails }
+                        bestWorst['totalFanPoints'] = teamsTotalFantasyPoints[index];
+                        bestWorst['teamName'] = teams[index].team_name;
+                        bestWorst['teamId'] = teams[index].id;
+                        return bestWorst;
+                      })
+                  })
+              } else {
+                return {
+                  teamName: teams[index].team_name,
+                  teamId: teams[index].id,
+                  totalFanPoints: 0,
+                  topPerformer: { player_name: "Empty", photo_url: "https://e3educate.org/wp-content/uploads/2021/09/user.jpg" },
+                  worstPerformer: { player_name: "Empty", photo_url: "https://e3educate.org/wp-content/uploads/2021/09/user.jpg" }
+                }
+                
+              }
+              })).then((finalData) => { 
               console.log("final data:", finalData);
               res.json(finalData);
 
             })
+            
           });
           
         })
@@ -176,11 +192,25 @@ team.get('/overview/:teamId', function(req, res) {
   //   ]
   // };
 
+
   knex('players_in_team')
     .join('teams', {'players_in_team.team_id': 'teams.id'})
     .where({ team_id: req.params.teamId })
     .select('player_id', 'team_name')
     .then((players) => {
+      if (!players[0]) {
+        return knex('teams')
+          .where({ id: req.params.teamId })
+          .select('team_name')
+          .then((teamName) => {
+            const data = {
+              teamName: teamName[0].team_name,
+              players: []
+            }
+     
+            return res.json(data);
+          })
+      }
       Promise.all(players.map(player => (
         lastWeekPlayerStats(player.player_id)
           .then((playerGameData) => {
@@ -208,13 +238,14 @@ team.get('/overview/:teamId', function(req, res) {
             return filteredData[0];
           })
       ))).then((results) =>{ 
+        
         const data = {
           teamName: players[0].team_name,
           players: results
         }
 
         // results['teamName'] = player.team_name;
-        console.log(data);
+        // console.log(data);
         console.log("Player Season Data Sent Successfully!"); 
         res.json(data);
       })
@@ -267,11 +298,17 @@ team.delete('/delete/:teamId', authenticateJWT, function(req, res) {
 
 team.post('/create', authenticateJWT, function(req, res) {
   // create the team coming from the :teamId
-  console.log("call to create team: ", req.user);// need to get the user ID
+  console.log("call to create team: ", req.user.username);// need to get the user ID
 
-  // return knex('teams').insert({team_name: req.body.name, user_id: 1, platform: req.body.plateform})
-  // .then(() => console.log("team created"))
-  // .catch((err) => console.log(err));
+
+  return knex('users')
+    .where({ email: req.user.username })
+    .select('id')
+    .then((t) => {
+      return knex('teams').insert({team_name: req.body.name, user_id: Number(t[0].id), platform: req.body.plateform})
+      .then(() => console.log("team created"))
+      .catch((err) => console.log(err));
+    });
 });
 
 

@@ -7,8 +7,7 @@ import { StyledPlayerCards } from  '../style/PlayerCards.styles.jsx';
 export default function PlayerCards(props) {
   
   const {
-    playerFirstName,
-    playerLastName,
+    playerName,
     playerImage,
     position,
     lastWeekPoints,
@@ -20,7 +19,7 @@ export default function PlayerCards(props) {
   return (
     <StyledPlayerCards>
       <div className={"player-face"}>
-        <h3>{playerFirstName} {playerLastName}, {position}</h3>
+        <h3>{playerName},  {position}</h3>
         <img src={playerImage} height="100px" width="100px" alt="Player Face"/>
       </div>
       <div className="stats">
@@ -50,12 +49,11 @@ export default function PlayerCards(props) {
 
 
 PlayerCards.propTypes = { // prop-types ensure that props are as component expected
-  playerFirstName: PropTypes.string.isRequired,
-  playerLastName: PropTypes.string.isRequired,
+  playerName: PropTypes.string.isRequired,
   playerImage: PropTypes.string.isRequired,
   position: PropTypes.string.isRequired,
-  lastWeekPoints: PropTypes.number.isRequired,
-  lastWeekFan: PropTypes.number.isRequired,
-  lastWeekBlocks: PropTypes.number.isRequired,
-  lastWeekSteals: PropTypes.number.isRequired
+  lastWeekPoints: PropTypes.any.isRequired,
+  lastWeekFan: PropTypes.any.isRequired,
+  lastWeekBlocks: PropTypes.any.isRequired,
+  lastWeekSteals: PropTypes.any.isRequired
 };

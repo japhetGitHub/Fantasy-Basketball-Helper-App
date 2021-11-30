@@ -273,7 +273,7 @@ const altFillGameStatsTable = () => { // retreives last (14) days game stats dat
               // first removes existing data in table (to avoid breaking Unique constraint beacause of duplicate data)
               return knex('players_game_stats').insert(allRelevantPlayerGameData)
                 .then(() => console.log(`${chalk.green("players_game_stats data inserted")}`))
-                .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); console.log(chalk.bgBlueBright(err))});
+                .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); console.log(`${chalk.blue("skip this one")}`); });
             }).catch((err) => { console.log(`${chalk.red("Error retrieving players_game_stats data from sportsdata.io")}`); throw err });
         })
         .then(() => console.log(`Inserted game stats for ${daysAgo} day(s) ago`))
