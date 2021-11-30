@@ -131,7 +131,7 @@ team.get('/all', authenticateJWT, function(req, res) {
 });
 
 
-team.get('/overview/:teamId', authenticateJWT, function(req, res) {
+team.get('/overview/:teamId', function(req, res) {
   // gives back every player this team is having, used in the manage player too
   console.log("gets the team")
   // const data = {
@@ -240,17 +240,38 @@ const lastWeekPlayerStats = (playerId) => {
 
 team.put('/update/:teamId', authenticateJWT, function(req, res) {
   // update the team array
-  console.log("req: ", req.body.playerIdArray); // replace the array of the player in the team by this array
+  console.log("in the put")
+  const newArray = req.body.playerIdArray.map((num) => 
+  ({player_id: num, team_id: req.params.teamId}));
+  console.log(newArray)
+
+  db .query(`DELETE FROM players_in_team WHERE team_id=${req.params.teamId}`)
+  .then(() => console.log("delete"))
+  .catch((err) => err);
+
+  return knex('players_in_team').insert(newArray)
+    .then(() => console.log("created"))
+    .catch((err) => console.log(err));
 });
 
 team.delete('/delete/:teamId', authenticateJWT, function(req, res) {
   // delete the team coming from the :teamId
-  console.log("call to delete team")
+  db .query(`DELETE FROM players_in_team WHERE team_id=${req.params.teamId}`)
+  .then(() => console.log("delete players"))
+  .catch((err) => err);
+
+  db .query(`DELETE FROM teams WHERE id=${req.params.teamId}`)
+  .then(() => console.log("team"))
+  .catch((err) => err);
 });
 
 team.post('/create', authenticateJWT, function(req, res) {
-  // delete the team coming from the :teamId
-  console.log("call to create team: ", req.body);
+  // create the team coming from the :teamId
+  console.log("call to create team: ", req.user);// need to get the user ID
+
+  // return knex('teams').insert({team_name: req.body.name, user_id: 1, platform: req.body.plateform})
+  // .then(() => console.log("team created"))
+  // .catch((err) => console.log(err));
 });
 
 

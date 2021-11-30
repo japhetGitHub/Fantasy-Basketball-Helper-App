@@ -19,10 +19,10 @@ sportApi.get('/all', function(req, res) {
 
 sportApi.get('/fill', function(req, res) {
 
-  fillNbaTeamsTable()
-    .then(() => fillPlayersTable())
-    .then(() => fillSeasonStatsTable())
-    .then(() => altFillGameStatsTable())
+  altFillGameStatsTable()
+    // .then(() => fillPlayersTable())
+    // .then(() => fillSeasonStatsTable())
+    // .then(() => altFillGameStatsTable())
     .then(() => res.status(201).json({ msg: "Success filling seasonstats, gamestats tables!"}))
     .catch((err) => {
       console.log(err);

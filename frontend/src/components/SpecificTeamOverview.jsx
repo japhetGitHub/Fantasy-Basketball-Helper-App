@@ -20,8 +20,9 @@ export default function SpecificTeamOverview(props) {
 
   const carouselArray = [];
   let totalTeamFanPoints = 0;
+  let rankedPlayer = [];
   if (data) {
-    const rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
+    rankedPlayer = data.players.sort((a, b) => a.lastWeekFan < b.lastWeekFan ? 1 : a.lastWeekFan > b.lastWeekFan ? -1 : 0);
     carouselArray.push(<PlayerCards
       playerFirstName={rankedPlayer[0].playerFirstName}
       playerLastName={rankedPlayer[0].playerLastName}
@@ -69,7 +70,7 @@ export default function SpecificTeamOverview(props) {
       
       <Carousel slides={carouselArray} />
 
-      <TwitterZone />
+      <TwitterZone playerId={rankedPlayer && rankedPlayer} />
 
       <div className={"bottom-button"}>
         <div className={"bottom-left-button"}>
@@ -85,7 +86,10 @@ export default function SpecificTeamOverview(props) {
         </div>
         <div className={"bottom-right-button"}>
           <Button
-            onClick={() => teamService.deleteTeam()}
+            onClick={() => {
+              teamService.deleteTeam(selectedTeam);
+              onClick("HomeLog");
+            }}
             variant={"contained"}
             color={"error"}
           >

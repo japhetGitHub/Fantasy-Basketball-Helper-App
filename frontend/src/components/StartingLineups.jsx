@@ -27,60 +27,6 @@ export default function StartingLineups(props) {
   const handleChange = (event) => {
     setSortType(event.target.value);
   };
-  
-  const oldData = {
-    teamName: "teamNameHere",
-    players: [
-      {
-        playerId: 200,
-        playerFirstName: "Steph",
-        playerLastName: "Curry",
-        playerImage: stephImage,
-        position: "PG",
-        Game: 10,
-        Points: 200,
-        "Fantasy Points": 50,
-        Blocks: 30,
-        Steals: 5,
-        lastWeekPoints: 130,
-        lastWeekFan: 300,
-        lastWeekBlocks: 3,
-        lastWeekSteals: 11
-      },
-      {
-        playerId: 201,
-        playerFirstName: "Zion",
-        playerLastName: "Williamson",
-        playerImage: zionImage,
-        position: "PF",
-        Game: 15,
-        Points: 100,
-        "Fantasy Points": 10,
-        Blocks: 10,
-        Steals: 8,
-        lastWeekPoints: 130,
-        lastWeekFan: 300,
-        lastWeekBlocks: 3,
-        lastWeekSteals: 11
-      },
-      {
-        playerId: 202,
-        playerFirstName: "Another",
-        playerLastName: "Point guard",
-        playerImage: stephImage,
-        position: "PG",
-        Game: 20,
-        Points: 150,
-        "Fantasy Points": 30,
-        Blocks: 20,
-        Steals: 12,
-        lastWeekPoints: 130,
-        lastWeekFan: 300,
-        lastWeekBlocks: 3,
-        lastWeekSteals: 11
-      },
-    ]
-  };
 
   const playerLatestGameData = {
     id: 1,
