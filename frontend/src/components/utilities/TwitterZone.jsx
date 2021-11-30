@@ -22,7 +22,7 @@ export default function TwitterZone(props) {
         {news && news.Content}
       </span>
       <span>
-        source: {news && news.Url}
+        source: { news && <a id="newsSource" href={news.Url}>{news.Source}</a>}
       </span>
     </StyledTwitterZone>
   );
