@@ -17,10 +17,11 @@ export default function ListPlayerOn(props) {
   const handleClick = () => {
     setOpen(!open);
   };
+
   return (
     <StyledListPlayerOn>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary={`${player.playerName} - ${player.position}`} />
+        <ListItemText primary={`${player.player_name} - ${player.position}`} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
