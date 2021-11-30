@@ -128,8 +128,8 @@ team.get('/all', authenticateJWT, function(req, res) {
                   teamName: teams[index].team_name,
                   teamId: teams[index].id,
                   totalFanPoints: 0,
-                  topPerformer: { fantasy_points_fan_duel: 9999, player_id: 9999 },
-                  worstPerformer: { fantasy_points_fan_duel: 9999, player_id: 9999 }
+                  topPerformer: { player_name: "Empty", photo_url: "https://e3educate.org/wp-content/uploads/2021/09/user.jpg" },
+                  worstPerformer: { player_name: "Empty", photo_url: "https://e3educate.org/wp-content/uploads/2021/09/user.jpg" }
                 }
                 
               }
@@ -192,11 +192,25 @@ team.get('/overview/:teamId', function(req, res) {
   //   ]
   // };
 
+
   knex('players_in_team')
     .join('teams', {'players_in_team.team_id': 'teams.id'})
     .where({ team_id: req.params.teamId })
     .select('player_id', 'team_name')
     .then((players) => {
+      if (!players[0]) {
+        return knex('teams')
+          .where({ id: req.params.teamId })
+          .select('team_name')
+          .then((teamName) => {
+            const data = {
+              teamName: teamName[0].team_name,
+              players: []
+            }
+     
+            return res.json(data);
+          })
+      }
       Promise.all(players.map(player => (
         lastWeekPlayerStats(player.player_id)
           .then((playerGameData) => {
@@ -224,13 +238,14 @@ team.get('/overview/:teamId', function(req, res) {
             return filteredData[0];
           })
       ))).then((results) =>{ 
+        
         const data = {
           teamName: players[0].team_name,
           players: results
         }
 
         // results['teamName'] = player.team_name;
-        console.log(data);
+        // console.log(data);
         console.log("Player Season Data Sent Successfully!"); 
         res.json(data);
       })

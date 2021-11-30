@@ -6,6 +6,7 @@ import PlayerCards from './PlayerCards.jsx';
 import PieChartGraph from './utilities/PieChartGraph.jsx';
 import TwitterZone from './utilities/TwitterZone.jsx';
 import teamService from '../services/team.service.js';
+import EmptyPlayerCard from './EmptyPlayerCard.jsx';
 
 import { StyledSpecificTeamOverview } from '../style/SpecificTeamOverview.styles.jsx';
 
@@ -21,7 +22,8 @@ export default function SpecificTeamOverview(props) {
   const carouselArray = [];
   let totalTeamFanPoints = 0;
   let rankedPlayer = [];
-  if (data) {
+  if (data && data.players[0]) {
+
     rankedPlayer = data.players.sort((a, b) => a.lastWeekFantasyPointsYahoo < b.lastWeekFantasyPointsYahoo ? 1 : a.lastWeekFantasyPointsYahoo > b.lastWeekFantasyPointsYahoo ? -1 : 0);
     carouselArray.push(<PlayerCards
       playerName={rankedPlayer[0].playerName}
@@ -55,6 +57,7 @@ export default function SpecificTeamOverview(props) {
       }
     });
     carouselArray.push(<PieChartGraph foward={foward} center={center} guard={guard} />);
+
   }
 
   return (
@@ -77,9 +80,9 @@ export default function SpecificTeamOverview(props) {
         </Button>
       </div>
       
-      <Carousel slides={carouselArray} />
+      <Carousel slides={carouselArray[0] ? carouselArray : [<EmptyPlayerCard key={"empty"} />]} />
 
-      <TwitterZone playerId={rankedPlayer[0] && rankedPlayer[0].playerId} />
+      {carouselArray[0] && <TwitterZone playerId={"20000455"} />}
 
       <div className={"bottom-button"}>
         <div className={"bottom-left-button"}>
