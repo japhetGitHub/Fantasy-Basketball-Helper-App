@@ -18,11 +18,12 @@ import stephImage from './../image/steph.png';
 import { StyledStartingLineups } from '../style/StartingLineups.styles.jsx';
 import playerStats from './PlayerStats.jsx';
 
-
 export default function StartingLineups(props) {
   const { onClick, selectedTeam } = props;
   const [data, setData] = useState(null);
   const [sortType, setSortType] = React.useState('Game');
+  const [seasonData, setSeasonData] = useState();
+
   const handleChange = (event) => {
     setSortType(event.target.value);
   };
@@ -207,6 +208,11 @@ export default function StartingLineups(props) {
     teamService.getStartingLineups(selectedTeam)
       .then((response) => setData(response));
   }, []);
+
+  useEffect(() => {
+    teamService.getSpecificTeamSeasonData(selectedTeam)
+      .then((response) => setSeasonData(response));
+  }, []);
   
   /*
     How it's working: sort the array of player based on whats in the sortType variable, this follows the selected prompt
@@ -221,16 +227,17 @@ export default function StartingLineups(props) {
     IF IT DONT WORK, the ListItem component, in the carousel the slides is set as slides={[useThat]} SOOO drop the [], i made the testing without
       passing useThat an array and only a component so it was my easy fix to test everything.
   */
+
+  
   
   const arrayListItem = [];
   if (data) {
-    const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
+    // const rankedPlayer = data.players.sort((a, b) => a[`${sortType}`] < b[`${sortType}`] ? 1 : a[`${sortType}`] > b[`${sortType}`] ? -1 : 0);
 
-    rankedPlayer.map((singlePlayer) => {
+    data.players.map((singlePlayer) => {
       arrayListItem.push(<ListItem key={singlePlayer.playerId}
         useThat={ playerStats(playerLatestGameData, playerSeasonStats, playerSeasonFanPoints) }
-        firstName={singlePlayer.playerFirstName}
-        lastName={singlePlayer.playerLastName}
+        playerName={singlePlayer.playerName}
         position={singlePlayer.position}
       />);
     });
@@ -246,11 +253,11 @@ export default function StartingLineups(props) {
           onChange={handleChange}
         >
 
-          <MenuItem value={"Game"}>Game</MenuItem>
-          <MenuItem value={"Fantasy Points"}>Fantasy Points</MenuItem>
-          <MenuItem value={"Points"}>Points</MenuItem>
-          <MenuItem value={"Blocks"}>Blocks</MenuItem>
-          <MenuItem value={"Steals"}>Steals</MenuItem>
+          {/* <MenuItem value={"Game"}>Game</MenuItem> */}
+          <MenuItem value={"lastWeekFantasyPointsYahoo"}>Fantasy Points</MenuItem>
+          <MenuItem value={"lastWeekPoints"}>Points</MenuItem>
+          <MenuItem value={"lastWeekBlocks"}>Blocks</MenuItem>
+          <MenuItem value={"lastWeekSteals"}>Steals</MenuItem>
 
         </Select>
       </FormControl>
