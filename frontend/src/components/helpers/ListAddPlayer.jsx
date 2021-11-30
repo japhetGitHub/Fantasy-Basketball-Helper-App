@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -17,7 +18,7 @@ export default function ListAddPlayer(props) {
   const allPlayersLabel = [];
   
   allPlayerInLeague.forEach((player) => {
-    allPlayersLabel.push({label: `${player.playerName} - ${player.position}`, playerId: player.playerId}); // set pour label
+    allPlayersLabel.push({label: `${player.player_name} - ${player.position}`, player_id: player.player_id}); // set pour label
   });
   const [value, setValue] = useState(allPlayersLabel[0]);
 
@@ -29,7 +30,7 @@ export default function ListAddPlayer(props) {
 
   const addPlayer = (playerObject) => {
     allPlayerInLeague.forEach((unique) => {
-      if (unique.playerId === playerObject.playerId) { // tcheck dans le tas qui vien de DB qui fit genre objet avec ccee quon a choisis
+      if (unique.player_id === playerObject.player_id) { // tcheck dans le tas qui vien de DB qui fit genre objet avec ccee quon a choisis
         addPlayerInTeam(unique);
         return;
       }

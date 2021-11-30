@@ -11,7 +11,7 @@ import { StyledListItem } from './../../style/ListItem.styles.jsx';
 
 
 export default function ListItem(props) {
-  const { useThat, firstName, lastName, position} = props;
+  const { useThat, playerName, position} = props;
   
   const [open, setOpen] = React.useState(false);
 
@@ -21,7 +21,7 @@ export default function ListItem(props) {
   return (
     <StyledListItem>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary={`${firstName} ${lastName} - ${position}`} />
+        <ListItemText primary={`${playerName} - ${position}`} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -37,7 +37,6 @@ export default function ListItem(props) {
 
 ListItem.propTypes = { // prop-types ensure that props are as component expected
   useThat: PropTypes.array,
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
+  playerName: PropTypes.string,
   position: PropTypes.string
 };

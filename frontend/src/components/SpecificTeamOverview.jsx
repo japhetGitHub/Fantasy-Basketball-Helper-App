@@ -86,7 +86,10 @@ export default function SpecificTeamOverview(props) {
         </div>
         <div className={"bottom-right-button"}>
           <Button
-            onClick={() => teamService.deleteTeam()}
+            onClick={() => {
+              teamService.deleteTeam(selectedTeam);
+              onClick("HomeLog");
+            }}
             variant={"contained"}
             color={"error"}
           >

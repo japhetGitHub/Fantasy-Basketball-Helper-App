@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axiosInterceptor from './custom.axios-interceptor';
 
 const API_URL = 'http://localhost:3001/api/team';
@@ -20,9 +21,9 @@ const getPlayersToManage = (teamId) => {
 
       response.data.players.forEach((playerInfo) => {
         managePlayers.push({
-          playerName: playerInfo.playerFirstName + " " + playerInfo.playerLastName,
+          player_name: playerInfo.playerFirstName + " " + playerInfo.playerLastName,
           position: playerInfo.position,
-          playerId: playerInfo.playerId
+          player_id: playerInfo.playerId
         });
       });
 
@@ -33,33 +34,33 @@ const getPlayersToManage = (teamId) => {
 const getStartingLineups = (teamId) => {
   return axiosInterceptor.get(API_URL + `/overview/${teamId}`)
     .then((response) => {
-      const managePlayers = {
-        teamName: response.data.teamName,
-        players: []
-      };
+      // const managePlayers = {
+      //   teamName: response.data.teamName,
+      //   players: []
+      // };
 
-      response.data.players.forEach((playerInfo) => {
-        managePlayers.players.push({
-          playerId: playerInfo.playerId,
-          playerFirstName: playerInfo.playerFirstName,
-          playerLastName: playerInfo.playerLastName,
-          playerImage: playerInfo.playerImage,
-          position: playerInfo.position,
-          Game: playerInfo.lastWeekGame,
-          Points: playerInfo.lastWeekPoints,
-          "Fantasy Points": playerInfo.lastWeekFan,
-          Blocks: playerInfo.lastWeekBlocks,
-          Steals: playerInfo.lastWeekSteals
-        });
-      });
+      // response.data.players.forEach((playerInfo) => {
+      //   managePlayers.players.push({
+      //     playerId: playerInfo.playerId,
+      //     playerFirstName: playerInfo.playerFirstName,
+      //     playerLastName: playerInfo.playerLastName,
+      //     playerImage: playerInfo.playerImage,
+      //     position: playerInfo.position,
+      //     Game: playerInfo.lastWeekGame,
+      //     Points: playerInfo.lastWeekPoints,
+      //     "Fantasy Points": playerInfo.lastWeekFan,
+      //     Blocks: playerInfo.lastWeekBlocks,
+      //     Steals: playerInfo.lastWeekSteals
+      //   });
+      // });
 
-      return managePlayers;
+      return response.data;
     });
 };
 
 const putUserTeam = (teamId, teamArray) => {
   const playerIdArray = [];
-  teamArray.forEach((player) => playerIdArray.push(player.playerId));
+  teamArray.forEach((player) => playerIdArray.push(player.player_id));
   return axiosInterceptor.put(API_URL + `/update/${teamId}`, { playerIdArray });
 };
 
@@ -71,6 +72,10 @@ const createTeam = (name, plateform) => {
   return axiosInterceptor.post(API_URL + `/create`, {name, plateform});
 };
 
+const getSpecificTeamSeasonData = (teamId) => {
+  return axiosInterceptor.get(API_URL + `/api/myteam/season/${teamId}`);
+};
+
 const teamService = {
   getAllTeamForUser,
   getAllPlayerForTeam,
@@ -78,7 +83,8 @@ const teamService = {
   getStartingLineups,
   putUserTeam,
   deleteTeam,
-  createTeam
+  createTeam,
+  getSpecificTeamSeasonData
 };
 
 export default teamService;
