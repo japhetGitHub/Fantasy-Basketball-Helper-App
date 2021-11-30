@@ -53,7 +53,7 @@ export default function ManagePlayer(props) {
     if (player) {
       setAllPlayerInLeague(allPlayerInLeague => [...allPlayerInLeague, player]);
       for (let i = 0; i < userTeam.length; i++) {
-        if (player.playerId === userTeam[i].playerId) {
+        if (player.player_id === userTeam[i].player_id) {
           userTeam.splice(i, 1);
           setUserTeam(userTeam);
         }
@@ -66,7 +66,7 @@ export default function ManagePlayer(props) {
 
     for (let i = 0; i < allPlayerInLeague.length; i++) {
       for (let j = 0; j < userTeam.length; j++) {
-        if (allPlayerInLeague[i].playerId === userTeam[j].playerId) {
+        if (allPlayerInLeague[i].player_id === userTeam[j].player_id) {
           allPlayerInLeague.splice(i, 1);
           setAllPlayerInLeague(allPlayerInLeague);
         }
@@ -74,7 +74,7 @@ export default function ManagePlayer(props) {
     }
 
     userTeam.forEach((singlePlayer) => {
-      arrayList.push(<ListPlayerOn key={singlePlayer.playerId} player={singlePlayer} removePlayerInTeam={removePlayerInTeam} />);
+      arrayList.push(<ListPlayerOn key={singlePlayer.player_id} player={singlePlayer} removePlayerInTeam={removePlayerInTeam} />);
     });
 
     for (let i = arrayList.length; i < 20; i++) {

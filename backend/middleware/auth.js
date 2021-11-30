@@ -34,7 +34,7 @@ router.post('/login', (req, res) => {
 
   if (user) {
       // Generate an access token and a refresh token
-      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '3s' });
+      const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '1d' });
       const refreshToken = jwt.sign({ username: user.username, role: user.role }, refreshTokenSecret);
       
       refreshTokens.push(refreshToken); // add refresh token to array (later should be changed to a db insert)
@@ -63,7 +63,7 @@ router.post('/register', (req, res) => {
   users.push(user);
 
   // Generate an access token and a refresh token
-  const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '5m' });
+  const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret, { expiresIn: '1d' });
   const refreshToken = jwt.sign({ username: user.username, role: user.role }, refreshTokenSecret);
   
   refreshTokens.push(refreshToken); // save refresh token
