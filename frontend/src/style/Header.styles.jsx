@@ -18,13 +18,15 @@ export const StyledHeader = styled.div`
 
   & .scoreboardOutline {
     display: flex;
-    margin-left: 2em;
+    margin-left: 3.5em;
     width: 70%;
   }
 
   & .nbaLogo {
     display: flex;
   }
+
+ 
 
   & .team {
     display: flex;
@@ -95,7 +97,7 @@ export const StyledHeader = styled.div`
   }
 
   & p {
-    margin-left: 5.5em;
+    text-align: center;
   }
 
   & .MuiButton-root {

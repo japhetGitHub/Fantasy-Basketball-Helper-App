@@ -42,18 +42,20 @@ export default function Register(props) {
           onChange={(event) => setPassword(event.target.value)}
         />
       </form>
-      <Button
-        onClick={handleRegister}
-        variant="outlined"
-      >
-        Register
-      </Button>
-      <Button
-        onClick={() => onClick("HomePage")}
-        variant="outlined"
-      >
-        Back
-      </Button>
+      <div className="buttons">
+        <Button
+          onClick={handleRegister}
+          variant="outlined"
+        >
+          Register
+        </Button>
+        <Button
+          onClick={() => onClick("HomePage")}
+          variant="outlined"
+        >
+          Back
+        </Button>
+      </div>
       { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
     </StyledRegister>
   );
