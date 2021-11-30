@@ -36,6 +36,7 @@ export default function ManagePlayer(props) {
   const [userTeam, setUserTeam] = useState(null);
   const [allPlayerInLeague, setAllPlayerInLeague] = useState(null);
   let arrayList = [];
+
         
   useEffect(() => {
     teamService.getPlayersToManage(selectedTeam)
@@ -60,6 +61,8 @@ export default function ManagePlayer(props) {
       }
     }
   };
+
+
 
 
   if (userTeam && allPlayerInLeague) {
