@@ -9,7 +9,7 @@ CREATE TABLE players_game_stats (
   global_team_id INT,
   game_id INT,
   opponent_id INT,
-  date_time VARCHAR(255),
+  date_time TIMESTAMP,
   home_or_away VARCHAR(10),
   minutes INT,
   seconds INT,
