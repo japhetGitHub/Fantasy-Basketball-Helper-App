@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledLiveGames = styled.div`
-border: 2px gray;
-border-style: solid none;
-color: white;
+
+
 `;
 
 export const StyledHeader = styled.div`
@@ -17,24 +16,82 @@ export const StyledHeader = styled.div`
     color: white;
   }
 
-  & .liveGamePlayers {
+  & .scoreboardOutline {
     display: flex;
-    justify-content: center;
-    background-color: white;
-    border-color: black;
-    color: black;
-    width: 50%;
-    margin-left: 6em;
+    margin-left: 2em;
+    width: 70%;
   }
 
-  & .liveGameScores {
+  & .nbaLogo {
     display: flex;
+  }
+
+  & .team {
+    display: flex;
+    width: 100%;
+    height: 50%;
+  }
+
+  & .icon {
+    display: flex;
+    width: 33%;
     justify-content: center;
+    align-items: center;
+  }
+
+  & .name {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+  }
+
+  & .score {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+  }
+
+  & .team2 {
+    display: flex;
+    width: 100%;
+    height: 50%;
+  }
+
+  & .icon2 {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & .name2 {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+  }
+
+  & .score2 {
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+  }
+
+  & .scoreboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border-style: solid;
     background-color: white;
-    border-color: black;
-    color: black;
-    width: 50%;
-    margin-left: 6em;
+    width: 100%;
   }
 
   & p {
