@@ -33,27 +33,27 @@ const getPlayersToManage = (teamId) => {
 const getStartingLineups = (teamId) => {
   return axiosInterceptor.get(API_URL + `/overview/${teamId}`)
     .then((response) => {
-      const managePlayers = {
-        teamName: response.data.teamName,
-        players: []
-      };
+      // const managePlayers = {
+      //   teamName: response.data.teamName,
+      //   players: []
+      // };
 
-      response.data.players.forEach((playerInfo) => {
-        managePlayers.players.push({
-          playerId: playerInfo.playerId,
-          playerFirstName: playerInfo.playerFirstName,
-          playerLastName: playerInfo.playerLastName,
-          playerImage: playerInfo.playerImage,
-          position: playerInfo.position,
-          Game: playerInfo.lastWeekGame,
-          Points: playerInfo.lastWeekPoints,
-          "Fantasy Points": playerInfo.lastWeekFan,
-          Blocks: playerInfo.lastWeekBlocks,
-          Steals: playerInfo.lastWeekSteals
-        });
-      });
+      // response.data.players.forEach((playerInfo) => {
+      //   managePlayers.players.push({
+      //     playerId: playerInfo.playerId,
+      //     playerFirstName: playerInfo.playerFirstName,
+      //     playerLastName: playerInfo.playerLastName,
+      //     playerImage: playerInfo.playerImage,
+      //     position: playerInfo.position,
+      //     Game: playerInfo.lastWeekGame,
+      //     Points: playerInfo.lastWeekPoints,
+      //     "Fantasy Points": playerInfo.lastWeekFan,
+      //     Blocks: playerInfo.lastWeekBlocks,
+      //     Steals: playerInfo.lastWeekSteals
+      //   });
+      // });
 
-      return managePlayers;
+      return response.data;
     });
 };
 
@@ -71,6 +71,10 @@ const createTeam = (name, plateform) => {
   return axiosInterceptor.post(API_URL + `/create`, {name, plateform});
 };
 
+const getSpecificTeamSeasonData = (teamId) => {
+  return axiosInterceptor.get(API_URL + `/api/myteam/season/${teamId}`);
+};
+
 const teamService = {
   getAllTeamForUser,
   getAllPlayerForTeam,
@@ -78,7 +82,8 @@ const teamService = {
   getStartingLineups,
   putUserTeam,
   deleteTeam,
-  createTeam
+  createTeam,
+  getSpecificTeamSeasonData
 };
 
 export default teamService;
