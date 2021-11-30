@@ -15,11 +15,12 @@ export default function Login(props) {
   // states for controlled components
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { onClick } = props;
+  const { onClick, setLogin } = props;
   const handleLogin = function(event) {
     event.preventDefault();
     AuthService.login(email, password).then(() => { // sends credentials to backend and expects to receieve access token & refresh token
       console.log("Logged in!");
+      setLogin(true);
       onClick("TestPage");
     }).catch((err) => {
       // unsuccessful error passed here from api.js(interceptors.response)) -> auth.service(login.post) -> here
@@ -68,5 +69,6 @@ export default function Login(props) {
   );
 }
 Login.propTypes = { // prop-types ensure that props are as component expected
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  setLogin: PropTypes.func.isRequired
 };
