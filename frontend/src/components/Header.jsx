@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import liveImage from '../image/test.png';
 import Button from '@mui/material/Button';
 import AuthService from "../services/auth.service";
 import nbaLogo from '../image/nba-logo-transparent.png';
@@ -68,6 +66,7 @@ const logos = {
   PHX,
   POR,
   SAC,
+  SAS,
   TOR,
   UTH,
   WAS };
@@ -81,11 +80,6 @@ import {
 export default function Header(props) {
   const { onClick } = props;
   const [liveGames, setLiveGames] = useState(null);
-  
-  // useEffect(() => {
-  //   axios.get("https://api.sportsdata.io/v3/nba/scores/json/AreAnyGamesInProgress?key=ce0935001bf94813a935f4593acd1514")
-  //     .then((res) => setLiveGames(res.data));
-  // }, []);
 
   useEffect(() => {
     scoreService.getLiveScore()
@@ -98,12 +92,9 @@ export default function Header(props) {
     onClick("HomePage");
   };
 
-  let arr = [];
-
 
   return (
     <StyledHeader>
-      {/* <h3>Our website name</h3> */}
       <p>
         <img
           src={companyLogo}
@@ -189,7 +180,6 @@ export default function Header(props) {
 
 Header.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired,
-  live: PropTypes.bool.isRequired,
   setLogin: PropTypes.func.isRequired,
   login: PropTypes.bool.isRequired
 };

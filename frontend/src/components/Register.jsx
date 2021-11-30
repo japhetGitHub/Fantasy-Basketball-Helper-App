@@ -17,7 +17,7 @@ export default function Register(props) {
     event.preventDefault();
     AuthService.register(email, password).then(() => {
       console.log("Registered!");
-      onClick("TestPage");
+      onClick("HomeLog");
     }).catch((err) => {
       setRegisterError({
         hasError: true,
