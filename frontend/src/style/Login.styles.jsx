@@ -18,7 +18,9 @@ export const StyledLogin = styled.div`
     color: white;
   }
 
-
+  & .MuiOutlinedInput-input{
+    color: white;
+  }
 
   & .MuiInputLabel-root{
     color: white;
