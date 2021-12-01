@@ -17,11 +17,44 @@ export const StyledStartingLineups = styled.div`
   }
 
   & .MuiButton-root{
-    color: white;
-    background-color: #1976d2;
+    color: black;
+    background-color: #FFAD00;
     width: 7em;
     height: 3em;
     margin-left: 9em;
+  }
+
+  & .css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root{
+    color: white;
+    margin-left: 1.5em;
+  }
+
+  & .MuiFormLabel-root{
+    margin-left: 1.5em;
+    margin-top: 1.5em;
+  }
+
+  & .MuiSvgIcon-root{
+    color: white;
+  }
+
+  & .MuiInputLabel-root{
+    color: white;
+  }
+
+  & .MuiSelect-select{
+    margin-left: 1.5em;
+  }
+
+  & .MuiOutlinedInput-input{
+    color: white;
+  }
+
+
+  & .MuiOutlinedInput-notchedOutline{
+    border-color: white;
+    margin: 0.5em;
+    margin-left: 1.5em;
   }
 
 `;

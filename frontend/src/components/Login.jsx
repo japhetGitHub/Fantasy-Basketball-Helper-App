@@ -36,7 +36,7 @@ export default function Login(props) {
   return (
     <StyledLogin>
       <p>
-        {/* <h3>Login</h3> */}
+        <h3>Login</h3>
         <form autoComplete="off" onSubmit={(e) => e.preventDefault()}>
           <TextField
             label={"email"}
@@ -51,18 +51,20 @@ export default function Login(props) {
             onChange={(event) => setPassword(event.target.value)}
           />
         </form>
-        <Button
-          onClick={handleLogin}
-          variant="outlined"
-        >
-          Login
-        </Button>
-        <Button
-          onClick={() => onClick("HomePage")}
-          variant="outlined"
-        >
-          Back
-        </Button>
+        <div className="buttons">
+          <Button
+            onClick={handleLogin}
+            variant="outlined"
+          >
+            Login
+          </Button>
+          <Button
+            onClick={() => onClick("HomePage")}
+            variant="outlined"
+          >
+            Back
+          </Button>
+        </div>
         { loginError.hasError === true && <ErrorAlert text={loginError.msg}/>}
       </p>
     </StyledLogin>
