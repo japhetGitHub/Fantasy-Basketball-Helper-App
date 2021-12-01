@@ -80,8 +80,11 @@ export default function ManagePlayer(props) {
       arrayList.push(<ListPlayerOn key={singlePlayer.player_id} player={singlePlayer} removePlayerInTeam={removePlayerInTeam} />);
     });
 
-    for (let i = arrayList.length; i < 20; i++) {
-      arrayList.push(<ListAddPlayer key={i} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
+    // for (let i = arrayList.length; i < 20; i++) {
+    //   arrayList.push(<ListAddPlayer key={i} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
+    // }
+    if (arrayList.length < 13) {
+      arrayList.push(<ListAddPlayer key={arrayList.length} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
     }
   }
 
