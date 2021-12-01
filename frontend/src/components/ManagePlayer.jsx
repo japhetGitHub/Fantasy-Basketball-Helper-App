@@ -96,6 +96,7 @@ export default function ManagePlayer(props) {
       </List>
 
       <Button
+        className={"save"}
         onClick={() => {
           onClick("SpecificTeamOverview");
           teamService.putUserTeam(selectedTeam, userTeam)
@@ -103,9 +104,10 @@ export default function ManagePlayer(props) {
         }}
         variant={"contained"}
       >
-        Keep that team state
+        Save
       </Button>
       <Button
+        className={"back"}
         onClick={() => onClick("SpecificTeamOverview")}
         variant={"outlined"}
       >

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const StyledListAddPlayer = styled.div`
 
+  text-align: center;
+
   & css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
     color: white;
   } 
@@ -59,6 +61,11 @@ export const StyledListAddPlayer = styled.div`
   & .MuiOutlinedInput-notchedOutline{
     border-color: white;
     margin: 0.5em;
+  }
+
+  & .Button {
+    color: black;
+    background-color: #FFAD00;
   }
 
 `;

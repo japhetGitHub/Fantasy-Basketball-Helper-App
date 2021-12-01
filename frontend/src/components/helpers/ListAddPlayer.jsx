@@ -58,6 +58,7 @@ export default function ListAddPlayer(props) {
         />
         
         <Button
+          className={"Button"}
           onClick={() => {
             handleClick();
             addPlayer(value);

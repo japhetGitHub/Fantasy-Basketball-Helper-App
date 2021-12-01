@@ -66,6 +66,7 @@ export default function SpecificTeamOverview(props) {
       <div className={"top-button"} >
         <div className={"left-button"} >
           <Button
+            className={"manage-players"}
             onClick={() => onClick("ManagePlayer")}
             variant={"outlined"}
           >
@@ -73,6 +74,7 @@ export default function SpecificTeamOverview(props) {
           </Button>
         </div>
         <Button
+          className={"StartingLineups"}
           onClick={() => onClick("StartingLineups")}
           variant={"outlined"}
         >
@@ -85,29 +87,30 @@ export default function SpecificTeamOverview(props) {
       {carouselArray[0] && <TwitterZone playerId={rankedPlayer[0].playerId} />}
 
       <div className={"bottom-button"}>
-        <div className={"bottom-left-button"}>
-          <Button
-            onClick={() => {
-              onClick("HomeLog");
-              onSelectedTeam(null);
-            }}
-            variant={"outlined"}
-          >
-            Back
-          </Button>
-        </div>
-        <div className={"bottom-right-button"}>
-          <Button
-            onClick={() => {
-              teamService.deleteTeam(selectedTeam);
-              onClick("HomeLog");
-            }}
-            variant={"contained"}
-            color={"error"}
-          >
+
+        <Button
+          className={"Delete"}
+          onClick={() => {
+            teamService.deleteTeam(selectedTeam);
+            onClick("HomeLog");
+          }}
+          variant={"contained"}
+          color={"error"}
+        >
             Delete team
-          </Button>
-        </div>
+        </Button>
+
+        <Button
+          className={"back"}
+          onClick={() => {
+            onClick("HomeLog");
+            onSelectedTeam(null);
+          }}
+          variant={"outlined"}
+        >
+            Back
+        </Button>
+
       </div>
     </StyledSpecificTeamOverview>
   );

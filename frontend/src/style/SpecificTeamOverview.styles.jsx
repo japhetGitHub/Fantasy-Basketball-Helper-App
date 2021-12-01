@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledSpecificTeamOverview = styled.div`
 
   text-align: center;
-  margin: 1.2em 0;
+  margin: 1em 0;
   background-color: #14346C;
 
   & span {
@@ -20,27 +20,33 @@ export const StyledSpecificTeamOverview = styled.div`
   }
 
   & .top-button{
-    margin: 1em 0;
+    margin: 0 0;
     display: flex;
     justify-content: space-around;
   }
 
-  & .bottom-left-button{
-    margin: 1em 0;
-    // display: flex;
-    // justify-content: space-around;
+  & .manage-players {
+    margin-top: 1em;
+    background-color: #FFAD00;
   }
 
-  & .bottom-right-button{
-    margin: 1em 0;
-    // display: flex;
-    // justify-content: space-around;
+  & .StartingLineups {
+    margin-top: 1em;
+    background-color: #FFAD00;
   }
-  // background-color: green;
+
+  & .back {
+    background-color: #FFAD00;
+    margin: 1em 1em;
+  }
+
+  & .Delete {
+    margin-right: 1em;
+  }
 
   & .MuiButton-root{
     color: black;
-    background-color: #FFAD00;
+    
   }
 
 `;
