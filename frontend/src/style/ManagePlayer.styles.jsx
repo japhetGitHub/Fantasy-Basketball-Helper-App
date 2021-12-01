@@ -14,8 +14,8 @@ export const StyledManagePlayer = styled.div`
   }
 
   & .MuiButton-root{
-    color: white;
-    background-color: #1976d2;
+    color: black;
+    background-color: #FFAD00;
     margin-left: 5em;
     margin-bottom: 1em;
   }

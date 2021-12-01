@@ -38,8 +38,8 @@ export const StyledSpecificTeamOverview = styled.div`
   }
 
   & .MuiButton-root{
-    color: white;
-    background-color: #1976d2;
+    color: black;
+    background-color: #FFAD00;
   }
 
 `;

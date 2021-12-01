@@ -101,8 +101,9 @@ export const StyledHeader = styled.div`
   }
 
   & .MuiButton-root {
-    color: white;
-    background-color: #1976d2;
+    color: #FFAD00;
+    background-color: none;
+    border-color: #FFAD00;
     width: 7em;
     height: 3em;
     margin-left: 9em;

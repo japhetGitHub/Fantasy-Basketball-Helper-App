@@ -26,7 +26,7 @@ import MIA from '../image/nbaLogos/MIA.png';
 import MIL from '../image/nbaLogos/MIL.png';
 import MIN from '../image/nbaLogos/MIN.png';
 import NOH from '../image/nbaLogos/NOH.png';
-import NYK from '../image/nbaLogos/NYK.png';
+import NY from '../image/nbaLogos/NYK.png';
 import OKC from '../image/nbaLogos/OKC.png';
 import ORL from '../image/nbaLogos/ORL.png';
 import PHI from '../image/nbaLogos/PHI.png';
@@ -59,7 +59,7 @@ const logos = {
   MIL,
   MIN,
   NOH,
-  NYK,
+  NY,
   OKC,
   ORL,
   PHI,
