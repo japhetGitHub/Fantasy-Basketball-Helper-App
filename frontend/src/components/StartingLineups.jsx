@@ -199,6 +199,7 @@ export default function StartingLineups(props) {
           latestGameData.data.find(({ playername }) => playername === singlePlayer.playerName),
           seasonData.data.find(({ playername }) => playername === singlePlayer.playerName),
           seasonFanPoints.find(({ playerName }) => playerName === singlePlayer.playerName).games,
+          singlePlayer
         ) }
         playerName={singlePlayer.playerName}
         position={singlePlayer.position}
@@ -214,8 +215,9 @@ export default function StartingLineups(props) {
         <InputLabel>Rank list by:</InputLabel>
         <Select
           value={sortType}
-          label="Rank list by:"
+          // label="Rank by:"
           onChange={handleChange}
+          // sx={{"'&:not(.Mui-disabled):hover::before": {borderColor: "white"}}}
         >
 
           {/* <MenuItem value={"Game"}>Game</MenuItem> */}
