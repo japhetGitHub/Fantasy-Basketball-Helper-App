@@ -30,6 +30,13 @@ export const StyledCard = styled.div`
   align-items: center;
   height: 50%;
 
- 
+  & .topPerformer {
+    display: flex;
+    margin-bottom: 0em;
+  }
 
+  & .worstPerformer {
+    display: flex;
+    margin-bottom: 0em;
+  }
 `;

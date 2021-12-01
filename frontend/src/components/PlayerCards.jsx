@@ -20,7 +20,7 @@ export default function PlayerCards(props) {
     <StyledPlayerCards>
       <div className={"player-face"}>
         <h3>{playerName},  {position}</h3>
-        <img src={playerImage} height="100px" width="100px" alt="Player Face"/>
+        <img src={playerImage} height="130px" width="100px" alt="Player Face"/>
       </div>
       <div className="stats">
         <h3>Last Week Stats</h3>
