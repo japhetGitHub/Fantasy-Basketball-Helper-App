@@ -27,36 +27,38 @@ export default function Register(props) {
   };
   return (
     <StyledRegister>
-      <h3>Register</h3>
-      <form>
-        <TextField
-          label={"email"}
-          type={"email"}
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-        <TextField
-          label={"password"}
-          type={"password"}
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </form>
-      <div className="buttons">
-        <Button
-          onClick={handleRegister}
-          variant="outlined"
-        >
-          Register
-        </Button>
-        <Button
-          onClick={() => onClick("HomePage")}
-          variant="outlined"
-        >
-          Back
-        </Button>
-      </div>
-      { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
+      <p>
+        <h3>Register</h3>
+        <form>
+          <TextField
+            label={"email"}
+            type={"email"}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <TextField
+            label={"password"}
+            type={"password"}
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </form>
+        <div className="buttons">
+          <Button
+            onClick={handleRegister}
+            variant="outlined"
+          >
+            Register
+          </Button>
+          <Button
+            onClick={() => onClick("HomePage")}
+            variant="outlined"
+          >
+            Back
+          </Button>
+        </div>
+        { registerError.hasError === true && <ErrorAlert text={registerError.msg}/>}
+      </p>
     </StyledRegister>
   );
 }

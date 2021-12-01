@@ -5,6 +5,7 @@ export const StyledLogin = styled.div`
   background-color: #14346C;
   height: 75%;
   padding: 1em;
+  color: white;
 
   & form {
     display: flex;

@@ -4,7 +4,7 @@ export const StyledTwitterZone = styled.div`
 
   color: black;
   display: flex;
-  background-color: white;
+  background-color: #FBBB34;
   flex-direction: column;
   width: 80%;
   margin-left: 2.3em;
@@ -25,7 +25,7 @@ export const StyledTwitterZone = styled.div`
   & .news{
     display: flex;
     text-align: justify;
-    font-size: 1em;
+    font-size: 0.8em;
   }
 
   & .source{
