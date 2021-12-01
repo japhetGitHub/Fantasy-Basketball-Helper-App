@@ -15,7 +15,7 @@ export default function PieChartGraph(props) {
         standalone={false}
         width={600} height={600}
         data={[
-          {x: "Fowards", y: fowardPerc},
+          {x: "Forwards", y: fowardPerc},
           {x: "Guards", y: guardPerc},
           {x: "Centers", y: centerPerc}
         ]}
@@ -24,12 +24,12 @@ export default function PieChartGraph(props) {
         colorScale={["tomato", "orange", "gold" ]}
       
       />
-      <circle cx="300" cy="300" r="80" fill="none" stroke="black" strokeWidth={3}/>
-      <circle cx="300" cy="300" r="260" fill="none" stroke="black" strokeWidth={3}/>
+      <circle cx="300" cy="300" r="80" fill="none" stroke="white" strokeWidth={3}/>
+      <circle cx="300" cy="300" r="260" fill="none" stroke="white" strokeWidth={3}/>
       <VictoryLabel
         textAnchor="middle" verticalAnchor="middle"
         x={300} y={300}
-        style={{fontSize: 30}}
+        style={{fontSize: 30, fill: "white"}}
         text="ftps by pos"
       />
     </svg>

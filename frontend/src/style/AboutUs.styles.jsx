@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const StyledAboutUs = styled.div`
-  border-top: 2px solid gray;
+  border-top: 2px solid #FBBB34;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -19,5 +19,9 @@ export const StyledAboutUs = styled.div`
   & div {
     display: flex;
     justify-content: space-evenly;
+  }
+
+  & img {
+    border: 2px solid white;
   }
 `;

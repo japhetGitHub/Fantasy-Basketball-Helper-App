@@ -40,8 +40,8 @@ export default function TeamOverview(props) {
             alt="Top Performer"
           />
           <p>{topPerformer.player_name}</p>
-          <h4>Total Team Fantasy Points Last Week:</h4>
-          <span>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</span>
+          <h4>Last Week Team Fantasy Points: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span></h4>
+          
           <h4>Worst Performer</h4>
           <img
             src={worstPerformer.photo_url}

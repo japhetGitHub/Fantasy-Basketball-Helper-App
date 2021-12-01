@@ -21,6 +21,12 @@ export const StyledCarousel = styled.div`
     color: white;
     border-color: #ddd;
   }
-
+  & .MuiPaginationItem-root {
+    color: white;
+    border-color: white;
+  }
+  & .Mui-selected {
+    border-color: #FBBB34;
+  }
 
 `;
