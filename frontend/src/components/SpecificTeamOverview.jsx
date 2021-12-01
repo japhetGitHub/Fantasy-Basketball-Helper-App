@@ -24,7 +24,7 @@ export default function SpecificTeamOverview(props) {
   let rankedPlayer = [];
   if (data && data.players[0]) {
 
-    rankedPlayer = data.players.sort((a, b) => a.lastWeekFantasyPointsYahoo < b.lastWeekFantasyPointsYahoo ? 1 : a.lastWeekFantasyPointsYahoo > b.lastWeekFantasyPointsYahoo ? -1 : 0);
+    rankedPlayer = data.players.sort((a, b) => b.lastWeekFantasyPointsYahoo - a.lastWeekFantasyPointsYahoo);
     carouselArray.push(<PlayerCards
       playerName={rankedPlayer[0].playerName}
       playerImage={rankedPlayer[0].playerImage}
