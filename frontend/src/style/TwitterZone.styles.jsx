@@ -13,6 +13,8 @@ export const StyledTwitterZone = styled.div`
   & .title{
     display: flex;
     margin-bottom: 0.25em;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
   }
 
   & .timeAgo{
