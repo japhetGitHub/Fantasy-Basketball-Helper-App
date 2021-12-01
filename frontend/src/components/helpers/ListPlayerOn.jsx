@@ -25,7 +25,7 @@ export default function ListPlayerOn(props) {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <h4>Are you sure you want to delete this player of your team?</h4>
+        <h4 className="confirmation">Are you sure you want to delete this player of your team?</h4>
         
         <Button
           onClick={() => {
