@@ -95,84 +95,89 @@ export default function Header(props) {
 
   return (
     <StyledHeader>
-      <p>
+      <div className="companyLogo">
         <img
           src={companyLogo}
           alt="Add sign"
           height="180em"
           weight="180em"
         />
-      </p>
-      { props.login &&
-        <Button
-          variant="outlined"
-          onClick={logoutHandler}
-        >
-          Logout
-        </Button>
-      }
-      <div className="scoreboardOutline">
-        <div className="nbaLogo">
-          <img
-            src={nbaLogo}
-            alt="nba logo"
-            height="100em"
-            weight="30em"
-          />
-        </div>
-        <div className="scoreboard">
-          <div className="team">
-            <div className="icon">
-              {liveGames &&
-                <img src= {logos[liveGames[0]]}
-                  alt="NBA"
-                  height="40em"
-                  weight="40em"
-                />
-              }
-            </div>
-            <div className="name">
-              {liveGames &&
-                <StyledLiveGames className="liveGamePlayers">
-                  {liveGames[0]}
-                </StyledLiveGames>
-              }
-            </div>
-            <div className="score">
-              {liveGames &&
-              <StyledLiveGames className="liveGameScores">
-                {liveGames[2]}
-              </StyledLiveGames>
-              }
-            </div>
-          </div>
-          <div className="team2">
-            <div className="icon2">
-              {liveGames &&
-                <img src= {logos[liveGames[1]]}
-                  alt="NBA"
-                  height="40em"
-                  weight="40em"
-                />
-              }
-            </div>
-            <div className="name2">
-              {liveGames &&
-                <StyledLiveGames className="liveGamePlayers">
-                  {liveGames[1]}
-                </StyledLiveGames>
-              }
-            </div>
-            <div className="score2">
-              {liveGames &&
-                <StyledLiveGames className="liveGameScores">
-                  {liveGames[3]}
-                </StyledLiveGames>
-              }
-            </div>
-          </div>
-        </div>
       </div>
+      <div className="rightHeader">
+
+        <div className="scoreboardOutline">
+          <div className="nbaLogo">
+            <img
+              src={nbaLogo}
+              alt="nba logo"
+              height="100em"
+              weight="30em"
+            />
+          </div>
+          <div className="scoreboard">
+            <div className="team">
+              <div className="icon">
+                {liveGames &&
+                  <img src= {logos[liveGames[0]]}
+                    alt="NBA"
+                    height="40em"
+                    weight="40em"
+                  />
+                }
+              </div>
+              <div className="name">
+                {liveGames &&
+                  <StyledLiveGames className="liveGamePlayers">
+                    {liveGames[0]}
+                  </StyledLiveGames>
+                }
+              </div>
+              <div className="score">
+                {liveGames &&
+                <StyledLiveGames className="liveGameScores">
+                  {liveGames[2]}
+                </StyledLiveGames>
+                }
+              </div>
+            </div>
+            <div className="team2">
+              <div className="icon2">
+                {liveGames &&
+                  <img src= {logos[liveGames[1]]}
+                    alt="NBA"
+                    height="40em"
+                    weight="40em"
+                  />
+                }
+              </div>
+              <div className="name2">
+                {liveGames &&
+                  <StyledLiveGames className="liveGamePlayers">
+                    {liveGames[1]}
+                  </StyledLiveGames>
+                }
+              </div>
+              <div className="score2">
+                {liveGames &&
+                  <StyledLiveGames className="liveGameScores">
+                    {liveGames[3]}
+                  </StyledLiveGames>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        { props.login &&
+          <Button
+            variant="outlined"
+            onClick={logoutHandler}
+          >
+            Logout
+          </Button>
+        }
+      </div>
+
     </StyledHeader>
   );
 }
