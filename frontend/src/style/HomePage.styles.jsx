@@ -24,8 +24,8 @@ export const StyledHomePage = styled.div`
   }
 
   & .MuiButton-root {
-    color: white;
-    background-color: #1976d2;
+    color: black;
+    background-color: #FFAD00;;
     width: 7em;
     height: 3em;
   }

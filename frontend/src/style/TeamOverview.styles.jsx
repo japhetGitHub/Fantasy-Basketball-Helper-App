@@ -16,8 +16,8 @@ export const StyledHeader = styled.div`
   
   & button {
     padding: 0.3em 0.4em;
-    color: white;
-    background-color: #1976d2;
+    color: black;
+    background-color: #FFAD00;
     width: 13em;
     height: 3em;
   }
