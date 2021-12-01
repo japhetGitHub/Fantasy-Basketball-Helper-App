@@ -56,4 +56,7 @@ export const StyledStartingLineups = styled.div`
     height: 3em;
     margin: 2em;
   }
+  & .MuiSvgIcon-root {
+    color: white;
+  }
 `;

@@ -7,6 +7,38 @@ export const StyledLiveGames = styled.div`
 
 export const StyledHeader = styled.div`
   background-color: #14346C;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start; 
+  & .rightHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 7px;
+    right: 49px;
+    position: relative;
+  }
+  & .scoreboardOutline {
+    margin-bottom: 10px;
+    width: 93% !important;
+  }
+  & .rightHeader > button {
+    position: relative;
+    right: -41px;
+    top: -4px;
+    width: auto;
+    height: 38px;
+  }
+  & .companyLogo {
+    left: 2px;
+    top: -2px;
+    position: relative;
+  }
+  & .companyLogo > img {
+    width: 90%;
+    height: auto;
+  }
+
 
   & h3 {
     margin: 0;
@@ -94,6 +126,7 @@ export const StyledHeader = styled.div`
     border-style: solid;
     background-color: white;
     width: 100%;
+    color: black;
   }
 
   & p {

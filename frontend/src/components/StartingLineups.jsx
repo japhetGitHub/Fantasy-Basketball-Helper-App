@@ -212,7 +212,7 @@ export default function StartingLineups(props) {
   return (
     <StyledStartingLineups>
       <FormControl fullWidth>
-        <InputLabel>Rank list by:</InputLabel>
+        {/* <InputLabel>Rank list by:</InputLabel> */}
         <Select
           value={sortType}
           // label="Rank by:"
