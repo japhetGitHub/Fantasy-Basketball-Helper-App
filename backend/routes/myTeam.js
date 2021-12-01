@@ -123,7 +123,7 @@ const playerFantasyPointsHistory = (playerId) => {
   const dateStr = `${pastDate.getFullYear()}-${pastDate.getMonth()}-${pastDate.toLocaleString('default', { day: '2-digit' })}`;
   // console.log(chalk.red(dateStr));
   // console.log(lastWeekStats[0].player_name + '...' + chalk.underline(lastWeekStats[0].date_time))
-  return knex.select(knex.raw(` players_game_stats.fantasy_points_yahoo as fantasyPointsYahoo, player.player_name as playerName from players_game_stats join player on players_game_stats.player_id = player.player_id where player.player_id=${playerId}`)).then(fantasyPointsHistory => {
+  return knex.select(knex.raw(` players_game_stats.fantasy_points_yahoo as fantasyPointsYahoo, player.player_name as playerName from players_game_stats join player on players_game_stats.player_id = player.player_id where player.player_id=${playerId} order by date_time asc`)).then(fantasyPointsHistory => {
     
     return fantasyPointsHistory
   })
