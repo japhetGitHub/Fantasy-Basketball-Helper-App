@@ -4,7 +4,8 @@ export const StyledTeamOverview = styled.div`
   height: 37em;
   background-color: #14346C; 
   color: white;
-
+  border: solid;
+  border-width: 5px;
 
 `;
 
