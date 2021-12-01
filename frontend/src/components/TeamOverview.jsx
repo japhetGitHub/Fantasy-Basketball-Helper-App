@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 
+import BestWorstChart from './BestWorstChart.jsx';
+
 import {
   StyledTeamOverview,
   StyledHeader,
@@ -20,38 +22,79 @@ export default function TeamOverview(props) {
 
   return (
     <StyledTeamOverview>
-      <div className="box">
-        <StyledHeader>
-          <h3>{teamName}</h3>
-          <Button
-            onClick={onClick}
-            variant={"outlined"}
-          >
-            More on that team
-          </Button>
-        </StyledHeader>
+      {/* <div className="box"> */}
+      <StyledHeader>
+        <h2>{teamName}</h2>
+        <Button
+          onClick={onClick}
+          variant={"outlined"}
+        >
+          More Info
+        </Button>
+      </StyledHeader>
 
-        <StyledCard>
-          <h4>Top Performer</h4>
-          <img
-            src={topPerformer.photo_url}
-            height="100px"
-            width="100px"
-            alt="Top Performer"
+      <StyledCard>
+        <div className="bestWorst">
+          <div className="topPerformer">
+            <h4>Top Performer</h4>
+            <img
+              src={topPerformer.photo_url}
+              height="130px"
+              width="100px"
+              alt="Top Performer"
+            />
+            <div className="playerName">
+              <div>{topPerformer.player_name}</div>
+              <div>({topPerformer.player_team})</div>
+            </div>
+          </div>
+          <div className="worstPerformer">
+            <h4>Worst Performer</h4>
+            <img
+              src={worstPerformer.photo_url}
+              height="130px"
+              width="100px"
+              alt="Worst Performer"
+            />
+            <div className="playerName">
+              <div>{worstPerformer.player_name}</div>
+              <div>({worstPerformer.player_team})</div>
+            </div>
+          </div>
+        </div>
+        <div className="bestWorstChart">
+          <BestWorstChart
+            category={"Points"}
+            topPerformerStat={topPerformer.points}
+            worstPerformerStat={worstPerformer.points}
           />
-          <p>{topPerformer.player_name}</p>
-          <h4>Last Week Team Fantasy Points: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span></h4>
-          
-          <h4>Worst Performer</h4>
-          <img
-            src={worstPerformer.photo_url}
-            height="100px"
-            width="100px"
-            alt="Worst Performer"
+          <BestWorstChart
+            category={"Assists"}
+            topPerformerStat={topPerformer.assists}
+            worstPerformerStat={worstPerformer.assists}
           />
-          <p>{worstPerformer.player_name}</p>
-        </StyledCard>
-      </div>
+          <BestWorstChart
+            category={"Rebounds"}
+            topPerformerStat={topPerformer.rebounds}
+            worstPerformerStat={worstPerformer.rebounds}
+          />
+          <BestWorstChart
+            category={"Steals"}
+            topPerformerStat={topPerformer.steals}
+            worstPerformerStat={worstPerformer.steals}
+          />
+          <BestWorstChart
+            category={"Blocks"}
+            topPerformerStat={topPerformer.blocks}
+            worstPerformerStat={worstPerformer.blocks}
+          />
+          {/* <BestWorstChart topPerformer={topPerformer} worstPerformer={worstPerformer} /> */}
+        </div>
+        <div className="pointsSummary">
+          <h4>Last Week: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span> Fan Points</h4>
+        </div>
+      </StyledCard>
+      {/* </div> */}
     </StyledTeamOverview>
   );
 }
