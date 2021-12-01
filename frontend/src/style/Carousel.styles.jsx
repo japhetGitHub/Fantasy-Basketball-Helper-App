@@ -22,4 +22,5 @@ export const StyledCarousel = styled.div`
     border-color: #ddd;
   }
 
+
 `;
