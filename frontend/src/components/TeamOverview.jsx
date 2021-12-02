@@ -35,8 +35,8 @@ export default function TeamOverview(props) {
           <h4>Top Performer</h4>
           <img
             src={topPerformer.photo_url}
-            height="100px"
-            width="100px"
+            height="108px"
+            width="78px"
             alt="Top Performer"
           />
           <p>{topPerformer.player_name}</p>
@@ -45,8 +45,8 @@ export default function TeamOverview(props) {
           <h4>Worst Performer</h4>
           <img
             src={worstPerformer.photo_url}
-            height="100px"
-            width="100px"
+            height="108px"
+            width="78px"
             alt="Worst Performer"
           />
           <p>{worstPerformer.player_name}</p>

@@ -28,6 +28,7 @@ export default function ListPlayerOn(props) {
         <h4 className="confirmation">Are you sure you want to delete this player of your team?</h4>
         
         <Button
+          className={"Delete"}
           onClick={() => {
             handleClick();
             removePlayerInTeam(player);
@@ -39,6 +40,7 @@ export default function ListPlayerOn(props) {
         </Button>
       
         <Button
+          className={"Cancel"}
           onClick={handleClick}
           variant={"outlined"}
         >
