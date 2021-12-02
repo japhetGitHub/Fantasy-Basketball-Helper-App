@@ -138,7 +138,7 @@ export const StyledHeader = styled.div`
     width: 100%;
     padding: 0.1em 2em;
     margin: 0 -0.85em 0.5em -0.75em;
-    color: white;
+    color: #14346C;
   }
 
   & p {
