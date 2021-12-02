@@ -131,11 +131,14 @@ export const StyledHeader = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-style: solid;
-    background-color: white;
+    // border-style: solid;
+    border: 2px solid #14346C;
+    background-color: #FBBB34;
     height: 2.6em;
     width: 100%;
-    color: black;
+    padding: 0.1em 2em;
+    margin: 0 -0.85em 0.5em -0.75em;
+    color: white;
   }
 
   & p {

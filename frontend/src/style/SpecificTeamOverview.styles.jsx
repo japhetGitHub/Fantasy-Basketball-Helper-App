@@ -50,4 +50,27 @@ export const StyledSpecificTeamOverview = styled.div`
     
   }
 
+  & .slides > div > div > div > div {
+    overflow: hidden !important;
+  } 
+  
+  & .slides .player-face img {
+    // height: auto;
+    margin-top: 0;
+  }
+  & .slides .player-face h3 {
+    margin-top: 5%;
+  }
+  
+  & .slides .stats h3{
+    margin-top: 0;
+    
+  }
+
+  & .slides .test .pagination {
+    // height: 40%;
+    // margin: 0;
+    // display: none;
+    
+  }
 `;

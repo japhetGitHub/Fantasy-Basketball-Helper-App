@@ -29,6 +29,7 @@ export const StyledTwitterZone = styled.div`
     text-align: justify;
     font-size: 0.8em;
     padding-top: 0;
+    padding-bottom: 0;
   }
   
   & .news > p {
@@ -42,6 +43,8 @@ export const StyledTwitterZone = styled.div`
     display: flex;
     justify-content: center;
     font-size: 1em;
+
+    padding-top: 0.2em;
   }
 
 `;

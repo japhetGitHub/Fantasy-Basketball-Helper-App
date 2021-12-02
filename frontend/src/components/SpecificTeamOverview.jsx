@@ -82,7 +82,9 @@ export default function SpecificTeamOverview(props) {
         </Button>
       </div>
       
-      <Carousel slides={carouselArray[0] ? carouselArray : [<EmptyPlayerCard key={"empty"} />]} />
+      <div className="slides">
+        <Carousel slides={carouselArray[0] ? carouselArray : [<EmptyPlayerCard key={"empty"} />]} />
+      </div>
 
       {carouselArray[0] && <TwitterZone playerId={rankedPlayer[0].playerId} />}
 
