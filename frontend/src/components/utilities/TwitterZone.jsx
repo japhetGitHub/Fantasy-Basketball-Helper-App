@@ -19,7 +19,9 @@ export default function TwitterZone(props) {
       <h3 className="title">{news && news.Title}</h3>
       <div className="timeAgo">{news && news.TimeAgo}</div>
       <span className="news">
-        {news && news.Content}
+        <p>
+          {news && news.Content}
+        </p>
       </span>
       <span>
         source: { news && <a id="newsSource" href={news.Url}>{news.Source}</a>}
