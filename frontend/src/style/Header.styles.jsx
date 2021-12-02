@@ -8,7 +8,7 @@ export const StyledLiveGames = styled.div`
 export const StyledHeader = styled.div`
   background-color: #14346C;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start; 
   & .rightHeader {
     display: flex;
@@ -30,13 +30,21 @@ export const StyledHeader = styled.div`
     height: 38px;
   }
   & .companyLogo {
-    left: 2px;
-    top: -2px;
-    position: relative;
+    display: flex;
+    justify-content: space-around;
+
+    & .Logout-Button {
+      align-self: center;
+      color: #FFAD00;
+      background-color: none;
+      border-color: #FBBB34;
+      width: 7em;
+      height: 3em;
+    }
   }
   & .companyLogo > img {
-    width: 90%;
-    height: auto;
+    width: 120px;
+    height: 120px;
   }
 
 
@@ -120,27 +128,18 @@ export const StyledHeader = styled.div`
 
   & .scoreboard {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     border-style: solid;
     background-color: white;
+    height: 2.6em;
     width: 100%;
     color: black;
   }
 
   & p {
     text-align: center;
-  }
-
-  & .MuiButton-root {
-    color: #FFAD00;
-    background-color: none;
-    border-color: #FBBB34;
-    width: 7em;
-    height: 3em;
-    margin-left: 9em;
-    margin-bottom: 1em;
   }
 `;
 
