@@ -132,7 +132,7 @@ export const StyledHeader = styled.div`
     justify-content: center;
     align-items: center;
     // border-style: solid;
-    border: 2px solid white;
+    border: 2px solid #14346C;
     background-color: #FBBB34;
     height: 2.6em;
     width: 100%;
