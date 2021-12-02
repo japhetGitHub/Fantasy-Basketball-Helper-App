@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledTeamOverview = styled.div`
-  height: 37em;
+  height: auto;
   background-color: #14346C; 
   color: white;
   // border: 5px dotted white;
@@ -18,12 +18,12 @@ export const StyledTeamOverview = styled.div`
 export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-around;
-  flex: 1;
+  // flex: 1;
   align-items: center;
   font-weight: bolder;
   
   // border: 1px dotted yellow;
-
+  // margin-top: -2%;
   & button {
     // padding: 0.3em 0.4em;
     color: black;
@@ -39,14 +39,32 @@ export const StyledHeader = styled.div`
 `;
 
 export const StyledCard = styled.div`
+  // display: flex;
+  // flex-direction: column;
+  // // align-items: center;
+  // height: auto;
+  // width: auto;
+  // // border: 1px dotted cyan;
+
   display: flex;
-  flex-direction: column;
-  // align-items: center;
-  height: auto;
-  width: auto;
-  // border: 1px dotted cyan;
+  flex-direction: row;
+  justify-content: center;
+
+  & .leftArrow, .rightArrow {
+    align-self: center;
+  }
+  & .leftArrow {
+    transform: rotate(180deg);
+  }
   
   // flex-grow: 4;
+
+  & .container {
+    display: flex;
+    flex-direction: column;  
+    height: auto;
+    width: auto;  
+  }
 
   & .bestWorstChart {
     // border: 1px dotted orange;
@@ -100,6 +118,10 @@ export const StyledCard = styled.div`
     // justify-content: flex-start;
     font-size: 1.3em;
     // padding: 0 1%;
+  }
+
+  & .pointsSummary > h4 {
+    margin-bottom: 12%;
   }
 
  
