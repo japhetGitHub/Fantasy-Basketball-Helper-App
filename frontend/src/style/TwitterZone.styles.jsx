@@ -26,6 +26,14 @@ export const StyledTwitterZone = styled.div`
     display: flex;
     text-align: justify;
     font-size: 0.8em;
+    padding-top: 0;
+  }
+  
+  & .news > p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
   }
 
   & .source{

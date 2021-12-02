@@ -46,7 +46,7 @@ team.get('/all', authenticateJWT, function(req, res) {
               return Promise.all(teamsPlayers.map((player) => (
                 knex('players_season_stats')
                   .where({ player_id: player.player_id })
-                  .select(`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`, 'player_id')
+                  .select(`fantasy_points_${teams[index].platform.toLowerCase().replace(' ', '_')}`, 'points', 'rebounds', 'assists', 'steals', 'blocked_shots', 'player_id')
                   .then((final) => final[0])
                   .catch((err) => console.log(err))
               )))
@@ -71,20 +71,32 @@ team.get('/all', authenticateJWT, function(req, res) {
               if(bestWorst.topPerformer) {
                 return knex('player')
                   .where({ player_id: bestWorst['topPerformer'].player_id })
-                  .select('player_name', 'photo_url')
+                  .select('player_name', 'photo_url', 'team')
                   .then((result) => { 
                     const playerDetails = { 
                       'player_name': result[0].player_name, 
-                      'photo_url': result[0].photo_url 
+                      'photo_url': result[0].photo_url,
+                      'player_team': result[0].team,
+                      'points': bestWorst.topPerformer.points,
+                      'rebounds': bestWorst.topPerformer.rebounds,
+                      'assists': bestWorst.topPerformer.assists,
+                      'steals': bestWorst.topPerformer.steals,
+                      'blocks': bestWorst.topPerformer.blocked_shots
                     };
                     bestWorst['topPerformer'] = { ...playerDetails }
                     return knex('player')
                       .where({ player_id: bestWorst['worstPerformer'].player_id })
-                      .select('player_name', 'photo_url')
+                      .select('player_name', 'photo_url', 'team')
                       .then((result) => { 
                         const playerDetails = { 
                           'player_name': result[0].player_name, 
-                          'photo_url': result[0].photo_url 
+                          'photo_url': result[0].photo_url,
+                          'player_team': result[0].team,
+                          'points': bestWorst.worstPerformer.points,
+                          'rebounds': bestWorst.worstPerformer.rebounds,
+                          'assists': bestWorst.worstPerformer.assists,
+                          'steals': bestWorst.worstPerformer.steals,
+                          'blocks': bestWorst.topPerformer.blocked_shots
                         };
                         bestWorst['worstPerformer'] = { ...playerDetails }
                         bestWorst['totalFanPoints'] = teamsTotalFantasyPoints[index];

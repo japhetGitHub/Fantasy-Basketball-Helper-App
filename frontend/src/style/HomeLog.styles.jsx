@@ -8,6 +8,13 @@ export const StyledHomeLog = styled.div`
   & ul {
     padding-bottom: 25px;
   }
-
-
+  & .MuiPagination-root {
+    // border: 1px dotted green;    
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding-bottom: 3%;
+  }
+  & .MuiPagination-ul {
+    padding: 0;
+  }
 `;

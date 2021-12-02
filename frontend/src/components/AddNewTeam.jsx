@@ -11,11 +11,13 @@ export default function AddNewTeam(props) {
   return (
     <StyledAddNewTeam>
       <h2>Add a New Team</h2>
-      <img
-        src={addImage}
-        alt="Add sign"
-        onClick={() => onClick("CreateNewTeam")}
-      />
+      <div className="addTeamImage">
+        <img
+          src={addImage}
+          alt="Add sign"
+          onClick={() => onClick("CreateNewTeam")}
+        />
+      </div>
     </StyledAddNewTeam>
   );
 }
