@@ -21,8 +21,8 @@ export const StyledManagePlayer = styled.div`
 
   & .save {
     margin: 1em 1em;
-    color: black;
-    background-color: #50db00;
+    color: #c1dcd6;
+    background-color: #059234;
   }
 `;
 
