@@ -17,6 +17,7 @@ export const StyledSpecificTeamOverview = styled.div`
     background-color: #14346C;
     display: flex;
     margin-top: -1em;
+    justify-content: center;
   }
 
   & .top-button{

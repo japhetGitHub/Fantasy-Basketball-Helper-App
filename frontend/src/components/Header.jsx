@@ -102,18 +102,19 @@ export default function Header(props) {
           height="180em"
           weight="180em"
         />
+        { props.login &&
+          <Button
+            className={"Logout-Button"}
+            variant="outlined"
+            onClick={logoutHandler}
+          >
+            Logout
+          </Button>
+        }
       </div>
       <div className="rightHeader">
 
         <div className="scoreboardOutline">
-          <div className="nbaLogo">
-            <img
-              src={nbaLogo}
-              alt="nba logo"
-              height="100em"
-              weight="30em"
-            />
-          </div>
           <div className="scoreboard">
             <div className="team">
               <div className="icon">
@@ -167,15 +168,6 @@ export default function Header(props) {
             </div>
           </div>
         </div>
-        
-        { props.login &&
-          <Button
-            variant="outlined"
-            onClick={logoutHandler}
-          >
-            Logout
-          </Button>
-        }
       </div>
 
     </StyledHeader>
