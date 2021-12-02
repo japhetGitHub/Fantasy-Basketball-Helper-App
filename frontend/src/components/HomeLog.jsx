@@ -16,7 +16,7 @@ export default function HomeLog(props) {
     teamService.getAllTeamForUser()
       .then((response) => setData(response));
   }, []);
-
+  data && console.log(data);
   const viewArray = data ? data.map((singleTeam) => {
     return (
       <TeamOverview

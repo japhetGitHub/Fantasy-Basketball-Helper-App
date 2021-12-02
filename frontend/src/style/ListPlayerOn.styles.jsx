@@ -48,5 +48,15 @@ export const StyledListPlayerOn = styled.div`
   & css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
     color: white;
   } 
+
+  & .Delete {
+    margin-right: 1em;
+  }
+
+  & .Cancel {
+    color: black;
+    background-color: #FFAD00;
+    margin-left: 1em;
+  }
   
 `;

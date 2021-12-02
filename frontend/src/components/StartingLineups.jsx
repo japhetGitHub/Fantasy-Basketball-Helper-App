@@ -236,6 +236,7 @@ export default function StartingLineups(props) {
           onClick("SpecificTeamOverview");
         }}
         variant={"outlined"}
+        className={"back-button"}
       >
         Back
       </Button>

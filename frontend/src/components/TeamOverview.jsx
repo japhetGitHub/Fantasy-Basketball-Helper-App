@@ -22,7 +22,6 @@ export default function TeamOverview(props) {
 
   return (
     <StyledTeamOverview>
-      {/* <div className="box"> */}
       <StyledHeader>
         <h2>{teamName}</h2>
         <Button
@@ -92,7 +91,6 @@ export default function TeamOverview(props) {
               topPerformerStat={topPerformer.blocks}
               worstPerformerStat={worstPerformer.blocks}
             />
-            {/* <BestWorstChart topPerformer={topPerformer} worstPerformer={worstPerformer} /> */}
           </div>
           <div className="pointsSummary">
             <h4>Last Week: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span> Fan Points</h4>
@@ -103,7 +101,6 @@ export default function TeamOverview(props) {
         </div>
 
       </StyledCard>
-      {/* </div> */}
     </StyledTeamOverview>
   );
 }
