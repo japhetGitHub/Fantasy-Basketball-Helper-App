@@ -58,7 +58,7 @@ export const StyledHeader = styled.div`
 
   & .scoreboardOutline {
     display: flex;
-    margin-left: 3.5em;
+    margin-left: 3.8em;
     width: 70%;
   }
 

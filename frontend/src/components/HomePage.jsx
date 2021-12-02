@@ -12,7 +12,7 @@ export default function  HomePage(props) {
   const { onClick } = props;
   return (
     <StyledHomePage>
-      <h3>Congratulations,<br/>you’re about to be<br/>a walking W.</h3>
+      <h3 className="header">Congratulations,<br/>you’re about to be<br/>a walking W.</h3>
       <StyledButtonHomePage>
         <Button
           onClick={() => onClick("Login")}

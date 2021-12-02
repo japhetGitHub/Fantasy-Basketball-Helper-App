@@ -7,8 +7,10 @@ export const StyledTwitterZone = styled.div`
   background-color: #FBBB34;
   flex-direction: column;
   width: 80%;
-  margin-left: 2.3em;
+  margin-left: 2em;
   margin-top: 1em;
+  border: solid;
+  border-color: white;
 
   & .title{
     display: flex;

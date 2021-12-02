@@ -14,13 +14,14 @@ export const StyledButtonHomePage = styled.div`
 export const StyledHomePage = styled.div`
   background-color: #14346C;
 
-  & h3 {
+  & .header {
     margin: 0;
     text-align: left;
     font-size: 30px;
     font-weight: normal;
     padding: 1em 1em;;
     color: white;
+    padding-top: 0em;
   }
 
   & .MuiButton-root {
