@@ -8,6 +8,16 @@ export const StyledAboutUs = styled.div`
   justify-content: space-evenly;
   padding-bottom: 1em;
 
+  & h3 {
+    margin: 0;
+    text-align: left;
+    font-size: 25px;
+    font-weight: normal;
+    padding: 1em 1em;;
+    color: white;
+  }
+
+
   & p {
 
     padding: 0 1.5em;

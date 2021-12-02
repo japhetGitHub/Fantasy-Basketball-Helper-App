@@ -18,6 +18,12 @@ export const StyledPlayerCards = styled.div`
     }
   }
 
+  & .player-face > img{
+    margin-top: 5%;
+    border: 5px solid black;
+    border-radius: 10px;
+  }
+
   & .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
