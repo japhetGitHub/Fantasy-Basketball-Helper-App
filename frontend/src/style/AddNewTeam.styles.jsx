@@ -5,7 +5,7 @@ export const StyledAddNewTeam = styled.div`
   text-align: center;
   background-color: #14346C;
   color: white;
-  height: 38.9em;
+  height: 39.5em;
   margin-top: -50px;
 
   & h2 {

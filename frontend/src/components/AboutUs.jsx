@@ -8,7 +8,7 @@ import { StyledAboutUs } from '../style/AboutUs.styles.jsx';
 export default function AboutUs() {
   return (
     <StyledAboutUs>
-      <h3>About us</h3>
+      <h3 className="aboutUs">About us</h3>
       <p>
         Aren’t you tired of wasting time by switching between so many apps? Just become the king!<br/>
         <br/>Win all of your upcoming weeks in your fantasy league with our help!

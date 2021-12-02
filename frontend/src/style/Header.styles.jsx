@@ -10,6 +10,8 @@ export const StyledHeader = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start; 
+  margin-top: 0.5em;
+
   & .rightHeader {
     display: flex;
     flex-direction: column;

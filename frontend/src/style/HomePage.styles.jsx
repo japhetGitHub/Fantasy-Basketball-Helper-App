@@ -21,6 +21,7 @@ export const StyledHomePage = styled.div`
     font-weight: normal;
     padding: 1em 1em;;
     color: white;
+    padding-top: 0em;
   }
 
   & .MuiButton-root {

@@ -9,6 +9,8 @@ export const StyledTwitterZone = styled.div`
   width: 80%;
   margin-left: 2.3em;
   margin-top: 1em;
+  border: solid;
+  border-color: white;
 
   & .title{
     display: flex;

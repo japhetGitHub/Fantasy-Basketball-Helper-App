@@ -8,6 +8,11 @@ export const StyledAboutUs = styled.div`
   justify-content: space-evenly;
   padding-bottom: 1em;
 
+  & .aboutUs{
+    display: flex;
+    margin-top: 0.5em;
+  }
+
   & p {
 
     padding: 0 1.5em;
