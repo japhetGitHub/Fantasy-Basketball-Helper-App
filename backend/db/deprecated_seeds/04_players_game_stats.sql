@@ -1,3 +1,4 @@
+-- DEPRECATED - USE SEED-SCRIPTS/
 INSERT INTO 
 players_game_stats(
   playerID,
