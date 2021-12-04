@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-
 // Retrieves TOKEN_SECRET from .env 
 dotenv.config();
 const accessTokenSecret = process.env.TOKEN_SECRET;
 
+// utility function that can be added to any given route endpoint to only allow access if requesting client has a valid JWT checked here
 const authenticateJWT = (req, res, next) => {
   const authHeader = req.headers["x-access-token"] || req.headers.authorization;
   if (authHeader) {

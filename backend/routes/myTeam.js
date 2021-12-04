@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const authenticateJWT = require('../middleware/authenticateJWT');
+const dotenv = require('dotenv').config();
 
 const options = {
   client: 'pg',
   connection: {
-      host: '127.0.0.1',
-      port: '5432',
-      user: 'labber',
-      password: 'labber',
-      database: 'fantasy_basket'
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
   }
 }
 const knex = require('knex')(options);
@@ -33,11 +34,13 @@ router.get('/season/:teamId', authenticateJWT, (req, res) => {
               team_id,
               ...finalPlayerSeasonData
             } = playerSeasonData[0];
+
             const entries = [];
             for (const [key, value] of Object.entries(finalPlayerSeasonData)) {
               entries.push([key.replace(/_/g, '').toLowerCase(), value]);
             }
             const cleanedPlayerSeasonData = Object.fromEntries(entries);
+
             return cleanedPlayerSeasonData;
           })
       ))).then((results) =>{ 
@@ -75,12 +78,13 @@ router.get('/latest/:teamId', authenticateJWT, (req, res) => {
               team_id,
               ...finalPlayerGameData
             } = playerGameData[0];
+
             const entries = [];
             for (const [key, value] of Object.entries(finalPlayerGameData)) {
               entries.push([key.replace(/_/g, '').toLowerCase(), value]);
             }
             const cleanedPlayerGameData = Object.fromEntries(entries);
-            // console.log(cleanedPlayerGameData);
+
             return cleanedPlayerGameData;
           })
       ))).then((results) =>{ 
@@ -102,7 +106,6 @@ router.get('/:teamId/fanpoints/all', authenticateJWT, (req, res) => {
         //look up player season stats for each playerId
         playerFantasyPointsHistory(player.player_id)
           .then((playerFantasyPointsHistory) => {
-
             return playerFantasyPointsHistory;
           })
       ))).then((results) =>{ 
@@ -118,30 +121,13 @@ router.get('/:teamId/fanpoints/all', authenticateJWT, (req, res) => {
 const playerFantasyPointsHistory = (playerId) => {
   const currentDate = new Date();
   const pastDate = new Date(currentDate);
-  const daysAgo = 14;
+  const daysAgo = 14; // this variable determines how many days back to look in a player's game history
   pastDate.setDate(pastDate.getDate() - daysAgo);
   const dateStr = `${pastDate.getFullYear()}-${pastDate.getMonth()}-${pastDate.toLocaleString('default', { day: '2-digit' })}`;
-  // console.log(chalk.red(dateStr));
-  // console.log(lastWeekStats[0].player_name + '...' + chalk.underline(lastWeekStats[0].date_time))
+
   return knex.select(knex.raw(` players_game_stats.fantasy_points_yahoo as fantasyPointsYahoo, player.player_name as playerName from players_game_stats join player on players_game_stats.player_id = player.player_id where player.player_id=${playerId} order by date_time asc`)).then(fantasyPointsHistory => {
-    
     return fantasyPointsHistory
   })
 };
-
-router.post('/books', authenticateJWT, (req, res) => {
-  const { role } = req.user;
-
-  if (role !== 'admin') {
-    console.log("Error: User not authorized for this route");
-    return res.sendStatus(403);
-  }
-
-
-  const book = req.body;
-  books.push(book);
-
-  res.send('Book added successfully');
-});
 
 module.exports = router;
