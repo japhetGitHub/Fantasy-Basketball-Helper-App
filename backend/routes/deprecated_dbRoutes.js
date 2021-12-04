@@ -6,28 +6,17 @@ const db = require('../db');
 const getTeam = function() {
   console.log('BEFORE');
   return db 
-  // .query(query)
-  // console.log('HELLO')
   .query(`SELECT * FROM teams;`)
-  // res.json({data: result.rows}
-  // .then (res.send())
   .then((result) => {
-    console.log('RESULT', result)
-    // res.send(result.rows)
     return result.rows
   })
   .catch((err) => err);
-
-
 } 
 
 router.get('/team/all', function(req, res) {
-  // console.log('HELLO');
-  // res.send('HELLO')
   console.log('HELLO');
   getTeam()
     .then (result => {
-      console.log(result)
       res.send(result)
     })
 });
@@ -38,7 +27,6 @@ const getUserID  = function() {
   // query needs to be modified to user id
   .query(`SELECT id FROM users;`)
   .then((result) => {
-    console.log('RESULT', result)
     return result.rows
   })
   .catch((err) => err);
