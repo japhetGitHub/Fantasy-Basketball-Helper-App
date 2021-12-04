@@ -37,7 +37,7 @@ const fillNbaTeamsTable = () => {
       return knex.raw('TRUNCATE TABLE nba_team RESTART IDENTITY cascade')
         .then(() => (
           knex('nba_team').insert(allRelevantTeamData)
-            .then(() => console.log(`${chalk.green("nba_team data inserted")}`))
+            .then(() => console.log(`${chalk.green("-> nba_team data inserted")}`))
         )).catch((err) => { console.log(`${chalk.red("Error inserting nba_team data into database")}`); throw err });
     }).catch((err) => { console.log(`${chalk.red("Error retrieving nba_team data from sportsdata.io")}`); throw err });
 };
@@ -59,7 +59,7 @@ const fillPlayersTable = () => {
       return knex.raw('TRUNCATE TABLE player RESTART IDENTITY cascade')
         .then(() => (
           knex('player').insert(allRelevantPlayerData)
-            .then(() => console.log(`${chalk.green("player data inserted")}`))
+            .then(() => console.log(`${chalk.green("-> player data inserted")}`))
         )).catch((err) => { console.log(`${chalk.red("Error inserting player data into database")}`); throw err });
     }).catch((err) => { console.log(`${chalk.red("Error retrieving player data from sportsdata.io")}`); throw err });
 };
@@ -120,7 +120,7 @@ const fillSeasonStatsTable = () => {
       return knex.raw('TRUNCATE TABLE players_season_stats RESTART IDENTITY cascade')
         .then(() => (
           knex('players_season_stats').insert(allRelevantSeasonData)
-            .then(() => console.log(`${chalk.green("players_season_stats data inserted")}`))
+            .then(() => console.log(`${chalk.green("-> players_season_stats data inserted")}`))
         )).catch((err) => { console.log(`${chalk.red("Error inserting players_season_stats data into database")}`); throw err });
     }).catch((err) => { console.log(`${chalk.red("Error retrieving players_season_stats data from sportsdata.io")}`); throw err });
 };
@@ -272,11 +272,11 @@ const altFillGameStatsTable = () => { // retreives last (14) days game stats dat
               });
               // first removes existing data in table (to avoid breaking Unique constraint beacause of duplicate data)
               return knex('players_game_stats').insert(allRelevantPlayerGameData)
-                .then(() => console.log(`${chalk.green("players_game_stats data inserted")}`))
-                .catch((err) => { console.log(`${chalk.red("Error inserting players_game_stats data into database")}`); console.log(`${chalk.blue("skip this one")}`); });
+                .then(() => console.log(`${chalk.green("->-> players_game_stats data inserted")}`))
+                .catch((err) => { console.log(`${chalk.blue("skipping this data point")}`); });
             }).catch((err) => { console.log(`${chalk.red("Error retrieving players_game_stats data from sportsdata.io")}`); throw err });
         })
-        .then(() => console.log(`Inserted game stats for ${daysAgo} day(s) ago`))
+        .then(() => console.log(`-> Inserted game stats for ${daysAgo} day(s) ago`))
       , Promise.resolve() )
     ));
 };
@@ -284,60 +284,49 @@ const altFillGameStatsTable = () => { // retreives last (14) days game stats dat
 
 const seedSampleData = (username) => {
   // in production code this user and teams should already be in their respective tables
-  const sampleIds = [
-    20000441,
-    20000442,
-    20000443,
-    20000452,
-    20000453,
-    20000455,
-    20000456,
-    20000457,
-    20000459,
-    20000464,
-    20000468,
-    20000471,
-    20000474
-  ];
-  return knex('users').insert({
-    username: "bobby24",
-    email: username,
-    password: "45137"
-  }).then(() => console.log("inserted example user"))
-  .then(() => (
-    knex('users')
-      .where({ email: username })
-      .select('id')
-      .then((user) => {
-        knex('teams').insert([
-          {
-            team_name: "kobe4life",
-            user_id: user[0].id,
-            platform: "Yahoo"
-          },
-          {
-            team_name: "celticSquadd",
-            user_id: user[0].id,
-            platform: "Fan Duel"
-          }     
-        ]).then(() => console.log("inserted example teams"))
-        .then(() => {
-          knex('teams')
-            .select('id')
-            .then((teams) => {
-              teams.forEach(team => {
-                sampleIds.forEach((player_id) => {
-                  knex('players_in_team').insert({
-                    player_id,
-                    team_id: team.id  
-                  }).then(() => console.log(`${team.id} player ${player_id} inserted`)).catch((err) => console.log(err))
-                })
-              });
-            })
-        })
-        .catch((err) => console.log(err))
-      })
-  )).catch((err) => console.log(err))
+  return knex('users')
+    .insert({
+      username: "bobby24",
+      email: username,
+      password: "45137"
+    }).then(() => (
+      knex('users')
+        .where({ email: username })
+        .select('id')
+        .then((user) => (
+          knex('teams').insert([
+            {
+              team_name: "kobe4life",
+              user_id: user[0].id,
+              platform: "Yahoo"
+            },
+            {
+              team_name: "celticSquadd",
+              user_id: user[0].id,
+              platform: "Fan Duel"
+            }     
+          ]).then(() => (
+            knex('teams')
+              .select('id')
+              .then((teams) => (
+                Promise.all(teams.map(team => (
+                  knex('player')
+                    .select('player_id')
+                    .orderByRaw(' random()')
+                    .limit(13)
+                    .then((sampleIds) => (
+                      Promise.all(sampleIds.map((sampleId) => {
+                        return knex('players_in_team').insert({
+                          player_id: sampleId.player_id,
+                          team_id: team.id  
+                        }).catch((err) => console.log(err))
+                      })).then(() => console.log(chalk.green(`->players inserted into team ${team.id}`))).catch((err) => console.log(err))
+                    ))
+                ))).catch((err) => console.log(err))
+              ))
+          )).catch((err) => console.log(err))
+        ))
+    )).catch((err) => console.log(err))
 
 }
 

@@ -1,6 +1,6 @@
 const axios = require('axios');
-const db = require('../db');
-// new api key: a670e2e31fbf47369d09c70d535d8fb8
+const db = require('..');
+
 const fillGameTable = (date) => {
   let queryInputGamesStats = "INSERT INTO players_game_stats(playerID, name, team, position, day, fantasyPoints, minutes, seconds, fieldGoalsMade, fieldGoalsAttempted, fieldGoalsPercentage, effectiveFieldGoalsPercentage, twoPointersMade, twoPointersAttempted, twoPointersPercentage, threePointersMade, threePointersAttempted, threePointersPercentage, freeThrowsMade, freeThrowsAttempted, freeThrowsPercentage , offensiveRebounds, defensiveRebounds, rebounds, offensiveReboundsPercentage, defensiveReboundsPercentage, totalReboundsPercentage, assists, steals, blockedShots, turnovers, personalFouls, points, trueShootingAttempts, trueShootingPercentage, playerEfficiencyRating, assistsPercentage, stealsPercentage, blocksPercentage, turnOversPercentage, usageRatePercentage, fantasyPointsFanDuel, fantasyPointsDraftKings, fantasyPointsYahoo, plusMinus, doubleDoubles, tripleDoubles, fantasyPointsFantasyDraft) VALUES";
   
