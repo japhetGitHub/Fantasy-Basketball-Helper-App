@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import axiosInterceptor from './custom.axios-interceptor';
 
 const API_URL = 'http://localhost:3001/api/team';
@@ -21,9 +20,9 @@ const getPlayersToManage = (teamId) => {
 
       response.data.players.forEach((playerInfo) => {
         managePlayers.push({
-          player_name: playerInfo.playerName,
+          'player_name': playerInfo.playerName,
           position: playerInfo.position,
-          player_id: playerInfo.playerId
+          'player_id': playerInfo.playerId
         });
       });
 
@@ -34,26 +33,6 @@ const getPlayersToManage = (teamId) => {
 const getStartingLineups = (teamId) => {
   return axiosInterceptor.get(API_URL + `/overview/${teamId}`)
     .then((response) => {
-      // const managePlayers = {
-      //   teamName: response.data.teamName,
-      //   players: []
-      // };
-
-      // response.data.players.forEach((playerInfo) => {
-      //   managePlayers.players.push({
-      //     playerId: playerInfo.playerId,
-      //     playerFirstName: playerInfo.playerFirstName,
-      //     playerLastName: playerInfo.playerLastName,
-      //     playerImage: playerInfo.playerImage,
-      //     position: playerInfo.position,
-      //     Game: playerInfo.lastWeekGame,
-      //     Points: playerInfo.lastWeekPoints,
-      //     "Fantasy Points": playerInfo.lastWeekFan,
-      //     Blocks: playerInfo.lastWeekBlocks,
-      //     Steals: playerInfo.lastWeekSteals
-      //   });
-      // });
-
       return response.data;
     }).catch((err) => console.log(err));
 };
@@ -81,7 +60,6 @@ const getSpecificTeamLatestGameData = (teamId) => {
 const getPlayerFantasyPointsHistory = (teamId) => {
   return axiosInterceptor.get(`http://localhost:3001/api/myteam/${teamId}/fanpoints/all`)
     .then((results) => {
-      console.log(results);
       results = results.data.map((player) => {
         const data = {
           games: [],
@@ -95,6 +73,7 @@ const getPlayerFantasyPointsHistory = (teamId) => {
         });
         return data;
       });
+      console.log(results);
       return results;
     });
 };

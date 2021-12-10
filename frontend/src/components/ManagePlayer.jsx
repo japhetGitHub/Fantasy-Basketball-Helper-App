@@ -33,11 +33,12 @@ const rankThePositions = (position) => {
 
 export default function ManagePlayer(props) {
   const { onClick, selectedTeam } = props;
+
   const [userTeam, setUserTeam] = useState(null);
   const [allPlayerInLeague, setAllPlayerInLeague] = useState(null);
-  let arrayList = [];
 
-        
+  const arrayList = [];
+
   useEffect(() => {
     teamService.getPlayersToManage(selectedTeam)
       .then((response) => setUserTeam(response.sort((a, b) => rankThePositions(a.position) < rankThePositions(b.position) ? 1 : rankThePositions(a.position) > rankThePositions(b.position) ? -1 : 0)));
@@ -62,12 +63,8 @@ export default function ManagePlayer(props) {
     }
   };
 
-
-
-
   if (userTeam && allPlayerInLeague) {
-
-    for (let i = 0; i < allPlayerInLeague.length; i++) {
+    for (let i = 0; i < allPlayerInLeague.length; i++) { //TODO: refactor to more efficient solution than nested for-loops
       for (let j = 0; j < userTeam.length; j++) {
         if (allPlayerInLeague[i].player_id === userTeam[j].player_id) {
           allPlayerInLeague.splice(i, 1);
@@ -80,10 +77,7 @@ export default function ManagePlayer(props) {
       arrayList.push(<ListPlayerOn key={singlePlayer.player_id} player={singlePlayer} removePlayerInTeam={removePlayerInTeam} />);
     });
 
-    // for (let i = arrayList.length; i < 20; i++) {
-    //   arrayList.push(<ListAddPlayer key={i} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
-    // }
-    if (arrayList.length < 13) {
+    if (arrayList.length < 13) { // limits # of players on team to 13 (standard for Fantasy BBall leagues)
       arrayList.push(<ListAddPlayer key={arrayList.length} allPlayerInLeague={allPlayerInLeague} addPlayerInTeam={addPlayerInTeam} />);
     }
   }
@@ -91,6 +85,7 @@ export default function ManagePlayer(props) {
   return (
     <StyledManagePlayer>
       <h3>Adjust Your Team Roster</h3>
+      
       <List>
         {arrayList}
       </List>
@@ -106,6 +101,7 @@ export default function ManagePlayer(props) {
       >
         Save
       </Button>
+
       <Button
         className={"back"}
         onClick={() => onClick("SpecificTeamOverview")}

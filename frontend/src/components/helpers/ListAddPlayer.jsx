@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React, { useState } from 'react';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,17 +11,16 @@ import PropTypes from 'prop-types';
 
 import { StyledListAddPlayer } from './../../style/ListAddPlayer.styles.jsx';
 
+// This component is part of the ManagePlayer view where a user is able to add an additional player to their team
 export default function ListAddPlayer(props) {
-  const { allPlayerInLeague,  addPlayerInTeam } = props;
+  const { allPlayerInLeague,  addPlayerInTeam } = props; // allPlayerInLeague array already has players filtered out who are on the user's team
   const [open, setOpen] = useState(false);
   const allPlayersLabel = [];
   
   allPlayerInLeague.forEach((player) => {
-    allPlayersLabel.push({label: `${player.player_name} - ${player.position}`, player_id: player.player_id}); // set pour label
+    allPlayersLabel.push({label: `${player.player_name} - ${player.position}`, 'player_id': player.player_id}); // array of all players in nba for 'add new player' dropdown in manage players view
   });
-  const [value, setValue] = useState(allPlayersLabel[0]);
-
-  // value will be set to the whole object of the player but the only thing that gonna be shown is the label: value
+  const [value, setValue] = useState(allPlayersLabel[0]);  // value will contain the selected player's label and player id, used to add them to user's team roster/lineup
 
   const handleClick = () => {
     setOpen(!open);
@@ -36,7 +34,7 @@ export default function ListAddPlayer(props) {
       }
     });
   };
-  // trouble live: faut filter les option pour drop ceux deja dans la team sinon ca fuck up pi on double le key donc react est mad
+
   return (
     <StyledListAddPlayer>
       <ListItemButton onClick={handleClick}>
@@ -44,7 +42,6 @@ export default function ListAddPlayer(props) {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-
 
         <Autocomplete
           disablePortal

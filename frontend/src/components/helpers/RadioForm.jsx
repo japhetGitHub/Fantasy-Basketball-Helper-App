@@ -4,13 +4,13 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 
+// This component is the radio form used when a user adds a new team that they manage to their account.
 export default function RadioForm(props) {
   const { onChange } = props;
   return (
-    <FormControl component="fieldset">
-      <FormLabel component="legend">What&apos;s you fantasy league?</FormLabel>
+    <FormControl className="form" component="fieldset">
+      <h3>What&apos;s your fantasy league?</h3>
       <RadioGroup
         row
         aria-label="fantasy"

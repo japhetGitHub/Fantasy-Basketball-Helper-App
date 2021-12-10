@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import AboutUs from "./AboutUs.jsx";
 
-import {
-  StyledButtonHomePage,
-  StyledHomePage
-} from '../style/HomePage.styles.jsx';
+import { StyledButtonHomePage, StyledHomePage } from '../style/HomePage.styles.jsx';
 
 export default function  HomePage(props) {
   const { onClick } = props;
+
   return (
     <StyledHomePage>
       <h3 className="header">Congratulations,<br/>you’re about to be<br/>a walking W.</h3>
@@ -31,7 +29,6 @@ export default function  HomePage(props) {
     </StyledHomePage>
   );
 }
-
 
 HomePage.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired,

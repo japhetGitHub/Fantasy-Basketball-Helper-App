@@ -3,8 +3,9 @@ import SeasonAverage from "./statCards/SeasonAverage";
 import FantasyPointsTrend from "./statCards/FantasyPointsTrend";
 import OvsDRebounds from "./statCards/OvsDRebounds";
 import LastWeekRadar from "./statCards/LastWeekRadar";
-// should return an array of stats cards that will be imported into the useThat prop of ListItem in StartingLineups which ListItem pipes into Carousel
-// this component should be the aggregate/list of a bunch of sub components (list items) for each card
+
+// returns an array of stats cards that will be imported into the useThat prop of ListItem in StartingLineups which ListItem pipes into Carousel
+// this component is the aggregate/list of a bunch of sub components (list items) for each card
 export default function playerStats(latestGameData, seasonStats, playerSeasonFanPoints, pastWeekData) {
   const statCards = [
     <LatestGame key={0} num={0} data={latestGameData} />,

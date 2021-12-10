@@ -10,8 +10,6 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use((config) => {  // Does stuff before request is sent
-  console.log("Intercepting Request");
-
   const token = TokenService.getAccessToken();
   if (token) {
     // config.headers["Authorization"] = 'Bearer ' + token;
