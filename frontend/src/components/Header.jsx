@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import AuthService from "../services/auth.service";
-import nbaLogo from '../image/nba-logo-transparent.png';
-import companyLogo from '../image/logo_transparent.png';
+import companyLogo from '../image/logo.png';
 import scoreService from '../services/livegame.service.js';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // NBA Logos
 import ATL from '../image/nbaLogos/ATL.png';
@@ -35,9 +35,13 @@ import POR from '../image/nbaLogos/POR.png';
 import SAC from '../image/nbaLogos/SAC.png';
 import SAS from '../image/nbaLogos/SAS.png';
 import TOR from '../image/nbaLogos/TOR.png';
-import UTH from '../image/nbaLogos/UTH.png';
+import UTA from '../image/nbaLogos/UTA.png';
 import WAS from '../image/nbaLogos/WAS.png';
 
+import {
+  StyledLiveGames,
+  StyledHeader
+} from '../style/Header.styles.jsx';
 
 const logos = {
   ATL,
@@ -68,14 +72,9 @@ const logos = {
   SAC,
   SAS,
   TOR,
-  UTH,
-  WAS };
-
-import {
-  StyledLiveGames,
-  StyledHeader
-} from '../style/Header.styles.jsx';
-
+  UTA,
+  WAS
+};
 
 export default function Header(props) {
   const { onClick } = props;
@@ -92,82 +91,79 @@ export default function Header(props) {
     onClick("HomePage");
   };
 
-
   return (
     <StyledHeader>
-      <div className="companyLogo">
+
+      <div className="header">
         <img
           src={companyLogo}
           alt="Add sign"
-          height="180em"
-          weight="180em"
         />
         { props.login &&
-          <Button
+          <IconButton
             className={"Logout-Button"}
-            variant="outlined"
+            size="large"
             onClick={logoutHandler}
           >
-            Logout
-          </Button>
+            <LogoutIcon />
+          </IconButton>
         }
       </div>
-      <div className="rightHeader">
 
-        <div className="scoreboardOutline">
-          <div className="scoreboard">
-            <div className="team">
-              <div className="icon">
-                {liveGames &&
-                  <img src= {logos[liveGames[0]]}
-                    alt="NBA"
-                    height="40em"
-                    weight="40em"
-                  />
-                }
-              </div>
-              <div className="name">
-                {liveGames &&
-                  <StyledLiveGames className="liveGamePlayers">
-                    {liveGames[0]}
-                  </StyledLiveGames>
-                }
-              </div>
-              <div className="score">
-                {liveGames &&
-                <StyledLiveGames className="liveGameScores">
-                  {liveGames[2]}
-                </StyledLiveGames>
-                }
-              </div>
-            </div>
-            <div className="team2">
-              <div className="icon2">
-                {liveGames &&
-                  <img src= {logos[liveGames[1]]}
-                    alt="NBA"
-                    height="40em"
-                    weight="40em"
-                  />
-                }
-              </div>
-              <div className="name2">
-                {liveGames &&
-                  <StyledLiveGames className="liveGamePlayers">
-                    {liveGames[1]}
-                  </StyledLiveGames>
-                }
-              </div>
-              <div className="score2">
-                {liveGames &&
-                  <StyledLiveGames className="liveGameScores">
-                    {liveGames[3]}
-                  </StyledLiveGames>
-                }
-              </div>
-            </div>
+      <div className="scoreboard">
+
+        <div className="team1">
+          <div className="icon">
+            {liveGames &&
+              <img src= {logos[liveGames[0]]}
+                alt="NBA"
+                height="40em"
+                weight="40em"
+              />
+            }
+          </div>
+          <div className="name">
+            {liveGames &&
+              <StyledLiveGames className="liveGamePlayers">
+                {liveGames[0]}
+              </StyledLiveGames>
+            }
+          </div>
+          <div className="score">
+            {liveGames &&
+            <StyledLiveGames className="liveGameScores">
+              {liveGames[2]}
+            </StyledLiveGames>
+            }
           </div>
         </div>
+
+        <div className="team2">
+          <div className="icon2">
+            {liveGames &&
+              <img src= {logos[liveGames[1]]}
+                alt="NBA"
+                height="40em"
+                weight="40em"
+              />
+            }
+          </div>
+          <div className="name2">
+            {liveGames &&
+              <StyledLiveGames className="liveGamePlayers">
+                {liveGames[1]}
+              </StyledLiveGames>
+            }
+          </div>
+          <div className="score2">
+            {liveGames &&
+              <StyledLiveGames className="liveGameScores">
+                {liveGames[3]}
+              </StyledLiveGames>
+            }
+          </div>
+        </div>
+
       </div>
 
     </StyledHeader>
