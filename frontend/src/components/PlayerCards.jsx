@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
 import { StyledPlayerCards } from  '../style/PlayerCards.styles.jsx';
+import { Grid } from '@mui/material';
 
 export default function PlayerCards(props) {
   
@@ -22,26 +22,38 @@ export default function PlayerCards(props) {
         <h3>{playerName},  {position}</h3>
         <img src={playerImage} height="130px" width="100px" alt="Player Face"/>
       </div>
+
       <div className="stats">
+        
         <h3>Last Week Stats</h3>
-        <div className={"stats-grid"}>
-          <div className="points">
-            <h3>Points</h3>
-            <p>{lastWeekPoints}</p>
-          </div>
-          <div className="fanPoints">
-            <h3>Fantasy Points</h3>
-            <p>{lastWeekFan}</p>
-          </div>
-          <div className="Block">
-            <h3>Blocks</h3>
-            <p>{lastWeekBlocks}</p>
-          </div>
-          <div className="Steals">
-            <h3>Steals</h3>
-            <p>{lastWeekSteals}</p>
-          </div>
-        </div>
+
+        <Grid container>
+          <Grid item={true} sx={{ border: 1, borderBottom: 0, borderTop: 0, borderLeft: 0, borderColor: '#FBBB34' }} xs={6}>
+            <div className="points">
+              <h3>Points</h3>
+              <p>{lastWeekPoints}</p>
+            </div>
+          </Grid>
+          <Grid item={true} sx={{ border: 1, borderBottom: 0, borderTop: 0, borderRight: 0, borderColor: '#FBBB34' }} xs={6}>
+            <div className="fanPoints">
+              <h3>Fantasy Points</h3>
+              <p>{lastWeekFan}</p>
+            </div>
+          </Grid>
+          <Grid item={true} sx={{ border: 1, borderBottom: 0, borderLeft: 0, borderColor: '#FBBB34' }} xs={6}>
+            <div className="Block">
+              <h3>Blocks</h3>
+              <p>{lastWeekBlocks}</p>
+            </div>
+          </Grid>
+          <Grid item={true} sx={{ border: 1, borderBottom: 0, borderRight: 0, borderColor: '#FBBB34' }} xs={6}>
+            <div className="Steals">
+              <h3>Steals</h3>
+              <p>{lastWeekSteals}</p>
+            </div>
+          </Grid>
+        </Grid>
+
       </div>
     </StyledPlayerCards>
   );
