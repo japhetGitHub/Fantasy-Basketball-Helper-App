@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { VictoryArea, VictoryChart, VictoryGroup, VictoryLabel, VictoryLegend, VictoryPolarAxis, VictoryTheme } from "victory";
+import React from "react";
+import PropTypes from 'prop-types';
+import { VictoryArea, VictoryChart, VictoryGroup, VictoryLabel, VictoryLegend, VictoryPolarAxis } from "victory";
 
 
-const getMaxima = (data) => {
+const getMaxima = (data) => { // returns array of the highest stats by category across all objects in playerData
   const groupedData = Object.keys(data[0]).reduce((memo, key) => {
     memo[key] = data.map((d) => d[key]);
     return memo;
@@ -14,47 +14,45 @@ const getMaxima = (data) => {
   }, {});
 };
 
-const processData = (data) => {
+const processData = (data) => { // converts data points to be between 0 and 1
   const maxByGroup = getMaxima(data);
   const makeDataArray = (d) => {
     return Object.keys(d).map((key) => {
-      return { x: key, y: d[key] / maxByGroup[key] };
+      return { x: key, y: maxByGroup[key] === 0 ? 0 : d[key] / maxByGroup[key] }; // ternary prevents divide by 0
     });
   };
   return data.map((datum) => makeDataArray(datum));
 };
 
+//This component is part of the StartingLineups view where a user can see more details about their team's players.
+//This graph superimposes the player's (normalized) weekly stats on their season stats to show if they are over/under- performing compared to their average performance.
 export default function LastWeekRadar(props) {
-  console.log(props.pastWeekData);
-  console.log(props.seasonStats);
-  const characterData = [
+  const { pastWeekData, seasonStats } = props;
+  const playerData = [
     {
-      points: Math.round(props.pastWeekData.lastWeekPoints),
-      assists: Math.round(props.pastWeekData.lastWeekAssists),
-      rebounds: (Math.round(props.pastWeekData.lastWeekOffensiveRebounds) + Math.round(props.pastWeekData.lastWeekDefensiveRebounds)),
-      blocks: Math.round(props.pastWeekData.lastWeekBlockedShots),
-      steals: Math.round(props.pastWeekData.lastWeekSteals)
+      points: Math.round(pastWeekData.lastWeekPoints),
+      assists: Math.round(pastWeekData.lastWeekAssists),
+      rebounds: (Math.round(pastWeekData.lastWeekOffensiveRebounds) + Math.round(pastWeekData.lastWeekDefensiveRebounds)),
+      blocks: Math.round(pastWeekData.lastWeekBlockedShots),
+      steals: Math.round(pastWeekData.lastWeekSteals)
     },
     {
-      points: Math.round(props.seasonStats.points / props.seasonStats.games),
-      assists: Math.round(props.seasonStats.assists / props.seasonStats.games),
-      rebounds: Math.round(props.seasonStats.rebounds / props.seasonStats.games),
-      blocks: Math.round(props.seasonStats.blockedshots / props.seasonStats.games),
-      steals: Math.round(props.seasonStats.steals / props.seasonStats.games)
+      points: Math.round(seasonStats.points / seasonStats.games), // dividing by number of games to make the data comparison proportional
+      assists: Math.round(seasonStats.assists / seasonStats.games),
+      rebounds: Math.round(seasonStats.rebounds / seasonStats.games),
+      blocks: Math.round(seasonStats.blockedshots / seasonStats.games),
+      steals: Math.round(seasonStats.steals / seasonStats.games)
     }
   ];
-  const [state, setState] = useState({
-    data: processData(characterData),
-    maxima: getMaxima(characterData)
-  });
-  
 
+  const state = {
+    data: processData(playerData),
+    maxima: getMaxima(playerData)
+  };
+  
   return (
-    <VictoryChart height="300" polar padding={{ top: 25, bottom: 25, right: 0, left: 20 }}
-      // theme={VictoryTheme.material}
-      domain={{ y: [ 0, 1 ] }}
-    >
-      <VictoryLegend x={20} y={-5}
+    <VictoryChart polar padding={{ top: 25, bottom: 25, right: 0, left: 20 }} domain={{ y: [ 0, 1 ] }}>
+      <VictoryLegend x={20} y={0}
         title="Past Week vs Season"
         itemsPerRow={1}
         orientation="horizontal"
@@ -99,8 +97,12 @@ export default function LastWeekRadar(props) {
           grid: { stroke: "white", opacity: 0.5 }
         }}
       />
-
     </VictoryChart>
   );
   
 }
+
+LastWeekRadar.propTypes = { // prop-types ensure that props are as component expected
+  pastWeekData: PropTypes.object.isRequired,
+  seasonStats: PropTypes.object.isRequired
+};
