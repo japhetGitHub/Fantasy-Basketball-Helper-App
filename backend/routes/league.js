@@ -17,8 +17,6 @@ const options = {
 }
 const knex = require('knex')(options);
 
-// "http://localhost:3001/api/league"
-
 league.get('/allPlayer', authenticateJWT, function(req, res) {
     return knex('player')
     .select('player_name', 'position', 'player_id')

@@ -32,7 +32,6 @@ const myTeamRouter = require('./routes/myTeam');
 
 const scoreRouter = require('./routes/score');
 
-app.use('/sportApi', sportApi);
 app.use('/api/team', teamRouter);
 app.use('/api/league', leagueRouter);
 app.use('/api/myteam', myTeamRouter);

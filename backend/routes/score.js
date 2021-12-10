@@ -16,11 +16,10 @@ score.get('/', function(req,res) {
   .then(response => {
     // Step 4: extract the information AwayTeam, HomeTeam, AwayTeamScore, HomeTeamScore into array
     arr.push(response.data[0].AwayTeam, response.data[0].HomeTeam, response.data[0].AwayTeamScore, response.data[0].HomeTeamScore)
-    // console.log(response)
     console.log('Scoreboard Data', arr);
+    
     // Step 5: Return the array
     return res.json(arr);
-    
   })
   .catch(error => {
     console.log(error);

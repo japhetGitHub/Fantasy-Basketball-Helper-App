@@ -119,12 +119,6 @@ router.get('/:teamId/fanpoints/all', authenticateJWT, (req, res) => {
 });
 
 const playerFantasyPointsHistory = (playerId) => {
-  const currentDate = new Date();
-  const pastDate = new Date(currentDate);
-  const daysAgo = 14; // this variable determines how many days back to look in a player's game history
-  pastDate.setDate(pastDate.getDate() - daysAgo);
-  const dateStr = `${pastDate.getFullYear()}-${pastDate.getMonth()}-${pastDate.toLocaleString('default', { day: '2-digit' })}`;
-
   return knex.select(knex.raw(` players_game_stats.fantasy_points_yahoo as fantasyPointsYahoo, player.player_name as playerName from players_game_stats join player on players_game_stats.player_id = player.player_id where player.player_id=${playerId} order by date_time asc`)).then(fantasyPointsHistory => {
     return fantasyPointsHistory
   })

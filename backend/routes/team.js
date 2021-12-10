@@ -17,8 +17,6 @@ const options = {
 const knex = require('knex')(options);
 const authenticateJWT = require('../middleware/authenticateJWT');
 
-// "http://localhost:3001/api/team"
-
 const lookupPlayersInTeam = (teamId) => {
   return knex('players_in_team')
     .where({ team_id: teamId })
