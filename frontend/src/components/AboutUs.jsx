@@ -10,19 +10,19 @@ export default function AboutUs() {
     <StyledAboutUs>
       <h3>About us</h3>
       <p>
-        Aren’t you tired of wasting time by switching between so many apps? Just become the king!<br/>
-        <br/>Win all of your upcoming weeks in your fantasy league with our help!
+        Don&apos;t you wish that winning your fantasy league didn&apos;t require you to be a part-time statastician too?<br/>
+        <br/>We heard from the community and created a solution that enables users to make their weekly lineup decisions as though they had their own data analytics team. We give you all the important stats in a centralized place using intuitive data visualizations.
       </p>
       <div className="aboutUsImage">
         <img
           src={lebronImage}
-          alt="Add sign"
+          alt="lebron"
           height="200px"
           weight="200px"
         />
         <img
           src={trophyImage}
-          alt="Add sign"
+          alt="trophy"
           height="200px"
           weight="200px"
         />
