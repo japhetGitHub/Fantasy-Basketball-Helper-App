@@ -5,6 +5,7 @@ text-align: center;
 background-color: #14346C;
 height: 75%;
 padding: 1em;
+margin-bottom: 1em;
 color: white;
 
 & form {
@@ -15,7 +16,9 @@ color: white;
   margin: 1em;
 }
 
-
+& .buttons {
+  display: flex;
+}
 
 & TextField {
   color: white;

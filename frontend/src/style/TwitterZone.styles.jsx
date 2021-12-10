@@ -45,6 +45,7 @@ export const StyledTwitterZone = styled.div`
     font-size: 1em;
 
     padding-top: 0.2em;
+    padding-bottom: 0.2em;
   }
 
 `;

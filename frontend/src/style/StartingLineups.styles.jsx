@@ -5,7 +5,7 @@ export const StyledStartingLineups = styled.div`
   background-color: #14346C;
   color: white;
   text-align: center;
-
+  margin-bottom: 1em;
 
   & .MuiFormControl-root{
     padding-top: 1em;
@@ -20,9 +20,11 @@ export const StyledStartingLineups = styled.div`
   & .MuiButton-root{
     color: black;
     background-color: #FFAD00;
-    width: 7em;
-    height: 3em;
-    margin-left: 9em;
+    width: auto;
+    height: auto;
+    padding: 0.5em 2em;
+    margin-bottom: 1em;
+    margin-top: 1em;
   }
 
   & .MuiOutlinedInput-input{
@@ -35,13 +37,7 @@ export const StyledStartingLineups = styled.div`
     border-color: white;
     margin: 0.5em;
   }
-  & .MuiButton-root {
-    color: white;
-    background-color: #1976D2;
-    width: 7em;
-    height: 3em;
-    margin: 2em;
-  }
+
   & .MuiSvgIcon-root {
     color: white;
   }
@@ -71,16 +67,10 @@ export const StyledStartingLineups = styled.div`
     color: white;
   }
 
-
   & .MuiOutlinedInput-notchedOutline{
     border-color: white;
     margin: 0.5em;
     margin-left: 1.5em;
-  }
-
-  & .back-button {
-    color: black;
-    background-color: #FFAD00;
   }
 
 `;

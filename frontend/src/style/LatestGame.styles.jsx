@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledLatestGame = styled.div`
-  // border: 1px solid white;
   text-align: center;
   margin-bottom: 2%;
 
@@ -14,8 +13,12 @@ export const StyledLatestGame = styled.div`
     font-size: 1.5em;
     margin-bottom: 5%;
   }  
-  
-  & h4 {
-    margin-top: -5%;
+
+  & .MuiGrid-grid-xs-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  & .MuiGrid-grid-xs-4 {
+    padding: 0.25em 0.5em !important;
   }
 `;

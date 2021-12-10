@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledSeasonAverage = styled.div`
-  // border: 1px solid grey;
   text-align: center;
   margin-bottom: 2%;
 
@@ -15,7 +14,11 @@ export const StyledSeasonAverage = styled.div`
     margin-bottom: 5%;
   }
   
-  & h4 {
-    margin-top: -5%;
+  & .MuiGrid-grid-xs-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  & .MuiGrid-grid-xs-4 {
+    padding: 0.25em 0.5em !important;
   }
 `;
