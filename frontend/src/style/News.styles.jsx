@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledTwitterZone = styled.div`
+export const StyledNews = styled.div`
 
   color: black;
   display: flex;

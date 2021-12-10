@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
 import PositionPointsPieChart from './PositionPointsPieChart.jsx';
-import TwitterZone from './TwitterZone.jsx';
+import News from './News.jsx';
 import teamService from '../services/team.service.js';
 import EmptyPlayerCard from './EmptyPlayerCard.jsx';
 
@@ -91,7 +91,7 @@ export default function SpecificTeamOverview(props) {
         <Carousel slides={carouselArray[0] ? carouselArray : [<EmptyPlayerCard key={"empty"} />]} />
       </div>
 
-      {carouselArray[0] && <TwitterZone playerId={rankedPlayer[0].playerId} />}
+      {carouselArray[0] && <News playerId={rankedPlayer[0].playerId} />}
 
       <div className={"bottom-button"}>
         <Button
