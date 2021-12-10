@@ -68,4 +68,7 @@ export const StyledListAddPlayer = styled.div`
     background-color: #FFAD00;
   }
 
+  & .MuiAutocomplete-endAdornment > button {
+    color: white;
+  }
 `;

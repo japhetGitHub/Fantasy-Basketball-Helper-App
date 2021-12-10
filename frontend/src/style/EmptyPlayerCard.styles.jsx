@@ -5,5 +5,4 @@ export const StyledEmptyPlayerCard = styled.div`
   margin-left: 40%;
   margin-bottom: 30%;
 }
-
 `;

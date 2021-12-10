@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 
 import { StyledListPlayerOn } from './../../style/ListPlayerOn.styles.jsx';
 
-
+// This component is part of the ManagePlayers view. It is a dropdown list item which allows a user to see that a player is currently on their team and enables them to delete them from their roster.
 export default function ListPlayerOn(props) {
   const { player, removePlayerInTeam } = props;
   const [open, setOpen] = useState(false);
@@ -25,7 +25,7 @@ export default function ListPlayerOn(props) {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <h4 className="confirmation">Are you sure you want to delete this player of your team?</h4>
+        <h4 className="confirmation">Are you sure you want to delete this player from your team?</h4>
         
         <Button
           className={"Delete"}

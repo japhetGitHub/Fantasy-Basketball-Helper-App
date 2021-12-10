@@ -12,25 +12,19 @@ export const StyledPlayerCards = styled.div`
 
   & .stats {
     padding: 0.1em 0;
-
-    & p {
-      text-decoration: underline;
+    & div {
+      padding: 1em 0;
+    }
+    & p, h3{
+      margin: 0;
     }
   }
 
   & .player-face > img{
     margin-top: 5%;
-    border: 5px solid black;
+    border: 5px solid white;
     border-radius: 10px;
   }
 
-  & .stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: 
-    'points fantasyPoints' 
-    'blocks steals';
-  }
 `;
 

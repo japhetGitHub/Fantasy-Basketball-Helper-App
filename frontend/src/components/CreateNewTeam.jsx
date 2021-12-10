@@ -13,31 +13,36 @@ export default function CreateNewTeam(props) {
   const { onClick } = props;
   return (
     <StyledCreateNewTeam>
-      <h3>Create a new team</h3>
+      <h2>Create a new team</h2>
       <TextField
-        label={"Name of the team"}
+        label={"Name of your team"}
         type={"teamName"}
         value={teamName}
         onChange={(event) => setTeamName(event.target.value)}
+        InputLabelProps={{ // MUI bug, only allows label style change through input props
+          style: { color: 'white', borderColor: 'white', marginLeft: '1em' },
+        }}
       />
         
       <RadioForm onChange={setFantasyChoice} />
-
-      <Button
-        onClick={() => {
-          teamService.createTeam(teamName, fantasyChoice);
-          onClick("HomeLog");
-        }}
-        variant={"contained"}
-      >
-        Create!
-      </Button>
-      <Button
-        onClick={() => onClick("HomeLog")}
-        variant={"outlined"}
-      >
-        Back
-      </Button>
+      
+      <div className="buttons">
+        <Button
+          onClick={() => {
+            teamService.createTeam(teamName, fantasyChoice);
+            onClick("HomeLog");
+          }}
+          variant={"contained"}
+        >
+          Create
+        </Button>
+        <Button
+          onClick={() => onClick("HomeLog")}
+          variant={"outlined"}
+        >
+          Back
+        </Button>
+      </div>
     </StyledCreateNewTeam>
   );
 }

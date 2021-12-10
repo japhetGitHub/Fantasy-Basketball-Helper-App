@@ -19,7 +19,6 @@ export const StyledAboutUs = styled.div`
 
 
   & p {
-
     padding: 0 1.5em;
     margin-top: 0;
     color: white;

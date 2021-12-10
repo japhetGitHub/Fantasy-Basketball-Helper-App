@@ -16,7 +16,7 @@ export default function HomeLog(props) {
     teamService.getAllTeamForUser()
       .then((response) => setData(response));
   }, []);
-  data && console.log(data);
+  
   const viewArray = data ? data.map((singleTeam) => {
     return (
       <TeamOverview
@@ -29,14 +29,11 @@ export default function HomeLog(props) {
           onClick("SpecificTeamOverview");
           onSelectedTeam(singleTeam.teamId);
         }}
-      />);
+      />
+    );
   }) : [];
 
-  viewArray.push(
-    <AddNewTeam
-      onClick={onClick}
-    />
-  );
+  viewArray.push(<AddNewTeam onClick={onClick} />);
   
   return (
     <StyledHomeLog>
@@ -44,7 +41,6 @@ export default function HomeLog(props) {
     </StyledHomeLog>
   );
 }
-
 
 HomeLog.propTypes = { // prop-types ensure that props are as component expected
   onClick: PropTypes.func.isRequired,

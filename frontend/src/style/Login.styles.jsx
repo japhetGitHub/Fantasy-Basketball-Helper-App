@@ -5,6 +5,7 @@ export const StyledLogin = styled.div`
   background-color: #14346C;
   height: 75%;
   padding: 1em;
+  margin-bottom: 1em;
   color: white;
 
   & form {
@@ -13,6 +14,10 @@ export const StyledLogin = styled.div`
     justify-content: space-around;
     height: 110%;
     margin: 1em;
+  }
+
+  & .buttons {
+    display: flex;
   }
 
   & TextField {
@@ -34,11 +39,10 @@ export const StyledLogin = styled.div`
 
   & .MuiButton-root {
     color: black;
-    background-color: #FFAD00;
+    background-color: #FFAD00 !important;
     width: 7em;
     height: 3em;
     margin: 2em;
   }
-
 `;
 

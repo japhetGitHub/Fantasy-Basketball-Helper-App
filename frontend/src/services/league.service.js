@@ -15,7 +15,6 @@ const getNewsForPlayer = (playerId) => {
     });
 };
 
-
 const leagueService = {
   getAllPlayerInLeague,
   getNewsForPlayer,

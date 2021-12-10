@@ -4,6 +4,7 @@ export const StyledManagePlayer = styled.div`
   
   background-color: #14346C;
   text-align: center;
+  margin-bottom: 1em;
 
   & h3 {
     color: white;

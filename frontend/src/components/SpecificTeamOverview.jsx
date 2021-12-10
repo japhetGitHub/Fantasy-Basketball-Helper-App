@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import Button from '@mui/material/Button';
+
 import Carousel from './utilities/Carousel.jsx';
 import PlayerCards from './PlayerCards.jsx';
-import PieChartGraph from './utilities/PieChartGraph.jsx';
-import TwitterZone from './utilities/TwitterZone.jsx';
+import PositionPointsPieChart from './PositionPointsPieChart.jsx';
+import News from './News.jsx';
 import teamService from '../services/team.service.js';
 import EmptyPlayerCard from './EmptyPlayerCard.jsx';
 
@@ -23,8 +25,8 @@ export default function SpecificTeamOverview(props) {
   let totalTeamFanPoints = 0;
   let rankedPlayer = [];
   if (data && data.players[0]) {
-
     rankedPlayer = data.players.sort((a, b) => b.lastWeekFantasyPointsYahoo - a.lastWeekFantasyPointsYahoo);
+    
     carouselArray.push(<PlayerCards
       playerName={rankedPlayer[0].playerName}
       playerImage={rankedPlayer[0].playerImage}
@@ -43,26 +45,29 @@ export default function SpecificTeamOverview(props) {
       lastWeekBlocks={rankedPlayer[rankedPlayer.length - 1].lastWeekBlockedShots}
       lastWeekSteals={rankedPlayer[rankedPlayer.length - 1].lastWeekSteals}
     />);
-    let foward = 0;
+    
+    let forward = 0;
     let center = 0;
     let guard = 0;
+
     data.players.forEach((player) => {
       totalTeamFanPoints += Number(player.lastWeekFantasyPointsYahoo);
       if (player.position === "SF" || player.position === "PF") {
-        foward += Number(player.lastWeekFantasyPointsYahoo);
+        forward += Number(player.lastWeekFantasyPointsYahoo);
       } else if (player.position === "PG" || player.position === "SG") {
         guard += Number(player.lastWeekFantasyPointsYahoo);
       } else {
         center += Number(player.lastWeekFantasyPointsYahoo);
       }
     });
-    carouselArray.push(<PieChartGraph foward={foward} center={center} guard={guard} />);
 
+    carouselArray.push(<PositionPointsPieChart forward={forward} center={center} guard={guard} />);
   }
 
   return (
     <StyledSpecificTeamOverview>
       <span className="header">{data && data.teamName} - {data && (Math.round(totalTeamFanPoints * 100) / 100).toFixed(2)} fpts</span>
+
       <div className={"top-button"} >
         <div className={"left-button"} >
           <Button
@@ -86,10 +91,9 @@ export default function SpecificTeamOverview(props) {
         <Carousel slides={carouselArray[0] ? carouselArray : [<EmptyPlayerCard key={"empty"} />]} />
       </div>
 
-      {carouselArray[0] && <TwitterZone playerId={rankedPlayer[0].playerId} />}
+      {carouselArray[0] && <News playerId={rankedPlayer[0].playerId} />}
 
       <div className={"bottom-button"}>
-
         <Button
           className={"Delete"}
           onClick={() => {
@@ -112,7 +116,6 @@ export default function SpecificTeamOverview(props) {
         >
             Back
         </Button>
-
       </div>
     </StyledSpecificTeamOverview>
   );

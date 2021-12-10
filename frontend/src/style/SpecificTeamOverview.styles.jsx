@@ -3,20 +3,20 @@ import styled from 'styled-components';
 export const StyledSpecificTeamOverview = styled.div`
 
   text-align: center;
-  margin: 1em 0;
+  margin: 0 0 1em;
   background-color: #14346C;
+  
 
   & span {
     font-weight: bold;
     font-size: 1.5em;
-    padding: 1em 1em;
+    padding: 1em 1em 0em;
   }
 
   & .header {
     color: white;
     background-color: #14346C;
     display: flex;
-    margin-top: -1em;
     justify-content: center;
   }
 
@@ -55,7 +55,6 @@ export const StyledSpecificTeamOverview = styled.div`
   } 
   
   & .slides .player-face img {
-    // height: auto;
     margin-top: 0;
   }
   & .slides .player-face h3 {
@@ -66,11 +65,10 @@ export const StyledSpecificTeamOverview = styled.div`
     margin-top: 0;
     
   }
-
-  & .slides .test .pagination {
-    // height: 40%;
-    // margin: 0;
-    // display: none;
-    
+  
+  & .slides svg {
+    position: relative;
+    top: 3.5em;
   }
+
 `;
