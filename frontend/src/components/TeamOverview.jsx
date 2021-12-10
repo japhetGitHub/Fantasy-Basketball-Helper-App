@@ -11,7 +11,6 @@ import {
 } from '../style/TeamOverview.styles.jsx';
 
 export default function TeamOverview(props) {
-  
   const {
     teamName,
     topPerformer,
@@ -33,11 +32,9 @@ export default function TeamOverview(props) {
       </StyledHeader>
 
       <StyledCard>
-        <div className="leftArrow">
-          <span>&#10132;</span>
-        </div>
         <div className="content">
           <div className="bestWorst">
+
             <div className="topPerformer">
               <h4>Top Performer</h4>
               <img
@@ -65,6 +62,7 @@ export default function TeamOverview(props) {
               </div>
             </div>
           </div>
+
           <div className="bestWorstChart">
             <BestWorstChart
               category={"Points"}
@@ -92,18 +90,17 @@ export default function TeamOverview(props) {
               worstPerformerStat={worstPerformer.blocks}
             />
           </div>
-          <div className="pointsSummary">
-            <h4>Last Week: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span> Fan Points</h4>
-          </div>
-        </div>
-        <div className="rightArrow">
-          <span>&#10132;</span>
-        </div>
 
+          <div className="pointsSummary">
+            <h4>Last Week: <span><strong>{(Math.round(totalFanPoints * 100) / 100).toFixed(2)}</strong></span> fpts</h4>
+          </div>
+
+        </div>
       </StyledCard>
     </StyledTeamOverview>
   );
 }
+
 TeamOverview.propTypes = {
   teamName: PropTypes.string.isRequired,
   topPerformer: PropTypes.object.isRequired,
@@ -111,4 +108,3 @@ TeamOverview.propTypes = {
   totalFanPoints: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired
 };
-
