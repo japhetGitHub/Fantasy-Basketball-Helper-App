@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { VictoryChart, VictoryLine, VictoryScatter, VictoryLabel, VictoryAxis } from 'victory';
 
-// OPTIONS FOR LINE OF FIT
-// const cartesianInterpolations = [
+// OPTIONS FOR Cartesian Interpolation / LINE OF FIT (see <VictoryLine interpolation={___} ... /> below)
+// [
 //   "basis",
 //   "bundle",
 //   "cardinal",
@@ -17,13 +17,14 @@ import { VictoryChart, VictoryLine, VictoryScatter, VictoryLabel, VictoryAxis } 
 //   "stepBefore"
 // ];
 
+//This component is part of the StartingLineups view where a user can see more details about their team's players.
+//This graph tracks the fantasy points a player accross the season.
 export default function FantasyPointsTrend(props) {
 
   const { data } = props;
-  console.log(data);
 
   return (
-    <VictoryChart height={300} >
+    <VictoryChart height={325} >
       <VictoryAxis label="Game #" style={{
         axis: {stroke: "white"},
         axisLabel: {fill: "white"},
@@ -36,7 +37,7 @@ export default function FantasyPointsTrend(props) {
         ticks: {stroke: "white"},
         tickLabels: {fontSize: 15, padding: 5, fill: "white"}
       }} />
-      <VictoryLabel x={125} y={15} text={"Fantasy Points (Season)"} style={{ fontSize: 25, fill: "white" }}/>
+      <VictoryLabel x={125} y={25} text={"Fantasy Points (Season)"} style={{ fontSize: 25, fill: "white" }}/>
       <VictoryLine
         interpolation={"linear"} data={data}
         style={{ data: { stroke: "#c43a31" } }}

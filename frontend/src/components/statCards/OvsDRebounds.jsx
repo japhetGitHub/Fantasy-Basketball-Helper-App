@@ -10,8 +10,10 @@ export default function OvsDRebounds(props) {
     { x: 2, y: data.defensiverebounds }
   ];
 
+  //This component is part of the StartingLineups view where a user can see more details about their team's players.
+  //This graph tracks the a player's rebounds, comparing their offensive vs defensive rebounds.
   return (
-    <svg viewBox="0, 0, auto, auto" height="225">
+    <svg viewBox="25, 0, 300, 225" height="215">
       <VictoryPie
         padding={{ top: 0, bottom: 0, right: 100, left: 60 }}
         standalone={false}
@@ -20,7 +22,7 @@ export default function OvsDRebounds(props) {
         innerRadius={60}
         labelRadius={({ innerRadius }) => innerRadius + 5 }
         labels={[`Off. ${data.offensiverebounds}`, `Def. ${data.defensiverebounds}`]}
-        labelComponent={<VictoryTooltip active />}
+        labelComponent={<VictoryTooltip active renderInPortal={false} />}
         data={pieHalves}
         style={{ labels: { fontSize: 15, fill: "black" } }}
         colorScale={"qualitative"}
@@ -36,5 +38,5 @@ export default function OvsDRebounds(props) {
 }
 
 OvsDRebounds.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.object.isRequired
 };
