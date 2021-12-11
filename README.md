@@ -1,5 +1,7 @@
 # Fantasy-Basketball-Helper-App
-A helper app that allows users to at-a-glance see rich basketball data/statistics for their fantasy team so that they can make more informed and competitive decisions. This app is designed to be a complementary tool for the fantasy basketball experience.
+A mobile-first web app that allows users to see rich basketball data/statistics for their fantasy teams all at-a-glance. This data is often found in scattered sources and can take time to analyze. This app centralizes the most important of these data points and displays them using easily understood data visualizations. Consequently, users can make more informed and competitive lineup decisions in a much shorter amount of time.
+
+This app is designed to be a complementary tool for the fantasy basketball experience.
 
 ## Tech Stack
 The architecture is a Single-Page App that uses Javascript for the full stack. React is used in the frontend, Express in the backend, and PostgreSQL for the database.
@@ -10,6 +12,7 @@ Visual elements were sourced from the Material UI library and styled using the S
 
 >Backend: [Node.js](https://nodejs.org/en/), [Express](https://expressjs.com/), [JSON Web Tokens by Auth0](https://github.com/auth0/node-jsonwebtoken), [PostgreSQL](https://node-postgres.com/), [Knex.js](https://knexjs.org/), [Axios](https://axios-http.com/)
 
+Note: NBA data is sourced from sportsdata.io and all fantasy stats currently follow Yahoo Fantasy Sports.
 
 # Getting Started
 ## Setup - Upon first install
@@ -40,3 +43,9 @@ Visual elements were sourced from the Material UI library and styled using the S
 |Manage Players |Player Stats |
 |---|---|
 |![manage players page](https://github.com/japhetGitHub/Fantasy-Basketball-Helper-App/blob/main/screenshots/manage_players.gif?raw=true)|![starting lineup player stats page](https://github.com/japhetGitHub/Fantasy-Basketball-Helper-App/blob/main/screenshots/player_stats.gif?raw=true)|
+
+# Additional (stretch) goals
+- Add more data visualizations that incorporate advanced stats in meaningful and approachable ways.
+- Add experiences that enable more dynamic lineup experimentation across multiple vectors of data.
+- Improve desktop UI/UX.
+- Add functionality that allows users to more easily import their fantasy team data from popular fantasy basketball platforms.
