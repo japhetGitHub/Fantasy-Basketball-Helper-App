@@ -33,7 +33,7 @@ Note: NBA data is sourced from sportsdata.io and all fantasy stats currently fol
 # Screenshots
 |Landing Page |
 |---|
-|![landing page](https://github.com/japhetGitHub/Fantasy-Basketball-Helper-App/blob/main/screenshots/landing_page.png?raw=true)|
+|![landing page](https://github.com/japhetGitHub/Fantasy-Basketball-Helper-App/blob/main/screenshots/landing.png?raw=true)|
 
 |All Teams |Specific Team Overview|
 |---|---|
